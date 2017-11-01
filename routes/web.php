@@ -19,8 +19,10 @@
 //Auth::routes();
 
 
-
-Route::get('/{path?}', [
-    'uses' => 'HomeController@index',
-    'where' => ['path' => '^((?!api).)*$']
-]);
+Route::group(['middleware'=>'web'],function(){
+    Route::get('/{path?}', [
+        'uses' => 'HomeController@index',
+        'as' => 'index',
+        'where' => ['path' => '^((?!api).)*$']
+    ]);
+});

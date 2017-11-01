@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Redirect} from 'react-router';
+import Home from '../Home'
 import {Field, reduxForm} from 'redux-form';
 
 class Register extends Component {
     constructor(props) {
         super(props);
-        this.state = {fullName: '', email: '', login: '', password: '', address: '', phone: '', bankCard: ''};
+        this.state = {fullName: '', email: '', login: '', password: '', passwordConfirmation:'', address: '', phone: '', bankCard: '', fireRedirect: false};
         this.handleFullName = this.handleFullName.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.handlePasswordConfirmation = this.handlePasswordConfirmation.bind(this);
         this.handleAddress = this.handleAddress.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
         this.handleBankCard = this.handleBankCard.bind(this);
@@ -39,6 +42,11 @@ class Register extends Component {
             password: e.target.value
         })
     }
+    handlePasswordConfirmation(e) {
+        this.setState({
+            passwordConfirmation: e.target.value
+        })
+    }
 
     handleAddress(e) {
         this.setState({
@@ -60,11 +68,13 @@ class Register extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        this.setState({fireRedirect: true});
         const user = {
             full_name: this.state.fullName,
             email: this.state.email,
             login: this.state.login,
             password: this.state.password,
+            password_confirmation: this.state.passwordConfirmation,
             address: this.state.address,
             phone: this.state.phone,
             bank_card: this.state.bankCard,
@@ -74,6 +84,7 @@ class Register extends Component {
     }
 
     render() {
+        const {fireRedirect} = this.state.fireRedirect;
         return (
             <div className="container">
                 <div className="row">
@@ -160,13 +171,13 @@ class Register extends Component {
                                     </div>
 
                                     <div className="form-group">
-                                        <label htmlFor="password-confirm" className="col-md-4 control-label">Confirm
+                                        <label htmlFor="password_confirmation" className="col-md-4 control-label">Confirm
                                             Password</label>
 
                                         <div className="col-md-6">
-                                            <input id="password-confirm" type="password" className="form-control"
+                                            <input id="password_confirmation" type="password" className="form-control"
                                                    placeholder="Repeat your password" name="password_confirmation"
-                                                   required/>
+                                                   required onChange={this.handlePasswordConfirmation}/>
                                         </div>
                                     </div>
 
@@ -182,6 +193,7 @@ class Register extends Component {
                                         </div>
                                     </div>
                                 </form>
+                                {fireRedirect && (<Redirect to={Home} push/>)}
                             </div>
                         </div>
                     </div>

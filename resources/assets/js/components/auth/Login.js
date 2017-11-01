@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import PasswordForget from "./PasswordReset";
+import Home from '../Home';
+import PasswordReset from "./PasswordReset";
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {email: '', password: '', remember: '', fireRedirect: false};
+        this.state = {email: '', password: '', remember: false, fireRedirect: false};
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handleRemember = this.handleRemember.bind(this);
@@ -28,7 +29,7 @@ class Login extends Component {
 
     handleRemember(e) {
         this.setState({
-            remember: e.target.value
+            remember: !this.state.remember
         })
     }
 
@@ -96,11 +97,11 @@ class Login extends Component {
                                             Login
                                         </button>
 
-                                        <Link to="/passwordreset">Forgot Your Password?</Link>
+                                        <Link to={PasswordReset}>Forgot Your Password?</Link>
                                     </div>
                                 </div>
                             </form>
-                            {fireRedirect && (<Redirect to='/home'/>)}
+                            {fireRedirect && (<Redirect to= "/home" push/>)}
                         </div>
                     </div>
                 </div>
