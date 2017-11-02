@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Redirect} from 'react-router';
 import Home from '../Home'
 import {Field, reduxForm} from 'redux-form';
+import {registerUser} from '../../actions/actions';
 
 class Register extends Component {
     constructor(props) {
@@ -79,8 +80,11 @@ class Register extends Component {
             phone: this.state.phone,
             bank_card: this.state.bankCard,
         };
-        let uri = 'http://localhost:8000/api/register';
-        axios.post(uri, user);
+        registerUser(user);
+        this.context.history.push('/');
+        alert("Try to register")
+        // let uri = 'http://localhost:8000/api/register';
+        // axios.post(uri, user);
     }
 
     render() {
@@ -93,7 +97,6 @@ class Register extends Component {
                             <div className="panel-heading">Register</div>
                             <div className="panel-body">
                                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
-                                    <input type="hidden" value={window.Laravel.csrfToken}/>
 
                                     <div className="form-group">
                                         <label htmlFor="email" className="col-md-4 control-label">E-Mail Address</label>
