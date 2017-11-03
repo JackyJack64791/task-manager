@@ -3,12 +3,13 @@ import axios from 'axios';
 import {Redirect} from 'react-router';
 import Home from '../Home'
 import {Field, reduxForm} from 'redux-form';
-import {registerUser} from '../../actions/actions';
+import {connect} from 'react-redux';
+import * as actions from '../../actions/actions';
 
 class Register extends Component {
     constructor(props) {
         super(props);
-        this.state = {fullName: '', email: '', login: '', password: '', passwordConfirmation:'', address: '', phone: '', bankCard: '', fireRedirect: false};
+        this.state = {fullName: '', email: '', login: '', password: '', passwordConfirmation:'', address: '', phone: '', bankCard: ''};
         this.handleFullName = this.handleFullName.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -80,15 +81,11 @@ class Register extends Component {
             phone: this.state.phone,
             bank_card: this.state.bankCard,
         };
-        registerUser(user);
-        this.context.history.push('/');
-        alert("Try to register")
-        // let uri = 'http://localhost:8000/api/register';
-        // axios.post(uri, user);
+        this.props.registerUser(user);
+        this.context.history.push('/home');
     }
 
     render() {
-        const {fireRedirect} = this.state.fireRedirect;
         return (
             <div className="container">
                 <div className="row">
@@ -145,7 +142,7 @@ class Register extends Component {
 
                                         <div className="col-md-6">
                                             <input id="phone" type="tel" pattern="(\+?\d[- .]*){7,13}"
-                                                   className="form-control" placeholder="79529428753" name="phone"
+                                                   className="form-control" placeholder="88005553535" name="phone"
                                                    required onChange={this.handlePhone}/>
 
                                         </div>
@@ -186,7 +183,7 @@ class Register extends Component {
 
 
                                     <div className="form-group">
-                                        <div className="col-md-8 col-md-offset-4">
+                                        <div className="col-md-6 col-md-offset-4">
                                             <button type="submit" className="btn btn-primary">
                                                 Register
                                             </button>
@@ -196,7 +193,6 @@ class Register extends Component {
                                         </div>
                                     </div>
                                 </form>
-                                {fireRedirect && (<Redirect to={Home} push/>)}
                             </div>
                         </div>
                     </div>
@@ -205,4 +201,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default connect(null,actions)(Register);

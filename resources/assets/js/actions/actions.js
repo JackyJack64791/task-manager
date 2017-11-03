@@ -1,6 +1,6 @@
 import axios from 'axios';
-import jwtdecode from 'jwt-decode';
-import {AUTH_ERROR, AUTH_USER, LOGOUT_USER} from "../constants/actionTypes";
+import jwt_decode from 'jwt-decode';
+import {AUTH_ERROR, AUTH_USER, LOGOUT_USER, USER_INFO, USER_INFO_SUCCESS, USER_INFO_ERROR} from "../constants/actionTypes";
 
 const ROOT_URL = 'http://localhost:8000';
 
@@ -11,13 +11,24 @@ export function authUser(user) {
                 dispatch({type:AUTH_USER,
                 payload:response.data.token
                 });
-
         localStorage.setItem('token',response.data.token);
             })
             .catch(()=>{
-            alert("What a dummy");
                 dispatch(authError("Required field is empty"));
             });
+    }
+}
+
+export function userInfo(){
+    return dispatch => {
+        axios.get(ROOT_URL+'/api/profile',{
+            headers: {authorization: "Bearer " + localStorage.getItem('token')}
+        })
+            .then(response => {
+                dispatch(userInfoSuccess(response.data.user)
+                )
+           })
+            .catch(response => dispatch(userInfoError("You are not logged in")));
     }
 }
 
@@ -28,12 +39,24 @@ export function registerUser(user) {
                 dispatch({type:AUTH_USER});
                 localStorage.setItem('token',response.data.token);
             })
-            .catch(response =>dispatch(authError(response.dataerror)));
+            .catch(response =>dispatch(authError(response.data.error)));
 
     }
 
 }
 
+export function userInfoSuccess(user){
+    return {
+        type: USER_INFO_SUCCESS,
+        payload: user
+    }
+}
+export function userInfoError(error){
+    return {
+        type: USER_INFO_ERROR,
+        payload: error
+    }
+}
 export function authError(error){
     return {
         type: AUTH_ERROR,

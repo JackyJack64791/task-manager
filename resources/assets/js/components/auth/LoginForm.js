@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Link} from 'react-router-dom';
-import {authUser} from '../../actions/actions';
+import * as actions from '../../actions/actions';
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -37,18 +39,15 @@ class LoginForm extends Component {
             password: this.state.password,
             remember: this.state.remember
         };
-        authUser(user);
-        //alert("Auth is complete");
-        // let uri = 'http://localhost:8000/api/login';
-        // axios.post(uri, user);
+        this.props.authUser(user);
+        this.props.userInfo();
 
     }
     componentWillMount() {
         if (this.props.authenticated === true) {
-            alert("What a boy");
-            this.context.history.push('/')
+            this.context.router.push('/home');
+            //this.props.history.push('/home');
         }
-        else alert("Nevermind");
     }
 
     render() {
@@ -85,13 +84,18 @@ class LoginForm extends Component {
                         <button type="submit" className="btn btn-primary">
                             Login
                         </button>
-                        <Link to='/password/reset'>Forgot Your Password?</Link>
+                        <Link className="btn btn-link" to='/password/reset'>Forgot Your Password?</Link>
                     </div>
                 </fieldset>
             </form>
         )
     }
 }
+function mapStateToProps(state) {
+    return {
+        //history: PropTypes.object.isRequired,
+        authenticated:state.auth.authenticated
+    }
+}
 
-
-export default LoginForm;
+export default connect(mapStateToProps,actions)(LoginForm);

@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from "./reducers/rootReducer";
 import thunkMiddleware from 'redux-thunk'
-import {AUTH_SUCCESS} from './constants/actionTypes';
+import {AUTH_USER} from './constants/actionTypes';
 // window.Laravel = {
 //     csrfToken: '{{csrfToken()}}'
 // };

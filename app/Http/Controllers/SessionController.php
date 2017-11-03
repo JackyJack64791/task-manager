@@ -12,7 +12,7 @@ class SessionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.auth',['except'=>['create']]);
+        $this->middleware('jwt.auth')->except('create');
     }
     public function index()
     {
@@ -24,7 +24,6 @@ class SessionController extends Controller
             'email'=>$request->get('email'),
             'password'=>$request->get('password'),
             ];
-        //return response()->json($credentials);
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(["you're so" => "retard"], 401);
@@ -33,18 +32,12 @@ class SessionController extends Controller
             return response()->json(["It's not" => "for you"], 500);
         }
         return response()->json(compact('token'));
-//        if(auth()->attempt(['email' => request()->get('email'), 'password' => request()->get('password')]))
-//        {
-//            //auth()->login();
-//            return response()->json(["name" => Auth::user()]);
-//        }
-//        else return response()->json(["your_mom"=>"disgusting"]);
     }
 
-    public function destroy()
-    {
-        auth()->logout();
-
-        return response()->json(["name" => Auth::user()]);
-    }
+//    public function destroy()
+//    {
+//        auth()->logout();
+//
+//        return response()->json(["name" => Auth::user()]);
+//    }
 }

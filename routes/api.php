@@ -21,9 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::get('profile','UserController@show')->name('profile');
     //Route::post('login', 'Auth\LoginController@login')->name('login');
-    Route::resource('login','SessionController',['only'=>['index']]);
+    Route::resource('login','SessionController')->only('index');
     Route::post('login','SessionController@create')->name('login');
-    Route::post('logout', 'SessionController@destroy')->name('logout');
+//    Route::post('logout', 'SessionController@destroy')->name('logout');
 
 // Registration Routes...
     Route::get('register', function(){
