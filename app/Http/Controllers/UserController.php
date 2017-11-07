@@ -86,7 +86,7 @@ class UserController extends Controller
 
         } catch (TokenExpiredException $e) {
             try {
-                $refreshed = JWTAUTH::refresh(JWTAuth::getToken());
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
                 $user = JWTAuth::setToken($refreshed)->toUser();
                 header('Authorization: Bearer ' . $refreshed);
 
@@ -115,9 +115,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
 
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -125,9 +124,47 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+        $user_entity = User::findOrFail($request->id);
+        $this->validate($request, [
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
+            'login' => 'required|string|max:20|unique:users,login,'.$request->id,
+            'address' => 'required|string|max:255',
+            'phone' => 'required|regex:/[0-9]{1}[0-9]{10}/|unique:users,phone,'.$request->id,
+//            'password' => 'confirmed|string|min:6',
+            'bank_card'=> 'required|numeric|unique:users,bank_card,'.$request->id]);
+        $user_entity->update($request->all());
+        $token = JWTAuth::fromUser($user_entity);
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('token'));
+
     }
 
     /**

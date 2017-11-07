@@ -1,6 +1,9 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import {AUTH_ERROR, AUTH_USER, LOGOUT_USER, USER_INFO, USER_INFO_SUCCESS, USER_INFO_ERROR} from "../constants/actionTypes";
+import {
+    AUTH_ERROR, AUTH_USER, LOGOUT_USER, USER_INFO, USER_INFO_SUCCESS, USER_INFO_ERROR,
+    USER_FILTER
+} from "../constants/actionTypes";
 
 const ROOT_URL = 'http://localhost:8000';
 
@@ -45,6 +48,19 @@ export function registerUser(user) {
 
 }
 
+export function updateUser(user) {
+
+    return function (dispatch) {
+        axios.put(ROOT_URL+'/api/update',user,{
+            headers: {authorization: "Bearer " + localStorage.getItem('token')}
+        })
+            .then(response => {
+                dispatch({type:AUTH_USER});
+                localStorage.setItem('token',response.data.token);
+            })
+            .catch(response =>dispatch(authError(response.data.error)));
+    }
+}
 export function userInfoSuccess(user){
     return {
         type: USER_INFO_SUCCESS,

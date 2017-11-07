@@ -10,25 +10,30 @@ class Profile extends Component {
     constructor(props){
         super(props);
     }
+    filterUser(user){
+        return Array.filter(Object.keys(user),function(value){
+            return value !== "id" && value !== "created_at" && value !== "updated_at"
+        });
+    }
+    getPropertyNames()
+    {
+        return ["Full Name","Email","Login","Address","Bank card number", "Phone number"];
+    }
     componentDidMount()
     {
-        if(this.props.authenticated !== false) this.props.userInfo();
+        if(this.props.user === null) this.props.userInfo();
     }
     userProperty(){
 
         if (this.props.authenticated === false) {
 
             return <thead>Please, <Link to="/login">sign in</Link></thead>
-        } else {//instanceof Array) {
-            // return <tr>{this.props.user.address}</tr>
-                Object.keys(this.props.user).map(function(key){
-                    return <UserProperty key={key} value=1/>
-                });//this.props.user.map(function(key, value){
-                  //return <UserProperty key={key} value={value}/>
-                //});
-            // return Object.keys(this.props.user).map((name,value)=> {
-            //         return <UserProperty name={name} value={value}/>;
-            //     });
+        } else {
+            let user = this.filterUser(this.props.user);
+            let names = this.getPropertyNames();
+                return user.map((key, i)=>
+                   <UserProperty name={names[i]} value={this.props.user[key]}/>
+                )
         }
     }
     render()
@@ -40,9 +45,16 @@ class Profile extends Component {
                         <div className="panel panel-default">
                             <div className="panel-heading">User</div>
                             <div className="panel-body">
-                                <table>
+                                <table className="table table-responsive">
+                                    <tbody>
                                     {this.userProperty()}
+                                    </tbody>
                                 </table>
+                                <div className="form-group">
+                                    <div className="col-md-6 col-md-offset-4">
+                                        <Link className="btn btn-primary" to='/profile/settings'>Edit Profile</Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

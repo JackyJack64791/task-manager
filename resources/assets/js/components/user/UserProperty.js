@@ -4,11 +4,14 @@ import axios from 'axios';
 
 class UserProperty extends Component {
 
+    constructor(props){
+        super(props);
+    }
     render() {
         return (
             <tr>
-                <td>{this.props.key}</td>
-                <td>{this.props.value}</td>
+                <td className="user-property">{this.props.name}</td>
+                <td className="user-value">{this.props.value}</td>
             </tr>
         );
     }

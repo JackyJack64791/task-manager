@@ -40,10 +40,14 @@ class LoginForm extends Component {
             remember: this.state.remember
         };
         this.props.authUser(user);
+        this.props.history.push("/home");
+        this.props.userInfo();
+        //
     }
     componentWillMount() {
         if (this.props.authenticated === true) {
-            this.context.router.push('/home');
+            this.props.userInfo();
+            //this.context.router.push('/home');
             //this.props.history.push('/home');
         }
     }
@@ -96,4 +100,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps,actions)(LoginForm);
+export default withRouter(connect(mapStateToProps,actions)(LoginForm));

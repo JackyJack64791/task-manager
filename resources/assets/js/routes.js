@@ -7,6 +7,7 @@ import Home from './components/Home'
 import PasswordReset from './components/auth/PasswordReset';
 import Profile from "./components/user/Profile";
 import Logout from "./components/auth/Logout";
+import ProfileEdit from './components/user/ProfileEdit';
 import {Route} from 'react-router';
 
 const Routes = () => {
@@ -17,7 +18,8 @@ const Routes = () => {
             <Route path="/login" component={Login}/>
             <Route path="/logout" component={Logout}/>
             <Route path="/password/reset" component={PasswordReset}/>
-            <Route path="/profile" component={Profile}/>
+            <Route path="/profile/info" component={Profile}/>
+            <Route path="/profile/settings" component={ProfileEdit}/>
         </Layout>
     )
 };

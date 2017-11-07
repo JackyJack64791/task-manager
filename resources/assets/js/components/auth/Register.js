@@ -4,6 +4,7 @@ import {Redirect} from 'react-router';
 import Home from '../Home'
 import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import * as actions from '../../actions/actions';
 
 class Register extends Component {
@@ -82,7 +83,7 @@ class Register extends Component {
             bank_card: this.state.bankCard,
         };
         this.props.registerUser(user);
-        this.context.history.push('/home');
+        this.props.history.push("/home");
     }
 
     render() {
@@ -201,4 +202,4 @@ class Register extends Component {
     }
 }
 
-export default connect(null,actions)(Register);
+export default withRouter(connect(null,actions)(Register));
