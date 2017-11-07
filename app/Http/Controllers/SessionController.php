@@ -31,12 +31,13 @@ class SessionController extends Controller
         } catch (JWTException $e) {
             return response()->json(["It's not" => "for you"], 500);
         }
+       // Auth::attempt(["email" => $credentials['email'],"password"=> $credentials['password']]);
         return response()->json(compact('token'));
     }
 
 //    public function destroy()
 //    {
-//        auth()->logout();
+//        Auth::logout();
 //
 //        return response()->json(["name" => Auth::user()]);
 //    }

@@ -40,8 +40,6 @@ class LoginForm extends Component {
             remember: this.state.remember
         };
         this.props.authUser(user);
-        this.props.userInfo();
-
     }
     componentWillMount() {
         if (this.props.authenticated === true) {

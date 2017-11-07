@@ -25,8 +25,8 @@ export function userInfo(){
             headers: {authorization: "Bearer " + localStorage.getItem('token')}
         })
             .then(response => {
-                dispatch(userInfoSuccess(response.data.user)
-                )
+                dispatch(userInfoSuccess(response.data.user),
+                );
            })
             .catch(response => dispatch(userInfoError("You are not logged in")));
     }

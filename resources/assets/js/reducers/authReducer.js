@@ -1,7 +1,7 @@
 import {AUTH_ERROR, AUTH_USER, LOGOUT_USER, USER_INFO, USER_INFO_SUCCESS, USER_INFO_ERROR} from "../constants/actionTypes";
 
 const token = localStorage.getItem('token');
-function authReducer (state={}, action) {
+function authReducer (state={authenticated: false, user:{}}, action) {
     switch(action.type)
     {
         case AUTH_USER:
