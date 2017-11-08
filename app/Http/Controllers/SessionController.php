@@ -23,6 +23,8 @@ class SessionController extends Controller
         $credentials = [
             'email'=>$request->get('email'),
             'password'=>$request->get('password'),
+            //'remember'=>$request->get('remember'),
+            //TODO::remember me
             ];
         try {
             if (!$token = JWTAuth::attempt($credentials)) {

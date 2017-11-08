@@ -91,15 +91,6 @@ class ProfileEdit extends Component {
         this.props.updateUser(user);
         this.props.history.push("/logout");
     }
-    // filterUser(user){
-    //     return Array.filter(Object.keys(user),function(value){
-    //         return value !== "id" && value !== "created_at" && value !== "updated_at"
-    //     });
-    // }
-    // getPropertyNames()
-    // {
-    //     return ["Full Name","Email","Login","Address","Bank card number", "Phone number"];
-    // }
     render(){
         return (<div className="container">
             <div className="row">
@@ -217,7 +208,7 @@ class ProfileEdit extends Component {
 }
 function mapStateToProps(state){
     return {
-        user:state.auth.user,
+        user:state.user.user,
     }
 }
 export default connect(mapStateToProps,actions)(ProfileEdit);

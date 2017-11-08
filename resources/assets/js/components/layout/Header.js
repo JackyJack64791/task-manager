@@ -43,64 +43,6 @@ class Header extends Component{
         )
     }
     render(){
-        // return (
-        //     <nav className="navbar navbar-default navbar-static">
-        //         <div className="container-fluid">
-        //             <div className="navbar-header">
-        //                 <button className="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".js-navbar">
-        //                     <span className="sr-only">Toggle navigation</span>
-        //                     <span className="icon-bar"></span>
-        //                     <span className="icon-bar"></span>
-        //                     <span className="icon-bar"></span>
-        //                 </button>
-        //                 <a className="navbar-brand" href="#" >Название проекта</a>
-        //             </div>
-        //             <div className="collapse navbar-collapse js-navbar">
-        //                 <ul className="nav navbar-nav">
-        //                     <li><a href="#">Главная</a></li>
-        //                     <li className="dropdown">
-        //                         <a id="drop1" href="#" className="dropdown-toggle" data-toggle="dropdown">
-        //                             Меню
-        //                             <span className="caret"></span>
-        //                         </a>
-        //                         <ul className="dropdown-menu">
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                             <li className="divider"></li>
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                         </ul>
-        //                     </li>
-        //                     <li className="dropdown">
-        //                         <a id="drop1" href="#" className="dropdown-toggle" data-toggle="dropdown">
-        //                             Меню
-        //                             <span className="caret"></span>
-        //                         </a>
-        //                         <ul className="dropdown-menu">
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                             <li className="divider"></li>
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                         </ul>
-        //                     </li>
-        //                 </ul>
-        //                 <ul className="nav navbar-nav navbar-right">
-        //                     <li className="dropdown">
-        //                         <a id="drop1" href="#" className="dropdown-toggle" data-toggle="dropdown">
-        //                             Меню
-        //                             <span className="caret"></span>
-        //                         </a>
-        //                         <ul className="dropdown-menu">
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                             <li className="divider"></li>
-        //                             <li><a href="#">Текст подпункта</a></li>
-        //                         </ul>
-        //                     </li>
-        //                 </ul>
-        //             </div>
-        //         </div>
-        //     </nav>
-        //)
         return (
                 <nav className="navbar navbar-default navbar-static">
                     <div className="container">
@@ -120,7 +62,7 @@ class Header extends Component{
 function mapStateToProps(state) {
     return {
         authenticated:state.auth.authenticated,
-        user: state.auth.user
+        user: state.user.user
     }
 }
 

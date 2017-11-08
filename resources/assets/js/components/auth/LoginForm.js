@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Field, reduxForm } from 'redux-form';
 import {Link} from 'react-router-dom';
 import * as actions from '../../actions/actions';
 import {withRouter} from 'react-router';
@@ -41,17 +40,8 @@ class LoginForm extends Component {
         };
         this.props.authUser(user);
         this.props.history.push("/home");
-        this.props.userInfo();
-        //
-    }
-    componentWillMount() {
-        if (this.props.authenticated === true) {
-            this.props.userInfo();
-            //this.context.router.push('/home');
-            //this.props.history.push('/home');
-        }
-    }
 
+    }
     render() {
         return (
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -86,17 +76,21 @@ class LoginForm extends Component {
                         <button type="submit" className="btn btn-primary">
                             Login
                         </button>
-                        <Link className="btn btn-link" to='/password/reset'>Forgot Your Password?</Link>
+                        <Link className="btn btn-link" to='/reset/email'>Forgot Your Password?</Link>
                     </div>
                 </fieldset>
+                {this.props.isLoading ? <p>LOADING</p> : ""}
+                {this.props.isError ? <p>{this.props.error}</p> : ""}
             </form>
         )
     }
 }
 function mapStateToProps(state) {
     return {
-        //history: PropTypes.object.isRequired,
-        authenticated:state.auth.authenticated
+        authenticated:state.auth.authenticated,
+        isLoading: state.auth.isLoading,
+        isError: state.auth.isError,
+        error: state.auth.error,
     }
 }
 

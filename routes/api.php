@@ -27,16 +27,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    Route::post('logout', 'SessionController@destroy')->name('logout');
 
 // Registration Routes...
-    Route::get('register', function(){
-       return response("GET::api/register");
-    });
+//    Route::get('register', function(){
+//       return response("GET::api/register");
+//    });
     Route::post('register', 'UserController@register')->name('register');
 
 // Password Reset Routes...
-//$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-//$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
+//Route::post('password/email', 'Auth\ForgotPasswordController@getResetToken');
+Route::post('reset/email','Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('reset/password', 'Auth\ResetPasswordController@reset')->name('password.reset');
 
 

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -35,5 +36,13 @@ class User extends Authenticatable
     public function skills()
     {
         return $this->belongsToMany(Skill::class,'skill_user');
+    }
+
+    public function getJWTCustomClaims() {
+        if ($this->can('use-extended-token-timelines')) {
+            $expiration = Carbon::now('UTC')->addWeeks(2)->getTimestamp();
+            return ['exp' => $expiration];
+        }
+        return [];
     }
 }

@@ -66,7 +66,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.auth.user,
+        user: state.user.user,
         authenticated:state.auth.authenticated,
 
     }
