@@ -38,11 +38,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Skill::class,'skill_user');
     }
 
-    public function getJWTCustomClaims() {
-        if ($this->can('use-extended-token-timelines')) {
-            $expiration = Carbon::now('UTC')->addWeeks(2)->getTimestamp();
-            return ['exp' => $expiration];
-        }
-        return [];
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
 }

@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use JWTAuth;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt.auth')->except('store');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +40,47 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        try {
+//
+//            if (! $user = JWTAuth::parseToken()->authenticate()) {
+//                return response()->json(['user_not_found'], 404);
+//            }
+//
+//        } catch (TokenExpiredException $e) {
+//            try {
+//                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+//                $user = JWTAuth::setToken($refreshed)->toUser();
+//                header('Authorization: Bearer ' . $refreshed);
+//
+//            } catch (JWTException $e) {
+//                return response()->json(['token_expired'], $e->getStatusCode());
+//            }
+//
+//        } catch (TokenInvalidException $e) {
+//
+//            return response()->json(['token_invalid'], $e->getStatusCode());
+//
+//        } catch (JWTException $e) {
+//
+//            return response()->json(['token_absent'], $e->getStatusCode());
+//
+//        }
+
+        $this->validate($request, [
+            'customer_id' => 'required',
+            'deadline' => 'required|date',
+            'description' => 'required|string',
+            'specification'=>'string',
+            ]);
+        $project = Project::create([
+            'customer_id'=>$request->get('customer'),
+            'manager_id'=>auth()->id(),
+            'deadline'=>$request->get('deadline'),
+            'description'=>$request->get('description'),
+            'specification'=>$request->get('specification'),
+        ]);
+
+        return response()->json(compact('project'));
     }
 
     /**

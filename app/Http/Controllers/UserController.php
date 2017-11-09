@@ -12,6 +12,11 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt.auth')->except('register');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +24,32 @@ class UserController extends Controller
      */
     public function index()
     {
+        try {
 
-        //return response()->json(['auth'=>Auth::user(),'users'=>User::all()]);
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+        return response()->json(User::all());
     }
 
     public function register(Request $request)

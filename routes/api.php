@@ -37,4 +37,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('reset/email','Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::post('reset/password', 'Auth\ResetPasswordController@reset');
 
+Route::get('users','UserController@index');
+
+Route::post('project/create','ProjectController@store');
+
 

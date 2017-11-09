@@ -10,8 +10,10 @@ import PasswordResetEmail from './components/reset/PasswordResetEmail';
 import Profile from "./components/user/Profile";
 import Logout from "./components/auth/Logout";
 import ProfileEdit from './components/user/ProfileEdit';
-
+import ProjectCreate from "./components/project/ProjectCreate";
+import ProjectList from "./components/project/ProjectList";
 import {Route} from 'react-router';
+
 
 const Routes = () => {
     return (
@@ -25,6 +27,8 @@ const Routes = () => {
             <Route path="/reset/password" component={PasswordReset}/>
             <Route path="/profile/info" component={Profile}/>
             <Route path="/profile/settings" component={ProfileEdit}/>
+            <Route path="/project/create" component={ProjectCreate}/>
+            <Route path="/projects" component={ProjectList}/>
         </Layout>
     )
 };
