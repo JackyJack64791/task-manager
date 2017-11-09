@@ -25,6 +25,7 @@ class ProfileEdit extends Component {
         this.handlePhone = this.handlePhone.bind(this);
         this.handleBankCard = this.handleBankCard.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
     }
 
     handleFullName(e) {
@@ -73,7 +74,9 @@ class ProfileEdit extends Component {
             bankCard: e.target.value
         })
     }
-
+    handleRedirect(){
+        this.props.history.push("/profile/info");
+    }
     handleSubmit(e) {
         e.preventDefault();
         this.setState({fireRedirect: true});
@@ -88,8 +91,8 @@ class ProfileEdit extends Component {
             phone: this.state.phone,
             bank_card: this.state.bankCard,
         };
-        this.props.updateUser(user);
-        this.props.history.push("/logout");
+        this.props.updateUser(user,this.handleRedirect);
+
     }
     render(){
         return (<div className="container">

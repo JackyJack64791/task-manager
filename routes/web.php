@@ -18,6 +18,7 @@
 
 //Auth::routes();
 
+Route::get("reset/password","HomeController@index")->name('password.reset');
 
 Route::group(['middleware'=>'web'],function(){
     Route::get('/{path?}', [

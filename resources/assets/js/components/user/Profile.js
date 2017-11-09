@@ -21,20 +21,15 @@ class Profile extends Component {
     }
     componentDidMount()
     {
+        if(!this.props.authenticated) this.props.history.push("/login");
         if(this.props.user === null) this.props.userInfo();
     }
     userProperty(){
-
-        if (this.props.authenticated === false) {
-
-            return <thead>Please, <Link to="/login">sign in</Link></thead>
-        } else {
             let user = this.filterUser(this.props.user);
             let names = this.getPropertyNames();
                 return user.map((key, i)=>
                    <UserProperty name={names[i]} value={this.props.user[key]}/>
                 )
-        }
     }
     render()
     {

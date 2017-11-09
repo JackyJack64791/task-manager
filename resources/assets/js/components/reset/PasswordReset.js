@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import * as actions from '../../actions/actions';
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import queryString from 'query-string';
 
 class PasswordReset extends Component {
     componentDidMount(){
@@ -7,11 +11,12 @@ class PasswordReset extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {email: '', password: '', passwordConfirmation: ''};
+        this.state = {token: '', email: '', password: '', passwordConfirmation: ''};
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
         this.handlePasswordConfirmation = this.handlePasswordConfirmation.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
     }
 
     handleEmail(e) {
@@ -31,15 +36,25 @@ class PasswordReset extends Component {
             passwordConfirmation: e.target.value
         })
     }
+    handleRedirect()
+    {
+        this.props.history.push("/login");
+    }
+    parseQuery(query)
+    {
+        let queryParams = Object.keys(queryString.parse(query));
+        return queryParams[0];
+    }
     handleSubmit (e) {
         e.preventDefault();
+        this.state.token = this.parseQuery(this.props.location.search);
         const reset = {
+            token:this.state.token,
             email: this.state.email,
             password: this.state.password,
-            passwordConfirmation: this.state.passwordConfirmation
+            password_confirmation: this.state.passwordConfirmation
         };
-        this.props.resetPassword(reset);
-        this.props.history.push("/login");
+        this.props.resetPassword(reset,this.state.token,this.handleRedirect);
 
     }
     render() {
@@ -50,6 +65,7 @@ class PasswordReset extends Component {
                         <div className="panel-heading">Password Reset</div>
                         <div className="panel-body">
                             <form className="form-horizontal" onSubmit={this.handleSubmit}>
+                                <input type="hidden" name="token" value={this.state.token}/>
                             <fieldset className="form-group">
                                 <label htmlFor="email" className="col-md-4 control-label">E-Mail Address</label>
                                 <div className="col-md-6">
@@ -83,6 +99,7 @@ class PasswordReset extends Component {
                                 </div>
                             </fieldset>
                             </form>
+                            {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
                         </div>
                     </div>
                 </div>
@@ -91,4 +108,4 @@ class PasswordReset extends Component {
     }
 }
 
-export default PasswordReset;
+export default withRouter(connect(null,actions)(PasswordReset));

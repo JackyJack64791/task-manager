@@ -22,7 +22,7 @@ const Routes = () => {
             <Route path="/logout" component={Logout}/>
             <Route path="/reset/email" component={PasswordResetEmail}/>
             <Route path="/reset/info" component={PasswordResetInfo}/>
-            <Route path="/reset/password/:token" component={PasswordReset}/>
+            <Route path="/reset/password" component={PasswordReset}/>
             <Route path="/profile/info" component={Profile}/>
             <Route path="/profile/settings" component={ProfileEdit}/>
         </Layout>

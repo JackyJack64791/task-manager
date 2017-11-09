@@ -7,7 +7,7 @@ import {
 
 const ROOT_URL = 'http://localhost:8000';
 
-export function authUser(user) {
+export function authUser(user,redirect) {
     return function (dispatch) {
         dispatch(authLoading());
         axios.post(ROOT_URL + '/api/login', user)
@@ -19,10 +19,10 @@ export function authUser(user) {
                 });
                 localStorage.setItem('token', response.data.token);
                 dispatch(userInfo(response.data.token));
-                console.log(response);
+                redirect()
             })
             .catch(() => {
-                dispatch(authError("Required field is empty"));
+                dispatch(authError("Wrong email or password"));
             });
     }
 }
@@ -40,13 +40,14 @@ export function userInfo(token=localStorage.getItem('token')) {
     }
 }
 
-export function registerUser(user) {
+export function registerUser(user,redirect) {
     return function (dispatch) {
         axios.post(ROOT_URL + '/api/register', user)
             .then(response => {
                 dispatch({type: AUTH_USER});
                 localStorage.setItem('token', response.data.token);
                 dispatch(userInfo(response.data.token));
+                redirect();
             })
             .catch(response => dispatch(authError(response.data.error)));
 
@@ -54,7 +55,7 @@ export function registerUser(user) {
 
 }
 
-export function updateUser(user) {
+export function updateUser(user,redirect) {
 
     return function (dispatch) {
         axios.put(ROOT_URL + '/api/update', user, {
@@ -63,30 +64,31 @@ export function updateUser(user) {
             .then(response => {
                 dispatch({type: AUTH_USER});
                 localStorage.setItem('token', response.data.token);
+                dispatch(userInfo(response.data.token));
+                redirect();
             })
             .catch(response => dispatch(authError(response.data.error)));
     }
 }
 
-export function resetSendEmail(email)
+export function resetSendEmail(email,redirect)
 {
-    console.log("meow");
     return function (dispatch) {
         axios.post(ROOT_URL+'/api/reset/email',{email: email})
             .then(response => {
-                console.log(response);
                 dispatch({type: RESET_SEND_MAIL});
+                redirect();
             })
             .catch(response => dispatch(resetSendEmailError(response.data.error)))
     }
 }
-export function resetPassword(credentials)
+export function resetPassword(credentials,token,redirect)
 {
     return function (dispatch) {
-        axios.post(ROOT_URL+'/api/reset/password',credentials)
+        axios.post(ROOT_URL+'/api/reset/password?'+token,credentials)
             .then(response => {
-                console.log(response);
                 dispatch({type: RESET_PASSWORD});
+                redirect();
             })
             .catch(response => dispatch(resetPasswordError(response.data.error)))
     }

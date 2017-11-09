@@ -8,6 +8,10 @@ import {withRouter} from 'react-router';
 import * as actions from '../../actions/actions';
 
 class Register extends Component {
+
+    componentDidMount(){
+        if(this.props.authenticated) this.props.history.push("/profile/info");
+    }
     constructor(props) {
         super(props);
         this.state = {fullName: '', email: '', login: '', password: '', passwordConfirmation:'', address: '', phone: '', bankCard: ''};
@@ -20,6 +24,7 @@ class Register extends Component {
         this.handlePhone = this.handlePhone.bind(this);
         this.handleBankCard = this.handleBankCard.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
     }
 
     handleFullName(e) {
@@ -68,6 +73,10 @@ class Register extends Component {
             bankCard: e.target.value
         })
     }
+    handleRedirect()
+    {
+        this.props.history.push("/home");
+    }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -82,8 +91,7 @@ class Register extends Component {
             phone: this.state.phone,
             bank_card: this.state.bankCard,
         };
-        this.props.registerUser(user);
-        this.props.history.push("/home");
+        this.props.registerUser(user,this.handleRedirect);
     }
 
     render() {
@@ -194,11 +202,21 @@ class Register extends Component {
                                         </div>
                                     </div>
                                 </form>
+                                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>)
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        authenticated:state.auth.authenticated,
+        isLoading: state.auth.isLoading,
+        isError: state.auth.isError,
+        error: state.auth.error,
     }
 }
 

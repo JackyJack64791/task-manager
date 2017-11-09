@@ -13,17 +13,23 @@ class PasswordResetEmail extends Component {
         this.state = {email: ''};
         this.handleEmail = this.handleEmail.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
     }
     handleEmail(e) {
         this.setState({
             email: e.target.value
         })
     }
+    handleRedirect()
+    {
+        this.props.history.push({
+            pathname: "/reset/info",
+            state: {email: this.state.email}
+        })
+    }
     handleSubmit (e) {
         e.preventDefault();
-        this.props.resetSendEmail(this.state.email);
-        this.props.history.push("/reset/info");
-
+        this.props.resetSendEmail(this.state.email,this.handleRedirect);
     }
     render() {
         return (<div className="container">

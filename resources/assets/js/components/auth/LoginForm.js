@@ -5,13 +5,17 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 
 class LoginForm extends Component {
+    componentDidMount(){
+        if(this.props.authenticated) this.props.history.push("/profile/info");
+    }
     constructor(props) {
         super(props);
         this.state = {email: '', password: '', remember: false};
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.handleRemember = this.handleRemember.bind(this);
+        // this.handleRemember = this.handleRemember.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
     }
 
     handleEmail(e) {
@@ -26,22 +30,25 @@ class LoginForm extends Component {
         })
     }
 
-    handleRemember(e) {
-        this.setState({
-            remember: !this.state.remember
-        })
+    // handleRemember(e) {
+    //     this.setState({
+    //         remember: !this.state.remember
+    //     })
+    // }
+    handleRedirect()
+    {
+        this.props.history.push("/home");
     }
     handleSubmit (e) {
         e.preventDefault();
         const user = {
             email: this.state.email,
             password: this.state.password,
-            remember: this.state.remember
+            // remember: this.state.remember
         };
-        this.props.authUser(user);
-        this.props.history.push("/home");
-
+        this.props.authUser(user,this.handleRedirect);
     }
+
     render() {
         return (
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
@@ -61,16 +68,16 @@ class LoginForm extends Component {
 
                     </div>
                 </fieldset>
-                <fieldset className="form-group">
-                    <div className="col-md-6 col-md-offset-4">
-                        <div className="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember" onChange={this.handleRemember}/>
-                                Remember Me
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
+                {/*<fieldset className="form-group">*/}
+                    {/*<div className="col-md-6 col-md-offset-4">*/}
+                        {/*<div className="checkbox">*/}
+                            {/*<label>*/}
+                                {/*<input type="checkbox" name="remember" onChange={this.handleRemember}/>*/}
+                                {/*Remember Me*/}
+                            {/*</label>*/}
+                        {/*</div>*/}
+                    {/*</div>*/}
+                {/*</fieldset>*/}
                 <fieldset className="form-group">
                     <div className="col-md-8 col-md-offset-4">
                         <button type="submit" className="btn btn-primary">
@@ -79,8 +86,7 @@ class LoginForm extends Component {
                         <Link className="btn btn-link" to='/reset/email'>Forgot Your Password?</Link>
                     </div>
                 </fieldset>
-                {this.props.isLoading ? <p>LOADING</p> : ""}
-                {this.props.isError ? <p>{this.props.error}</p> : ""}
+                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
             </form>
         )
     }

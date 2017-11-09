@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router';
 
 class PasswordResetInfo extends Component {
+    componentDidMount(){
+        if(this.props.authenticated) this.props.history.push("/profile/info");
+    }
     render() {
         return (<div className="container">
             <div className="row">
@@ -8,7 +12,7 @@ class PasswordResetInfo extends Component {
                     <div className="panel panel-default">
                         <div className="panel-heading">Password Reset</div>
                         <div className="panel-body">
-                            <p>Email was sent to 123. Check your inbox.</p>
+                            <p>Email was sent to {this.props.location.state.email}. Check your inbox.</p>
                         </div>
                     </div>
                 </div>
@@ -17,4 +21,4 @@ class PasswordResetInfo extends Component {
     }
 }
 
-export default PasswordResetInfo;
+export default withRouter(PasswordResetInfo);

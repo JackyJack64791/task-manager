@@ -23,8 +23,6 @@ class SessionController extends Controller
         $credentials = [
             'email'=>$request->get('email'),
             'password'=>$request->get('password'),
-            //'remember'=>$request->get('remember'),
-            //TODO::remember me
             ];
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
@@ -33,7 +31,6 @@ class SessionController extends Controller
         } catch (JWTException $e) {
             return response()->json(["It's not" => "for you"], 500);
         }
-       // Auth::attempt(["email" => $credentials['email'],"password"=> $credentials['password']]);
         return response()->json(compact('token'));
     }
 
