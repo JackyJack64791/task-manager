@@ -4,9 +4,13 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 
 class ProjectCreate extends Component {
-    componentDidMount(){
-        if(!this.props.authenticated) this.props.history.push("/login");
+    componentDidMount() {
+        if (!this.props.authenticated) this.props.history.push("/login");
+        // if (!this.props.users.length) {
+        //     this.props.getUsers();
+        // }
     }
+
     constructor(props) {
         super(props);
         this.state = {customer: '', deadline: '', description: '', specification: ''};
@@ -17,38 +21,39 @@ class ProjectCreate extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
     }
-    filterUsers(users){
-        return users.map((user)=> (({ id, full_name }) => ({ id, full_name }))(user));
+
+    customers() {
+        return this.props.users.map((key) =>
+            <option value={key.id}>{key.full_name}</option>
+        )
+
     }
 
-    customers(){
-         let users = this.filterUsers(this.props.users);
-         return users.map((key)=>
-             <option value={key.id}>{key.full_name}</option>
-         )
-    }
-    handleCustomer(e){
+    handleCustomer(e) {
         this.setState({
             customer: e.target.value
         })
     }
-    handleDeadline(e){
+
+    handleDeadline(e) {
         this.setState({
             deadline: e.target.value
         })
     }
-    handleDescription(e){
+
+    handleDescription(e) {
         this.setState({
             description: e.target.value
         })
     }
-    handleSpecification(e){
+
+    handleSpecification(e) {
         this.setState({
             specification: e.target.value
         })
     }
 
-    handleSubmit (e) {
+    handleSubmit(e) {
         e.preventDefault();
         const project = {
             customer: this.state.customer,
@@ -56,14 +61,22 @@ class ProjectCreate extends Component {
             description: this.state.description,
             specification: this.state.specification,
         };
-        this.props.projectCreate(project,this.handleRedirect);
+        this.props.projectCreate(project, this.handleRedirect);
     }
-    handleRedirect()
-    {
+
+    handleRedirect() {
         this.props.history.push("/projects");
     }
+
     render() {
-        return (<div className="container">
+        let users;
+        if (this.props.users.length && !this.props.isLoading) {
+            users = this.props.users;
+        }
+        else {
+            return <p>Loading...</p>;
+        }
+        return (users && <div className="container">
             <div className="row">
                 <div className="col-md-8 col-md-offset-2">
                     <div className="panel panel-default">
@@ -83,7 +96,7 @@ class ProjectCreate extends Component {
 
                                     <div className="col-md-6">
                                         <input id="deadline" type="datetime-local" className="form-control"
-                                                name="deadline" required onChange={this.handleDeadline}/>
+                                               name="deadline" required onChange={this.handleDeadline}/>
 
                                     </div>
                                 </fieldset>
@@ -92,12 +105,13 @@ class ProjectCreate extends Component {
 
                                     <div className="col-md-6">
                                         <textarea id="description" className="form-control"
-                                               name="description" required onChange={this.handleDescription}/>
+                                                  name="description" required onChange={this.handleDescription}/>
 
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
-                                    <label htmlFor="specification" className="col-md-4 control-label">Specification</label>
+                                    <label htmlFor="specification"
+                                           className="col-md-4 control-label">Specification</label>
 
                                     <div className="col-md-6">
                                         <input id="specification" type="text" className="form-control"
@@ -122,14 +136,16 @@ class ProjectCreate extends Component {
     }
 
 }
+
 function mapStateToProps(state) {
     return {
-        authenticated:state.auth.authenticated,
-        isLoading: state.auth.isLoading,
-        isError: state.auth.isError,
-        error: state.auth.error,
+        authenticated: state.auth.authenticated,
+        isLoading: state.user.isLoading,
+        isError: state.user.isError,
+        error: state.user.error,
         users: state.user.users,
     }
 }
-export default withRouter(connect(mapStateToProps,actions)(ProjectCreate));
+
+export default withRouter(connect(mapStateToProps, actions)(ProjectCreate));
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -49,7 +48,7 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        return response()->json(User::all());
+        return response()->json(User::where('id', '!=', auth()->id())->get());
     }
 
     public function register(Request $request)
@@ -71,9 +70,8 @@ class UserController extends Controller
             'password'=>bcrypt($request->get('password')),
             'bank_card'=>$request->get('bank_card'),
         ]);
+
         $token = JWTAuth::fromUser($user);
-        //auth()->login($user,$request->get('remember'));
-        //return response()->json(["name"=>Auth::user()->getAuthIdentifierName()]);
         return response()->json(compact($token));
 
     }

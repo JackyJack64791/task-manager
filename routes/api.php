@@ -14,31 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-    //Route::get('login','HomeController@index');
-    //Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
     Route::get('profile','UserController@show')->name('profile');
-    //Route::post('login', 'Auth\LoginController@login')->name('login');
     Route::get('login','SessionController@index');
     Route::post('login','SessionController@create')->name('login');
     Route::put('update', "UserController@update")->name('update');
 //    Route::post('logout', 'SessionController@destroy')->name('logout');
-
-// Registration Routes...
-//    Route::get('register', function(){
-//       return response("GET::api/register");
-//    });
     Route::post('register', 'UserController@register')->name('register');
-
-// Password Reset Routes...
-//Route::post('password/email', 'Auth\ForgotPasswordController@getResetToken');
 Route::post('reset/email','Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::post('reset/password', 'Auth\ResetPasswordController@reset');
 
 Route::get('users','UserController@index');
 
 Route::post('project/create','ProjectController@store');
-
-
+Route::delete('project/delete', 'ProjectController@destroy');
+Route::get('projects','ProjectController@show');

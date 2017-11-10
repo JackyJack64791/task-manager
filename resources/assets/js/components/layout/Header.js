@@ -8,8 +8,12 @@ import {connect} from 'react-redux';
 
 class Header extends Component{
     componentDidMount(){
-        if(this.props.authenticated !== false) this.props.userInfo();
-        if(!this.props.users) this.props.getUsers();
+        if(this.props.authenticated){
+            this.props.userInfo();
+            if(!this.props.users.length) this.props.getUsers();
+            if(!this.props.projects.length) this.props.getProjects();
+        }
+
     }
     renderLinks(){
         if(this.props.authenticated){
@@ -65,7 +69,9 @@ class Header extends Component{
 function mapStateToProps(state) {
     return {
         authenticated:state.auth.authenticated,
-        user: state.user.user
+        user: state.user.user,
+        users: state.user.users,
+        projects: state.project.projects,
     }
 }
 

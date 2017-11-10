@@ -38,9 +38,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Skill::class,'skill_user');
     }
 
-    public function projects()
+    public function projectsManager()
     {
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class, 'manager_id');
+    }
+
+    public function projectsCustomer()
+    {
+        return $this->hasMany(Project::class, 'customer_id');
     }
 
     public function tasks()

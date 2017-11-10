@@ -3,7 +3,8 @@ import jwt_decode from 'jwt-decode';
 import {
     AUTH_ERROR, AUTH_USER, LOGOUT_USER, USER_INFO, USER_INFO_ERROR,
     USER_FILTER, AUTH_LOADING, RESET_SEND_MAIL, RESET_SEND_MAIL_ERROR, RESET_PASSWORD, RESET_PASSWORD_ERROR,
-    PROJECT_CREATE_ERROR, USERS_GET, USERS_GET_ERROR, PROJECT_CREATE
+    PROJECT_CREATE_ERROR, USERS_GET, USERS_GET_ERROR, PROJECT_CREATE, USERS_GET_LOADING, GET_PROJECTS,
+    GET_PROJECTS_ERROR, GET_PROJECTS_LOADING, PROJECT_DELETE, PROJECT_DELETE_ERROR
 } from "../constants/actionTypes";
 
 const ROOT_URL = 'http://localhost:8000';
@@ -17,13 +18,13 @@ export function authUser(user, redirect) {
         dispatch(authLoading());
         axios.post(ROOT_URL + '/api/login', user)
             .then(response => {
-                dispatch({
-                    type: AUTH_USER,
-                    payload: response.data.token
-                });
+                dispatch({type: AUTH_USER});
                 localStorage.setItem('token', response.data.token);
-                dispatch(userInfo(response.data.token));
-                dispatch(getUsers(response.data.token));
+                dispatch(
+                    userInfo(response.data.token),
+                    getUsers(response.data.token),
+                    getProjects(response.data.token)
+                );
                 redirect()
             })
             .catch(() => {
@@ -125,7 +126,7 @@ export function logoutUser() {
 export function userInfo(token = localStorage.getItem('token')) {
     return function (dispatch) {
         axios.get(ROOT_URL + '/api/profile', {
-            headers: {authorization: "Bearer " + token}//localStorage.getItem('token')}
+            headers: {authorization: "Bearer " + token}
         })
             .then(response => {
                 dispatch(userInfoSuccess(response.data.user),
@@ -137,6 +138,7 @@ export function userInfo(token = localStorage.getItem('token')) {
 
 export function getUsers(token = localStorage.getItem('token')) {
     return function (dispatch) {
+        dispatch(getUsersLoading());
         axios.get(ROOT_URL + '/api/users', {
             headers: {authorization: "Bearer " + token}
         })
@@ -153,6 +155,10 @@ export function getUsersSuccess(users) {
         type: USERS_GET,
         payload: users
     }
+}
+
+export function getUsersLoading() {
+    return {type:USERS_GET_LOADING}
 }
 
 export function getUsersError(error) {
@@ -182,10 +188,10 @@ export function userInfoError(error) {
 
 export function projectCreate(project, redirect) {
     return function (dispatch) {
-        axios.post(ROOT_URL + '/api/project/create', {
-            headers: {authorization: "Bearer " + localStorage.getItem('token'),
-            project}
-        })
+        axios.post(ROOT_URL + '/api/project/create',
+            project,
+            {headers:{Authorization: "Bearer " + localStorage.getItem('token')}}
+        )
             .then(response => {
                 dispatch({type:PROJECT_CREATE});
                 redirect();
@@ -194,9 +200,58 @@ export function projectCreate(project, redirect) {
     }
 }
 
+export function projectDelete(id) {
+    return function (dispatch) {
+        axios.delete(ROOT_URL + '/api/project/delete',
+            id,
+            {headers:{Authorization: "Bearer " + localStorage.getItem('token')}}
+            )
+            .then(response => {
+                dispatch({type:PROJECT_DELETE});
+            })
+            .catch(response => dispatch(projectDeleteError("You are not logged in")))
+    }
+}
+export function getProjects(token=localStorage.getItem('token')) {
+    return function (dispatch){
+        dispatch(getProjectsLoading());
+        axios.get(ROOT_URL + '/api/projects',
+        {headers:{Authorization: "Bearer " + token}}
+    )
+        .then(response => {
+            dispatch(getProjectsSuccess(response.data));
+        })
+        .catch(response => dispatch(getProjectsError("You are not logged in")));
+}
+}
+export function getProjectsSuccess(projects) {
+    return {
+        type: GET_PROJECTS,
+        payload: projects,
+    }
+}
+
+export function getProjectsLoading() {
+    return {type:GET_PROJECTS_LOADING}
+}
+
+export function getProjectsError(error) {
+    return {
+        type: GET_PROJECTS_ERROR,
+        payload: error
+    }
+}
+
 export function projectAddError(error) {
     return {
         type: PROJECT_CREATE_ERROR,
+        payload: error,
+    }
+}
+
+export function projectDeleteError(error) {
+    return {
+        type: PROJECT_DELETE_ERROR,
         payload: error,
     }
 }

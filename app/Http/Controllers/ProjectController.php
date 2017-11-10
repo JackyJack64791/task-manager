@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
+use App\User;
+use Illuminate\Support\Facades\Input;
 use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class ProjectController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('jwt.auth')->except('store');
+        $this->middleware('jwt.auth');
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +25,6 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -40,34 +45,34 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-//        try {
-//
-//            if (! $user = JWTAuth::parseToken()->authenticate()) {
-//                return response()->json(['user_not_found'], 404);
-//            }
-//
-//        } catch (TokenExpiredException $e) {
-//            try {
-//                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
-//                $user = JWTAuth::setToken($refreshed)->toUser();
-//                header('Authorization: Bearer ' . $refreshed);
-//
-//            } catch (JWTException $e) {
-//                return response()->json(['token_expired'], $e->getStatusCode());
-//            }
-//
-//        } catch (TokenInvalidException $e) {
-//
-//            return response()->json(['token_invalid'], $e->getStatusCode());
-//
-//        } catch (JWTException $e) {
-//
-//            return response()->json(['token_absent'], $e->getStatusCode());
-//
-//        }
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
 
         $this->validate($request, [
-            'customer_id' => 'required',
+            'customer' => 'required',
             'deadline' => 'required|date',
             'description' => 'required|string',
             'specification'=>'string',
@@ -80,7 +85,8 @@ class ProjectController extends Controller
             'specification'=>$request->get('specification'),
         ]);
 
-        return response()->json(compact('project'));
+//        return response()->json(compact('project'));
+        return response()->json([],200);
     }
 
     /**
@@ -89,9 +95,35 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+        return response()->json(auth()->user()->projectsManager()->get());
+
     }
 
     /**
@@ -125,6 +157,33 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+        $project = Project::findOrFail($id)->delete();
+        return response()->json([],200);
+
     }
 }

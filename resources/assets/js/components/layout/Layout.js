@@ -8,8 +8,6 @@ class Layout extends Component {
             <div>
                 <Header />
                 <div className="container">
-                    <h1>What a layout</h1>
-
                         {this.props.children}
                 </div>
             </div>

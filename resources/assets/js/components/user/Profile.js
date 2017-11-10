@@ -11,9 +11,7 @@ class Profile extends Component {
         super(props);
     }
     filterUser(user){
-        return Array.filter(Object.keys(user),function(value){
-            return value !== "id" && value !== "created_at" && value !== "updated_at"
-        });
+        return (({ full_name, email, login,address, bank_card, phone }) => ({full_name, email, login,address, bank_card, phone }))(user)
     }
     getPropertyNames()
     {
@@ -22,12 +20,12 @@ class Profile extends Component {
     componentDidMount()
     {
         if(!this.props.authenticated) this.props.history.push("/login");
-        if(this.props.user === null) this.props.userInfo();
+        if(!this.props.user.length) this.props.userInfo();
     }
     userProperty(){
             let user = this.filterUser(this.props.user);
             let names = this.getPropertyNames();
-                return user.map((key, i)=>
+                return Object.keys(user).map((key, i)=>
                    <UserProperty name={names[i]} value={this.props.user[key]}/>
                 )
     }
