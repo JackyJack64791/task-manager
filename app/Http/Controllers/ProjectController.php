@@ -73,6 +73,7 @@ class ProjectController extends Controller
 
         $this->validate($request, [
             'customer' => 'required',
+            'title' => 'required',
             'deadline' => 'required|date',
             'description' => 'required|string',
             'specification'=>'string',
@@ -80,6 +81,7 @@ class ProjectController extends Controller
         $project = Project::create([
             'customer_id'=>$request->get('customer'),
             'manager_id'=>auth()->id(),
+            'title' => $request->get('title'),
             'deadline'=>$request->get('deadline'),
             'description'=>$request->get('description'),
             'specification'=>$request->get('specification'),
@@ -183,6 +185,7 @@ class ProjectController extends Controller
 
         }
         $project = Project::findOrFail($id)->delete();
+
         return response()->json([],200);
 
     }

@@ -29,5 +29,6 @@ Route::post('reset/password', 'Auth\ResetPasswordController@reset');
 Route::get('users','UserController@index');
 
 Route::post('project/create','ProjectController@store');
-Route::delete('project/delete', 'ProjectController@destroy');
+//Route::patch()
+Route::delete('project/delete/{id}', 'ProjectController@destroy');
 Route::get('projects','ProjectController@show');

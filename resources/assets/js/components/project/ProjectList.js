@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import * as actions from '../../actions/actions';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
@@ -8,6 +9,7 @@ class ProjectList extends Component {
 
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
+         if(Object.keys(this.props.projects).length === 0 &&!this.props.getSuccess) this.props.getProjects();
     }
 
     projectsRender() {
@@ -22,7 +24,10 @@ class ProjectList extends Component {
             projects = this.props.projects;
         }
         else {
-            return <p>Loading...</p>;
+            if (!this.props.isLoading) {
+                return <p>Looks like you don't have any projects. You can <Link to="/project/create">create</Link> one
+                </p>
+            } else return <p>Loading...</p>;
         }
         return (projects && <div className="container">
             <div className="row">
@@ -48,6 +53,7 @@ function mapStateToProps(state) {
         projects: state.project.projects,
         isLoading: state.project.isLoading,
         isError: state.project.isError,
+        getSuccess: state.project.getSuccess,
     }
 }
 

@@ -9,11 +9,11 @@ class ProjectTab extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(){
-        if(confirm("Are you sure?")) this.deleteProject(this.props.id);
+        if(confirm("Are you sure?")) this.props.projectDelete(this.props.id);
     }
     render() {
         return (
-            <button type="button" className="close" aria-label="Close" onClick={this.handleSubmit}><span aria-hidden="true">&times;</span></button>)
+            <button type="button" className="close glyphicon glyphicon-remove" aria-label="Close" onClick={this.handleSubmit}><span aria-hidden="true"></span></button>)
     }
 
 }

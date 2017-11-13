@@ -6,15 +6,16 @@ import {connect} from 'react-redux';
 class ProjectCreate extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        // if (!this.props.users.length) {
-        //     this.props.getUsers();
-        // }
+        if (!this.props.usersSuccess) {
+            this.props.getUsers();
+        }
     }
 
     constructor(props) {
         super(props);
-        this.state = {customer: '', deadline: '', description: '', specification: ''};
+        this.state = {customer: '', title:'', deadline: '', description: '',  specification: ''};
         this.handleCustomer = this.handleCustomer.bind(this);
+        this.handleTitle = this.handleTitle.bind(this);
         this.handleDeadline = this.handleDeadline.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
         this.handleSpecification = this.handleSpecification.bind(this);
@@ -35,6 +36,12 @@ class ProjectCreate extends Component {
         })
     }
 
+    handleTitle(e) {
+        this.setState({
+            title: e.target.value
+        })
+    }
+
     handleDeadline(e) {
         this.setState({
             deadline: e.target.value
@@ -47,6 +54,7 @@ class ProjectCreate extends Component {
         })
     }
 
+
     handleSpecification(e) {
         this.setState({
             specification: e.target.value
@@ -57,6 +65,7 @@ class ProjectCreate extends Component {
         e.preventDefault();
         const project = {
             customer: this.state.customer,
+            title: this.state.title,
             deadline: this.state.deadline,
             description: this.state.description,
             specification: this.state.specification,
@@ -86,9 +95,20 @@ class ProjectCreate extends Component {
                                 <fieldset className="form-group">
                                     <label htmlFor="customer" className="col-md-4 control-label">Customer</label>
                                     <div className="col-md-6">
-                                        <select id="customer" className="form-control" onChange={this.handleCustomer}>
+                                        <select id="customer" defaultValue="0" className="form-control" onChange={this.handleCustomer} required>
+                                            <option disabled value="0">Choose customer...</option>
                                             {this.customers()}
                                         </select>
+                                    </div>
+                                </fieldset>
+                                <fieldset className="form-group">
+                                    <label htmlFor="title"
+                                           className="col-md-4 control-label">Title</label>
+
+                                    <div className="col-md-6">
+                                        <input id="title" type="text" className="form-control"
+                                               name="title" required onChange={this.handleTitle}/>
+
                                     </div>
                                 </fieldset>
                                 <fieldset className="form-group">
@@ -144,6 +164,7 @@ function mapStateToProps(state) {
         isError: state.user.isError,
         error: state.user.error,
         users: state.user.users,
+        usersSuccess: state.user.usersSuccess,
     }
 }
 

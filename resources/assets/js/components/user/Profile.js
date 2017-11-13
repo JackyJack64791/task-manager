@@ -20,7 +20,7 @@ class Profile extends Component {
     componentDidMount()
     {
         if(!this.props.authenticated) this.props.history.push("/login");
-        if(!this.props.user.length) this.props.userInfo();
+         if(!this.props.infoSuccess) this.props.userInfo();
     }
     userProperty(){
             let user = this.filterUser(this.props.user);
@@ -61,6 +61,7 @@ function mapStateToProps(state) {
     return {
         user: state.user.user,
         authenticated:state.auth.authenticated,
+        infoSuccess: state.user.infoSuccess,
 
     }
 }

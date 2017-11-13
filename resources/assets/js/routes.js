@@ -12,6 +12,7 @@ import Logout from "./components/auth/Logout";
 import ProfileEdit from './components/user/ProfileEdit';
 import ProjectCreate from "./components/project/ProjectCreate";
 import ProjectList from "./components/project/ProjectList";
+import ProjectInfo from "./components/project/ProjectInfo";
 import {Route} from 'react-router';
 
 
@@ -29,6 +30,7 @@ const Routes = () => {
             <Route path="/profile/settings" component={ProfileEdit}/>
             <Route path="/project/create" component={ProjectCreate}/>
             <Route path="/projects" component={ProjectList}/>
+            <Route path="/project/info/:id" component={ProjectInfo}/>
         </Layout>
     )
 };

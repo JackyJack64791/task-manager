@@ -10,8 +10,8 @@ class Header extends Component{
     componentDidMount(){
         if(this.props.authenticated){
             this.props.userInfo();
-            if(!this.props.users.length) this.props.getUsers();
-            if(!this.props.projects.length) this.props.getProjects();
+            this.props.getUsers();
+            this.props.getProjects();
         }
 
     }
