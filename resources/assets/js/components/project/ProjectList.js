@@ -4,12 +4,13 @@ import * as actions from '../../actions/actions';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import ProjectTab from "./ProjectTab";
+import Panel from "../Panel";
 
 class ProjectList extends Component {
 
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-         if(Object.keys(this.props.projects).length === 0 &&!this.props.getSuccess) this.props.getProjects();
+        if (!this.props.getSuccess) this.props.getProjects();
     }
 
     projectsRender() {
@@ -29,20 +30,11 @@ class ProjectList extends Component {
                 </p>
             } else return <p>Loading...</p>;
         }
-        return (projects && <div className="container">
-            <div className="row">
-                <div className="col-md-8 col-md-offset-2">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Project List</div>
-                        <div className="panel-body">
-                            <ul className="list-group">
-                                {this.projectsRender()}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>);
+        return (projects && <Panel title="Project List">
+            <ul className="list-group">
+                {this.projectsRender()}
+            </ul>
+        </Panel>);
     }
 
 }

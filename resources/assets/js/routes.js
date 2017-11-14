@@ -14,6 +14,7 @@ import ProjectCreate from "./components/project/ProjectCreate";
 import ProjectList from "./components/project/ProjectList";
 import ProjectInfo from "./components/project/ProjectInfo";
 import {Route} from 'react-router';
+import ProjectEdit from "./components/project/ProjectEdit";
 
 
 const Routes = () => {
@@ -31,6 +32,7 @@ const Routes = () => {
             <Route path="/project/create" component={ProjectCreate}/>
             <Route path="/projects" component={ProjectList}/>
             <Route path="/project/info/:id" component={ProjectInfo}/>
+            <Route path="/project/edit/:id" component={ProjectEdit}/>
         </Layout>
     )
 };

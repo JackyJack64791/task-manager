@@ -185,7 +185,6 @@ class UserController extends Controller
             'login' => 'required|string|max:20|unique:users,login,'.$request->id,
             'address' => 'required|string|max:255',
             'phone' => 'required|regex:/[0-9]{1}[0-9]{10}/|unique:users,phone,'.$request->id,
-//            'password' => 'confirmed|string|min:6',
             'bank_card'=> 'required|numeric|unique:users,bank_card,'.$request->id]);
         $user_entity->update($request->all());
         $token = JWTAuth::fromUser($user_entity);

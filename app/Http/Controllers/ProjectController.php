@@ -148,7 +148,39 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+        $project = Project::findOrFail($id);
+        $this->validate($request, [
+            'title' => 'required',
+            'deadline' => 'required|date',
+            'description' => 'required|string',
+            'specification'=>'string',]);
+        $project->update($request->all());
+        return response()->json([],200);
     }
 
     /**

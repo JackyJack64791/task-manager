@@ -12,7 +12,7 @@ class ProjectTab extends Component {
         return <li className="list-group-item">
             <ProjectDelete id={this.props.id}/>
             <ProjectEditButton id={this.props.id}/>
-            <h3><Link to={`/project/info/${this.props.id}`} params={{id:this.props.id}}>{this.props.name}</Link></h3>
+            <h3><Link to={"/project/info/"+this.props.id}>{this.props.name}</Link></h3>
              <p>{this.props.description}</p>
         </li>;
     }

@@ -3,6 +3,7 @@ import * as actions from '../../actions/actions';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import queryString from 'query-string';
+import Panel from "../Panel";
 
 class PasswordReset extends Component {
     componentDidMount(){
@@ -58,12 +59,8 @@ class PasswordReset extends Component {
 
     }
     render() {
-        return (<div className="container">
-            <div className="row">
-                <div className="col-md-8 col-md-offset-2">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Password Reset</div>
-                        <div className="panel-body">
+        return (
+            <Panel title="Password Reset">
                             <form className="form-horizontal" onSubmit={this.handleSubmit}>
                                 <input type="hidden" name="token" value={this.state.token}/>
                             <fieldset className="form-group">
@@ -100,11 +97,7 @@ class PasswordReset extends Component {
                             </fieldset>
                             </form>
                             {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>);
+            </Panel>);
     }
 }
 

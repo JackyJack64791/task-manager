@@ -4,7 +4,8 @@ import {
     AUTH_ERROR, AUTH_USER, LOGOUT_USER, USER_INFO, USER_INFO_ERROR,
     USER_FILTER, AUTH_LOADING, RESET_SEND_MAIL, RESET_SEND_MAIL_ERROR, RESET_PASSWORD, RESET_PASSWORD_ERROR,
     PROJECT_CREATE_ERROR, USERS_GET, USERS_GET_ERROR, PROJECT_CREATE, USERS_GET_LOADING, GET_PROJECTS,
-    GET_PROJECTS_ERROR, GET_PROJECTS_LOADING, PROJECT_DELETE, PROJECT_DELETE_ERROR
+    GET_PROJECTS_ERROR, GET_PROJECTS_LOADING, PROJECT_DELETE, PROJECT_DELETE_ERROR, PROJECT_CREATE_LOADING,
+    PROJECT_UPDATE_LOADING, PROJECT_UPDATE_ERROR, PROJECT_UPDATE
 } from "../constants/actionTypes";
 
 const ROOT_URL = 'http://localhost:8000';
@@ -195,12 +196,13 @@ export function userInfoError(error) {
 
 export function projectCreate(project, redirect) {
     return function (dispatch) {
+        dispatch(projectAddLoading());
         axios.post(ROOT_URL + '/api/project/create',
             project,
             {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
         )
             .then(response => {
-                dispatch({type: PROJECT_CREATE});
+                dispatch(projectAddSuccess());
                 dispatch(getProjects());
                 redirect();
             })
@@ -208,6 +210,38 @@ export function projectCreate(project, redirect) {
     }
 }
 
+export function getProjects(token = localStorage.getItem('token')) {
+
+    return function (dispatch) {
+        dispatch(getProjectsLoading());
+        axios.get(ROOT_URL + '/api/projects',
+            {headers: {Authorization: "Bearer " + token}}
+        )
+            .then(response => {
+                dispatch(getProjectsSuccess(response.data));
+            })
+            .catch(response => dispatch(getProjectsError("You are not logged in")));
+    }
+}
+
+export function projectUpdate(project,redirect) {
+    return function (dispatch) {
+        dispatch(projectUpdateLoading());
+        axios.put(`${ROOT_URL}/api/project/update/${project.id}`,
+            project,
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem('token')
+                }
+            })
+            .then(response=>{
+                dispatch(projectUpdateSuccess());
+                dispatch(getProjects());
+                redirect();
+            })
+            .catch(response => dispatch(projectUpdateError("Error")));
+    }
+}
 export function projectDelete(id) {
     return function (dispatch) {
         axios.delete(`${ROOT_URL}/api/project/delete/${id}`, {
@@ -224,20 +258,7 @@ export function projectDelete(id) {
     }
 }
 
-export function getProjects(token = localStorage.getItem('token')) {
 
-    return function (dispatch) {
-        dispatch(getProjectsLoading());
-        axios.get(ROOT_URL + '/api/projects',
-            {headers: {Authorization: "Bearer " + token}}
-        )
-            .then(response => {
-                dispatch(getProjectsSuccess(response.data));
-                console.log("getProjects");
-            })
-            .catch(response => dispatch(getProjectsError("You are not logged in")));
-    }
-}
 
 export function getProjectsSuccess(projects) {
     return {
@@ -257,6 +278,25 @@ export function getProjectsError(error) {
     }
 }
 
+export function projectUpdateSuccess() {
+    return {type: PROJECT_UPDATE};
+}
+export function projectUpdateLoading() {
+    return {type: PROJECT_UPDATE_LOADING}
+}
+export function projectUpdateError(error) {
+    return {
+        type: PROJECT_UPDATE_ERROR,
+        payload: error,
+    }
+}
+
+export function projectAddSuccess(){
+    return {type:PROJECT_CREATE}
+}
+export function projectAddLoading(){
+    return {type:PROJECT_CREATE_LOADING}
+}
 export function projectAddError(error) {
     return {
         type: PROJECT_CREATE_ERROR,
