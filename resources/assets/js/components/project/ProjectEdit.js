@@ -7,9 +7,9 @@ import Panel from "../Panel";
 class ProjectEdit extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        if (!this.props.infoSuccess) this.props.userInfo();
-        if (!this.props.usersSuccess) this.props.getUsers();
-        if (!this.props.getSuccess) this.props.getProjects();
+        // if (!this.props.infoSuccess) this.props.userInfo();
+        // if (!this.props.usersSuccess) this.props.getUsers();
+        // if (!this.props.getSuccess) this.props.getProjects();
     }
 
     constructor(props) {
@@ -30,6 +30,7 @@ class ProjectEdit extends Component {
         this.handleDeadline = this.handleDeadline.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
         this.handleSpecification = this.handleSpecification.bind(this);
+        this.handleRedirect = this.handleRedirect.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -58,7 +59,7 @@ class ProjectEdit extends Component {
     }
 
     handleRedirect() {
-        this.props.history.push("/project/info" + this.state.id);
+        this.props.history.push("/project/info/" + this.state.id);
     }
 
     handleSubmit(e) {

@@ -29,13 +29,16 @@ export function authUser(user, redirect) {
                     getProjects(response.data.token),
                 );
                 redirect();
-                // redirect()
             })
             .catch(() => {
                 dispatch(authError("Wrong email or password"));
+            })
+            .catch(()=> {
                 dispatch(getUsersError("Users are retards"));
+            })
+            .catch(()=> {
                 dispatch(getProjectsError("Projects are too"));
-            });
+            })
     }
 }
 
@@ -61,14 +64,10 @@ export function updateUser(user, redirect) {
             headers: {authorization: "Bearer " + localStorage.getItem('token')}
         })
             .then(response => {
-                dispatch({type: AUTH_USER});
-                localStorage.setItem('token', response.data.token)
-            })
-            .then(response => {
-                dispatch(userInfo(response.data.token));
+                dispatch(userInfo());
                 redirect();
             })
-            .catch(response => dispatch(authError(response.data.error)));
+            .catch(response => dispatch(authError("Invalid data")));
     }
 }
 
@@ -79,7 +78,7 @@ export function resetSendEmail(email, redirect) {
                 dispatch({type: RESET_SEND_MAIL});
                 redirect();
             })
-            .catch(response => dispatch(resetSendEmailError(response.data.error)))
+            .catch(response => dispatch(resetSendEmailError("Email doesn't exist")))
     }
 }
 
@@ -211,7 +210,7 @@ export function projectCreate(project, redirect) {
 }
 
 export function getProjects(token = localStorage.getItem('token')) {
-
+    console.log("getProjects");
     return function (dispatch) {
         dispatch(getProjectsLoading());
         axios.get(ROOT_URL + '/api/projects',

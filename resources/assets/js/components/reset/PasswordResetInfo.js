@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import Panel from "../Panel";
 
 class PasswordResetInfo extends Component {
     componentDidMount() {
         if (this.props.authenticated) this.props.history.push("/profile/info");
+        if(!this.props.location.state.email) this.props.history.push("/reset/email");
     }
 
     render() {

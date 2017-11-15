@@ -10,6 +10,8 @@ import Panel from "../Panel";
 class Profile extends Component {
     constructor(props) {
         super(props);
+        // this.state = {editing:false};
+        // this.handleClick = this.handleClick.bind(this);
     }
 
     filterUser(user) {
@@ -23,25 +25,38 @@ class Profile extends Component {
         }))(user)
     }
 
+    // handleClick(e){
+    //     this.setState({
+    //         editing:!this.state.editing
+    //     });
+    //     console.log(this.state.editing);
+    // }
     getPropertyNames() {
         return ["Full Name", "Email", "Login", "Address", "Bank card number", "Phone number"];
     }
 
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        if (!this.props.infoSuccess) this.props.userInfo();
+        // if (!this.props.infoSuccess) this.props.userInfo();
     }
 
     userProperty() {
         let user = this.filterUser(this.props.user);
         let names = this.getPropertyNames();
         return Object.keys(user).map((key, i) =>
-            <UserProperty name={names[i]} value={this.props.user[key]}/>
+            <UserProperty name={names[i]} value={this.props.user[key]} />//editing={this.state.editing}/>
         )
     }
 
     render() {
-        return (
+        let user;
+        if (!this.props.isLoading) {
+            user = this.props.user;
+        }
+        else {
+            return <p>Loading...</p>;
+        }
+        return (user &&
             <Panel title="User">
                 <table className="table table-responsive">
                     <tbody>
@@ -51,6 +66,7 @@ class Profile extends Component {
                 <div className="form-group">
                     <div className="col-md-6 col-md-offset-4">
                         <Link className="btn btn-primary" to='/profile/settings'>Edit Profile</Link>
+                        {/*<button className="btn btn-primary" onClick={this.handleClick}>Edit Profile</button>*/}
                     </div>
                 </div>
             </Panel>

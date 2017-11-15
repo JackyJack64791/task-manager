@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router';
 import * as actions from '../../actions/actions';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import Panel from "../Panel";
 
 class ProfileEdit extends Component {
     componentDidMount(){
-        if (!this.props.authenticated) this.props.history.push("/login");
+         if (!this.props.authenticated) this.props.history.push("/login");
+         // if(!this.props.user) this.props.getUser();
     }
     constructor(props) {
         super(props);
@@ -19,11 +20,10 @@ class ProfileEdit extends Component {
             phone: this.props.user.phone,
             bankCard: this.props.user.bank_card
         };
+        console.log(this.state);
         this.handleFullName = this.handleFullName.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
-        // this.handlePassword = this.handlePassword.bind(this);
-        // this.handlePasswordConfirmation = this.handlePasswordConfirmation.bind(this);
         this.handleAddress = this.handleAddress.bind(this);
         this.handlePhone = this.handlePhone.bind(this);
         this.handleBankCard = this.handleBankCard.bind(this);
@@ -48,17 +48,6 @@ class ProfileEdit extends Component {
             login: e.target.value
         })
     }
-
-    // handlePassword(e) {
-    //     this.setState({
-    //         password: e.target.value
-    //     })
-    // }
-    // handlePasswordConfirmation(e) {
-    //     this.setState({
-    //         passwordConfirmation: e.target.value
-    //     })
-    // }
 
     handleAddress(e) {
         this.setState({
@@ -89,8 +78,6 @@ class ProfileEdit extends Component {
             full_name: this.state.fullName,
             email: this.state.email,
             login: this.state.login,
-            // password: this.state.password,
-            // password_confirmation: this.state.passwordConfirmation,
             address: this.state.address,
             phone: this.state.phone,
             bank_card: this.state.bankCard,
@@ -100,7 +87,14 @@ class ProfileEdit extends Component {
     }
 
     render() {
-        return (
+        let user;
+        if (!this.props.isLoading) {
+            user = this.props.user;
+        }
+        else {
+            return <p>Loading...</p>;
+        }
+        return (user &&
             <Panel title="Edit Profile">
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
@@ -188,9 +182,9 @@ class ProfileEdit extends Component {
 
 function mapStateToProps(state) {
     return {
-        authenticated: state.user.authenticated,
+        authenticated: state.auth.authenticated,
         user: state.user.user,
     }
 }
 
-export default connect(mapStateToProps, actions)(ProfileEdit);
+export default withRouter(connect(mapStateToProps, actions)(ProfileEdit));

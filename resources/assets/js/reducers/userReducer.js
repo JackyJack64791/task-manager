@@ -1,7 +1,6 @@
 import {USER_INFO_ERROR, USER_INFO, USERS_GET, USERS_GET_ERROR, USERS_GET_LOADING} from "../constants/actionTypes";
 
 function userReducer(state={ user:{}, users: {}, usersSuccess:false, infoSuccess:false, isError:false, isLoading: false}, action){
-    // console.log(state);
     switch (action.type)
     {
         case USER_INFO:

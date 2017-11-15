@@ -14,10 +14,6 @@ class SessionController extends Controller
     {
         $this->middleware('jwt.auth')->except('create');
     }
-    public function index()
-    {
-        return User::all();
-    }
     public function create(Request $request)
     {
         $credentials = [
@@ -34,10 +30,12 @@ class SessionController extends Controller
         return response()->json(compact('token'));
     }
 
-//    public function destroy()
-//    {
-//        Auth::logout();
-//
-//        return response()->json(["name" => Auth::user()]);
-//    }
+    public function destroy()
+    {
+        JWTAuth::invalidate();
+        Auth::logout();
+
+
+        return response()->json(["name" => Auth::user()]);
+    }
 }
