@@ -23,11 +23,9 @@ export function authUser(user, redirect) {
             .then(response => {
                 dispatch({type: AUTH_USER});
                 localStorage.setItem('token', response.data.token);
-                dispatch(
-                    userInfo(response.data.token),
-                    getUsers(response.data.token),
-                    getProjects(response.data.token),
-                );
+                dispatch(userInfo(response.data.token));
+                dispatch(getUsers(response.data.token));
+                dispatch(getProjects(response.data.token));
                 redirect();
             })
             .catch(() => {

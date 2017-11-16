@@ -836,7 +836,9 @@ function authUser(user, redirect) {
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(ROOT_URL + '/api/login', user).then(function (response) {
             dispatch({ type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["c" /* AUTH_USER */] });
             localStorage.setItem('token', response.data.token);
-            dispatch(userInfo(response.data.token), getUsers(response.data.token), getProjects(response.data.token));
+            dispatch(userInfo(response.data.token));
+            dispatch(getUsers(response.data.token));
+            dispatch(getProjects(response.data.token));
             redirect();
         }).catch(function () {
             dispatch(authError("Wrong email or password"));

@@ -13,6 +13,7 @@ class SessionController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth')->except('create');
+        $this->middleware('jwt.refresh')->except('create');
     }
     public function create(Request $request)
     {
@@ -32,6 +33,32 @@ class SessionController extends Controller
 
     public function destroy()
     {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+
         JWTAuth::invalidate();
         Auth::logout();
 

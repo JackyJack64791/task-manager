@@ -14,8 +14,8 @@ class UserController extends Controller
 
     public function __construct()
     {
-        //$this->middleware('jwt.auth')->except('register');
-        //$this->middleware('jwt.refresh')->except('register');
+        $this->middleware('jwt.auth')->except('register');
+        $this->middleware('jwt.refresh')->except('register');
     }
     /**
      * Display a listing of the resource.
@@ -24,31 +24,31 @@ class UserController extends Controller
      */
     public function index()
     {
-//        try {
-//
-//            if (! $user = JWTAuth::parseToken()->authenticate()) {
-//                return response()->json(['user_not_found'], 404);
-//            }
-//
-//        } catch (TokenExpiredException $e) {
-////            try {
-////                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
-////                $user = JWTAuth::setToken($refreshed)->toUser();
-////                header('Authorization: Bearer ' . $refreshed);
-////
-////            } catch (JWTException $e) {
-//                return response()->json(['token_expired'], $e->getStatusCode());
-////            }
-//
-//        } catch (TokenInvalidException $e) {
-//
-//            return response()->json(['token_invalid'], $e->getStatusCode());
-//
-//        } catch (JWTException $e) {
-//
-//            return response()->json(['token_absent'], $e->getStatusCode());
-//
-//        }
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid!'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
         return response()->json(User::where('id', '!=', auth()->id())->get());
     }
 
@@ -104,36 +104,36 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function getToken($id){
-
-    }
+//    public function getToken($id){
+//
+//    }
     public function show()
     {
-//        try {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+//            try {
+//                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+//                $user = JWTAuth::setToken($refreshed)->toUser();
+//                header('Authorization: Bearer ' . $refreshed);
 //
-//            if (! $user = JWTAuth::parseToken()->authenticate()) {
-//                return response()->json(['user_not_found'], 404);
+//            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
 //            }
-//
-//        } catch (TokenExpiredException $e) {
-////            try {
-////                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
-////                $user = JWTAuth::setToken($refreshed)->toUser();
-////                header('Authorization: Bearer ' . $refreshed);
-////
-////            } catch (JWTException $e) {
-//                return response()->json(['token_expired'], $e->getStatusCode());
-////            }
-//
-//        } catch (TokenInvalidException $e) {
-//
-//            return response()->json(['token_invalid'], $e->getStatusCode());
-//
-//        } catch (JWTException $e) {
-//
-//            return response()->json(['token_absent'], $e->getStatusCode());
-//
-//        }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
         // the token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
     }
@@ -164,14 +164,14 @@ class UserController extends Controller
             }
 
         } catch (TokenExpiredException $e) {
-//            try {
-//                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
-//                $user = JWTAuth::setToken($refreshed)->toUser();
-//                header('Authorization: Bearer ' . $refreshed);
-//
-//            } catch (JWTException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
                 return response()->json(['token_expired'], $e->getStatusCode());
-//            }
+            }
 
         } catch (TokenInvalidException $e) {
 
