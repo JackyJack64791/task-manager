@@ -3,6 +3,7 @@ import * as actions from '../../actions/actions';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import Panel from "../Panel";
+import {Link} from 'react-router-dom';
 
 class ProjectEdit extends Component {
     componentDidMount() {
@@ -143,6 +144,9 @@ class ProjectEdit extends Component {
                             <button type="reset" className="btn btn-default">
                                 Reset
                             </button>
+                            <Link to={"/project/info/" + id} className="btn btn-default">
+                                Return
+                            </Link>
                         </div>
                     </div>
                 </form>

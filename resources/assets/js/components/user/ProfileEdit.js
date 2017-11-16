@@ -169,9 +169,9 @@ class ProfileEdit extends Component {
                             <button type="submit" className="btn btn-primary">
                                 Update
                             </button>
-                            <button type="reset" className="btn btn-default">
-                                Reset
-                            </button>
+                            <Link to={"/profile/info"} className="btn btn-default">
+                                Back to profile
+                            </Link>
                         </div>
                     </div>
                 </form>

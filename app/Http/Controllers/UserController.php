@@ -15,7 +15,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth')->except('register');
-        $this->middleware('jwt.refresh')->except('register');
+//        $this->middleware('jwt.refresh')->except('register');
     }
     /**
      * Display a listing of the resource.

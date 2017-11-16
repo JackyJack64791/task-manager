@@ -1,4 +1,7 @@
-import {USER_INFO_ERROR, USER_INFO, USERS_GET, USERS_GET_ERROR, USERS_GET_LOADING} from "../constants/actionTypes";
+import {
+    USER_INFO_ERROR, USER_INFO, USERS_GET, USERS_GET_ERROR, USERS_GET_LOADING,
+    USER_INFO_LOADING
+} from "../constants/actionTypes";
 
 function userReducer(state={ user:{}, users: {}, usersSuccess:false, infoSuccess:false, isError:false, isLoading: false}, action){
     switch (action.type)
@@ -9,6 +12,12 @@ function userReducer(state={ user:{}, users: {}, usersSuccess:false, infoSuccess
                 isError:false,
                 isLoading: false,
                 infoSuccess:true
+            });
+        case USER_INFO_LOADING:
+            return Object.assign({},state,{
+                isError:false,
+                isLoading: true,
+                infoSuccess:false
             });
         case USER_INFO_ERROR:
             return Object.assign({},state,{

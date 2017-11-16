@@ -32,10 +32,10 @@ class Header extends Component {
                         <span className="caret"></span>
                     </a>
                     <ul className="dropdown-menu">
-                        <li><Link className="dropdown-item" to="/profile/info">Profile</Link></li>
-                        <li><Link className="dropdown-item" to="/project/create">Create Project</Link></li>
-                        <li><Link className="dropdown-item" to="/projects">Project List</Link></li>
+                        <li><Link className="dropdown-item" to="/projects">Projects</Link></li>
+                        <li><Link className="dropdown-item" to="/tasks">Tasks</Link></li>
                         <li className="divider"></li>
+                        <li><Link className="dropdown-item" to="/profile/info">Profile</Link></li>
                         <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
                     </ul>
                 </li>

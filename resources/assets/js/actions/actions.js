@@ -5,7 +5,9 @@ import {
     USER_FILTER, AUTH_LOADING, RESET_SEND_MAIL, RESET_SEND_MAIL_ERROR, RESET_PASSWORD, RESET_PASSWORD_ERROR,
     PROJECT_CREATE_ERROR, USERS_GET, USERS_GET_ERROR, PROJECT_CREATE, USERS_GET_LOADING, GET_PROJECTS,
     GET_PROJECTS_ERROR, GET_PROJECTS_LOADING, PROJECT_DELETE, PROJECT_DELETE_ERROR, PROJECT_CREATE_LOADING,
-    PROJECT_UPDATE_LOADING, PROJECT_UPDATE_ERROR, PROJECT_UPDATE
+    PROJECT_UPDATE_LOADING, PROJECT_UPDATE_ERROR, PROJECT_UPDATE, PROJECT_DELETE_LOADING, TASK_DELETE_ERROR,
+    TASK_CREATE_ERROR, TASK_UPDATE_ERROR, GET_TASKS_ERROR, TASK_CREATE_LOADING, TASK_UPDATE_LOADING, GET_TASKS_LOADING,
+    TASK_DELETE_LOADING, TASK_CREATE, TASK_UPDATE, GET_TASKS, TASK_DELETE, USER_INFO_LOADING
 } from "../constants/actionTypes";
 
 const ROOT_URL = 'http://localhost:8000';
@@ -26,6 +28,7 @@ export function authUser(user, redirect) {
                 dispatch(userInfo(response.data.token));
                 dispatch(getUsers(response.data.token));
                 dispatch(getProjects(response.data.token));
+                dispatch(getTasks(response.data.token));
                 redirect();
             })
             .catch(() => {
@@ -46,8 +49,6 @@ export function registerUser(user, redirect) {
             .then(response => {
                 localStorage.setItem('token', response.data.token);
                 dispatch(authUser(user,redirect));
-                //dispatch(userInfo(response.data.token));
-                //redirect();
             })
             .catch(response => dispatch(authError(response.data.error)));
 
@@ -129,6 +130,7 @@ export function logoutUser() {
 export function userInfo(token = localStorage.getItem('token')) {
     console.log("userInfo");
     return function (dispatch) {
+        dispatch(userInfoLoading());
         axios.get(ROOT_URL + '/api/profile', {
             headers: {authorization: "Bearer " + token}
         })
@@ -178,6 +180,10 @@ export function userInfoSuccess(user) {
         type: USER_INFO,
         payload: user
     }
+}
+
+export function userInfoLoading() {
+    return {type: USER_INFO_LOADING}
 }
 
 export function userInfoError(error) {
@@ -241,6 +247,7 @@ export function projectUpdate(project,redirect) {
 }
 export function projectDelete(id) {
     return function (dispatch) {
+        dispatch(projectDeleteLoading());
         axios.delete(`${ROOT_URL}/api/project/delete/${id}`, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('token')
@@ -248,7 +255,7 @@ export function projectDelete(id) {
             }
         )
             .then(response => {
-                dispatch({type: PROJECT_DELETE});
+                dispatch(projectDeleteSuccess());
                 dispatch(getProjects());
             })
             .catch(response => dispatch(projectDeleteError("You are not logged in")))
@@ -301,9 +308,144 @@ export function projectAddError(error) {
     }
 }
 
+export function projectDeleteSuccess() {
+    return {type: PROJECT_DELETE}
+}
+export function projectDeleteLoading() {
+    return {type: PROJECT_DELETE_LOADING}
+}
 export function projectDeleteError(error) {
     return {
         type: PROJECT_DELETE_ERROR,
+        payload: error,
+    }
+}
+
+/////////////////////////////////////////////////////
+//-------------------taskReducer-------------------//
+/////////////////////////////////////////////////////
+
+export function taskCreate(task, redirect){
+    return function (dispatch) {
+        dispatch(taskCreateLoading());
+        axios.post(ROOT_URL + '/api/task/create',
+            task,
+            {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
+        )
+            .then(response => {
+                dispatch(taskCreateSuccess());
+                dispatch(getTasks());
+                redirect();
+            })
+            .catch(response => dispatch(taskCreateError(response.data.error)));
+    }
+}
+
+export function taskUpdate(task, redirect){
+    return function (dispatch) {
+        dispatch(taskUpdateLoading());
+        axios.put(`${ROOT_URL}/api/task/update/${task.id}`,
+            task,
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem('token')
+                }
+            })
+            .then(response => {
+                dispatch(taskUpdateSuccess());
+                dispatch(getTasks());
+                redirect();
+            })
+            .catch(response => dispatch(taskUpdateError("Error")));
+    }
+}
+
+export function getTasks(token = localStorage.getItem('token')){
+    console.log("getTasks");
+    return function (dispatch) {
+        dispatch(getTasksLoading());
+        axios.get(ROOT_URL + '/api/tasks',
+            {headers: {Authorization: "Bearer " + token}}
+        )
+            .then(response => {
+                dispatch(getTasksSuccess(response.data));
+            })
+            .catch(response => dispatch(getTasksError("You are not logged in")));
+    }
+}
+
+export function taskDelete(id){
+    return function (dispatch) {
+        dispatch(taskDeleteLoading());
+        axios.delete(`${ROOT_URL}/api/task/delete/${id}`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem('token')
+                }
+            }
+        )
+            .then(response => {
+                dispatch(taskDeleteSuccess());
+                dispatch(getTasks());
+            })
+            .catch(response => dispatch(taskDeleteError("You are not logged in")))
+    }
+}
+
+export function taskCreateSuccess(){
+    return {type:TASK_CREATE}
+}
+export function taskUpdateSuccess(){
+    return {type:TASK_UPDATE}
+}
+export function getTasksSuccess(tasks){
+    return {
+        type:GET_TASKS,
+        payload: tasks
+    }
+}
+export function taskDeleteSuccess(){
+    return {type:TASK_DELETE}
+}
+export function taskCreateLoading() {
+    return {type: TASK_CREATE_LOADING}
+}
+
+export function taskUpdateLoading() {
+    return {type: TASK_UPDATE_LOADING}
+}
+
+export function getTasksLoading() {
+    return {type: GET_TASKS_LOADING}
+}
+
+export function taskDeleteLoading() {
+    return {type: TASK_DELETE_LOADING}
+}
+
+export function taskCreateError(error) {
+    return {
+        type: TASK_CREATE_ERROR,
+        payload: error,
+    }
+}
+
+export function taskUpdateError(error) {
+    return {
+        type: TASK_UPDATE_ERROR,
+        payload: error,
+    }
+}
+
+export function getTasksError(error) {
+    return {
+        type: GET_TASKS_ERROR,
+        payload: error,
+    }
+}
+
+export function taskDeleteError(error) {
+    return {
+        type: TASK_DELETE_ERROR,
         payload: error,
     }
 }

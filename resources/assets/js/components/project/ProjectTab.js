@@ -1,27 +1,24 @@
 import React, {Component} from 'react';
 import * as actions from '../../actions/actions';
-import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import ProjectDelete from './ProjectDelete';
-import ProjectEditButton from './ProjectEditButton';
+import Tab from '../Tab';
 
 class ProjectTab extends Component {
-
+    constructor(props){
+        super(props);
+        this.deleteProject = this.deleteProject.bind(this);
+    }
+    deleteProject(){
+        this.props.projectDelete(this.props.id);
+    }
     render() {
-        return <li className="list-group-item">
-            <ProjectDelete id={this.props.id}/>
-            <ProjectEditButton id={this.props.id}/>
+        return <Tab deleteAction={this.deleteProject} linkEdit={`/project/edit/${this.props.id}`}>
             <h3><Link to={"/project/info/"+this.props.id}>{this.props.name}</Link></h3>
              <p>{this.props.description}</p>
-        </li>;
+         </Tab>;
     }
 
 }
-function mapStateToProps(state) {
-    return {
-
-    }
-}
-export default withRouter(connect(mapStateToProps,actions)(ProjectTab));
+export default connect(null,actions)(ProjectTab);
 

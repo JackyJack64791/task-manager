@@ -10,7 +10,6 @@ class ProjectList extends Component {
 
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        if (!this.props.getSuccess) this.props.getProjects();
     }
 
     projectsRender() {
@@ -26,14 +25,17 @@ class ProjectList extends Component {
         }
         else {
             if (!this.props.isLoading) {
-                return <p>Looks like you don't have any projects. You can <Link to="/project/create">create</Link> one
+                return <Panel title="Projects">
+                    <p>Looks like you don't have any projects. You can <Link to="/project/create">create</Link> one
                 </p>
+                </Panel>
             } else return <p>Loading...</p>;
         }
-        return (projects && <Panel title="Project List">
+        return (projects && <Panel title="Projects">
             <ul className="list-group">
                 {this.projectsRender()}
             </ul>
+            <Link className="btn btn-primary" to='/project/create'>Create New Project</Link>
         </Panel>);
     }
 

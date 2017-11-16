@@ -13,7 +13,7 @@ class SessionController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth')->except('create');
-        $this->middleware('jwt.refresh')->except('create');
+//        $this->middleware('jwt.refresh')->except('create');
     }
     public function create(Request $request)
     {

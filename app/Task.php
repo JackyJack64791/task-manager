@@ -6,9 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    protected $fillable = [
+        'author_id',
+        'project_id',
+        'title',
+        'description',
+        'priority',
+        'difficulty',
+        'status',
+        'completion_percent',
+        'hours_count',
+        'date_completion',
+        'performer_id',
+        'time_search',
+    ];
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function project()
@@ -18,7 +32,7 @@ class Task extends Model
 
     public function performer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'performer_id');
     }
 
     public function skills()

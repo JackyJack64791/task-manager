@@ -17,7 +17,7 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth');
-        $this->middleware('jwt.refresh');
+//        $this->middleware('jwt.refresh');
     }
     /**
      * Display a listing of the resource.

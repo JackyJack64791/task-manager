@@ -15,6 +15,10 @@ import ProjectList from "./components/project/ProjectList";
 import ProjectInfo from "./components/project/ProjectInfo";
 import {Route} from 'react-router';
 import ProjectEdit from "./components/project/ProjectEdit";
+import TaskCreate from "./components/task/TaskCreate";
+import TaskList from "./components/task/TaskList";
+import TaskInfo from "./components/task/TaskInfo";
+import TaskEdit from "./components/task/TaskEdit";
 
 
 const Routes = () => {
@@ -33,6 +37,11 @@ const Routes = () => {
             <Route path="/projects" component={ProjectList}/>
             <Route path="/project/info/:id" component={ProjectInfo}/>
             <Route path="/project/edit/:id" component={ProjectEdit}/>
+            <Route path="/task/create" component={TaskCreate}/>
+            <Route path="/tasks" component={TaskList}/>
+            <Route path="/task/info/:id" component={TaskInfo}/>
+            <Route path="/task/edit/:id" component={TaskEdit}/>
+
         </Layout>
     )
 };

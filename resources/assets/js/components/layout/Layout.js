@@ -8,7 +8,8 @@ class Layout extends Component {
         if (this.props.authenticated) {
             if(!this.props.getSuccessInfo && !this.props.isLoadingUsers) this.props.userInfo();
             if(!this.props.getSuccessUsers && !this.props.isLoadingUsers) this.props.getUsers();
-             if(!this.props.getSuccessProjects && !this.props.isLoadingProject) this.props.getProjects();
+            if(!this.props.getSuccessProjects && !this.props.isLoadingProjects) this.props.getProjects();
+            if(!this.props.getSuccessTasks && !this.props.isLoadingTasks) this.props.getTasks();
         }
     }
 
@@ -17,21 +18,25 @@ class Layout extends Component {
             let projects;
             let users;
             let user;
-            console.log(
-                `getSuccessInfo - ${this.props.getSuccessInfo},
+            let tasks;
+            console.log(`getSuccessInfo - ${this.props.getSuccessInfo},
                  getSuccessProjects - ${this.props.getSuccessProjects},
                  getSuccessUsers - ${this.props.getSuccessUsers},
-                 isLoadingProject - ${this.props.isLoadingProject},
+                 getSuccessTasks - ${this.props.getSuccessTasks},
+                 isLoadingProjects - ${this.props.isLoadingProjects},
                  isLoadingUsers - ${this.props.isLoadingUsers},
+                 isLoadingTasks - ${this.props.isLoadingTasks},
                  `
             );
-            if (this.props.getSuccessInfo && this.props.getSuccessProjects && this.props.getSuccessUsers && !this.props.isLoadingProject && !this.props.isLoadingUsers) {
+            if (this.props.getSuccessInfo && this.props.getSuccessProjects && this.props.getSuccessUsers && this.props.getSuccessTasks
+                && !this.props.isLoadingProjects && !this.props.isLoadingUsers && !this.props.isLoadingTasks) {
                 user = this.props.user;
                 projects = this.props.projects;
                 users = this.props.users;
+                tasks = this.props.tasks;
             }
             else return <p>Loading...</p>;
-            return (user && projects && users &&
+            return (user && projects && users && tasks &&
                 <div>
                     <Header/>
                     <div className="container">
@@ -55,11 +60,14 @@ class Layout extends Component {
         user: state.user.user,
         users: state.user.users,
         projects: state.project.projects,
-        isLoadingProject: state.project.isLoading,
+        tasks: state.task.tasks,
+        isLoadingProjects: state.project.isLoading,
+        isLoadingTasks: state.task.isLoading,
         isLoadingUsers: state.user.isLoading,
         getSuccessProjects: state.project.getSuccess,
         getSuccessUsers: state.user.usersSuccess,
         getSuccessInfo: state.user.infoSuccess,
+        getSuccessTasks: state.task.getSuccess,
     }
 }
 

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router';
 import axios from 'axios';
-import UserProperty from "./UserProperty";
 import * as actions from '../../actions/actions';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Panel from "../Panel";
+import InfoProperty from "../InfoProperty";
 
 class Profile extends Component {
     constructor(props) {
@@ -44,7 +44,7 @@ class Profile extends Component {
         let user = this.filterUser(this.props.user);
         let names = this.getPropertyNames();
         return Object.keys(user).map((key, i) =>
-            <UserProperty name={names[i]} value={this.props.user[key]} />//editing={this.state.editing}/>
+            <InfoProperty style="table" name={names[i]} value={this.props.user[key]} />//editing={this.state.editing}/>
         )
     }
 

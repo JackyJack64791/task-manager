@@ -7,9 +7,9 @@ import Panel from "../Panel";
 class ProjectCreate extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        if (!this.props.usersSuccess) {
-            this.props.getUsers();
-        }
+        // if (!this.props.usersSuccess) {
+        //     this.props.getUsers();
+        // }
     }
 
     constructor(props) {
@@ -75,7 +75,7 @@ class ProjectCreate extends Component {
     }
 
     handleRedirect() {
-        this.props.history.push("/projects");
+        if(!this.props.isError) this.props.history.push("/projects");
     }
 
     render() {
