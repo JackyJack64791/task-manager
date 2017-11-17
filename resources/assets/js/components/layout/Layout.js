@@ -19,15 +19,6 @@ class Layout extends Component {
             let users;
             let user;
             let tasks;
-            console.log(`getSuccessInfo - ${this.props.getSuccessInfo},
-                 getSuccessProjects - ${this.props.getSuccessProjects},
-                 getSuccessUsers - ${this.props.getSuccessUsers},
-                 getSuccessTasks - ${this.props.getSuccessTasks},
-                 isLoadingProjects - ${this.props.isLoadingProjects},
-                 isLoadingUsers - ${this.props.isLoadingUsers},
-                 isLoadingTasks - ${this.props.isLoadingTasks},
-                 `
-            );
             if (this.props.getSuccessInfo && this.props.getSuccessProjects && this.props.getSuccessUsers && this.props.getSuccessTasks
                 && !this.props.isLoadingProjects && !this.props.isLoadingUsers && !this.props.isLoadingTasks) {
                 user = this.props.user;

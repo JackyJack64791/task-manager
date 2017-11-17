@@ -11,12 +11,6 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('index');
-//});
-
-
-//Auth::routes();
 
 Route::get("reset/password","HomeController@index")->name('password.reset');
 

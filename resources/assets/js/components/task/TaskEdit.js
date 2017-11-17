@@ -17,10 +17,10 @@ class TaskCreate extends Component {
             description: task.description,
             priority: task.priority,
             difficulty: task.difficulty,
-            hoursCount: task.hoursCount,
-            dateCompletion: task.dateCompletion,
+            hoursCount: task.hours_count,
+            dateCompletion: task.date_completion,
             performer: task.performer_id,
-            timeSearch: task.timeSearch
+            timeSearch: task.time_search
         };
         this.handleTitle = this.handleTitle.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
@@ -99,10 +99,10 @@ class TaskCreate extends Component {
             description: this.state.description,
             priority: this.state.priority,
             difficulty: this.state.difficulty,
-            hoursCount: this.state.hoursCount,
-            dateCompletion: this.state.dateCompletion,
-            performer: this.state.performer,
-            timeSearch: this.state.timeSearch
+            hours_count: this.state.hoursCount,
+            date_completion: this.state.dateCompletion,
+            performer_id: this.state.performer,
+            time_search: this.state.timeSearch
         };
         this.props.taskUpdate(task, this.handleRedirect);
     }
@@ -201,9 +201,10 @@ class TaskCreate extends Component {
                 <fieldset className="form-group">
                     <label htmlFor="performer" className="col-md-4 control-label">Performer</label>
                     <div className="col-md-6">
-                        <select id="performer" className="form-control" value={this.state.performer}
+                        <select id="performer" className="form-control" defaultValue="0" value={this.state.performer}
                                 onChange={this.handlePerformer}
                         >
+                            {!this.state.performer ? <option disabled value="0">Choose performer...</option> : ""}
                             {this.performers()}
                         </select>
                     </div>
@@ -213,7 +214,7 @@ class TaskCreate extends Component {
                            className="col-md-4 control-label">Search time</label>
 
                     <div className="col-md-6">
-                        <input id="timeSearch" type="number" className="form-control"
+                        <input id="timeSearch" type="time" step="1" className="form-control"
                                name="timeSearch" value={this.state.timeSearch} onChange={this.handleTimeSearch}/>
                     </div>
                 </fieldset>
@@ -242,7 +243,6 @@ function mapStateToProps(state) {
         users: state.user.users,
         isError: state.task.isError,
         error: state.task.error,
-        isLoading: state.task.isLoading,
     }
 }
 

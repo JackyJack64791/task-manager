@@ -128,7 +128,6 @@ export function logoutUser() {
 /////////////////////////////////////////////////////
 
 export function userInfo(token = localStorage.getItem('token')) {
-    console.log("userInfo");
     return function (dispatch) {
         dispatch(userInfoLoading());
         axios.get(ROOT_URL + '/api/profile', {
@@ -143,7 +142,6 @@ export function userInfo(token = localStorage.getItem('token')) {
 }
 
 export function getUsers(token = localStorage.getItem('token')) {
-    console.log("getUsers");
     return function (dispatch) {
         dispatch(getUsersLoading());
         axios.get(ROOT_URL + '/api/users', {
@@ -214,7 +212,6 @@ export function projectCreate(project, redirect) {
 }
 
 export function getProjects(token = localStorage.getItem('token')) {
-    console.log("getProjects");
     return function (dispatch) {
         dispatch(getProjectsLoading());
         axios.get(ROOT_URL + '/api/projects',
@@ -361,7 +358,6 @@ export function taskUpdate(task, redirect){
 }
 
 export function getTasks(token = localStorage.getItem('token')){
-    console.log("getTasks");
     return function (dispatch) {
         dispatch(getTasksLoading());
         axios.get(ROOT_URL + '/api/tasks',

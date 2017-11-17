@@ -100,5 +100,11 @@ class PasswordReset extends Component {
             </Panel>);
     }
 }
-
-export default withRouter(connect(null,actions)(PasswordReset));
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated,
+        isError: state.auth.isError,
+        error: state.auth.error,
+    }
+}
+export default withRouter(connect(mapStateToProps,actions)(PasswordReset));

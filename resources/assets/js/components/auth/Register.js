@@ -1,8 +1,4 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import {Redirect} from 'react-router';
-import Home from '../Home'
-import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actions from '../../actions/actions';
@@ -217,7 +213,6 @@ class Register extends Component {
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
-        isLoading: state.auth.isLoading,
         isError: state.auth.isError,
         error: state.auth.error,
     }

@@ -241,7 +241,6 @@ function mapStateToProps(state) {
         users: state.user.users,
         isError: state.task.isError,
         error: state.task.error,
-        isLoading: state.task.isLoading,
     }
 }
 

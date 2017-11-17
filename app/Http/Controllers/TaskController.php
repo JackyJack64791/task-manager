@@ -14,7 +14,6 @@ class TaskController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth');
-//        $this->middleware('jwt.refresh');
     }
     /**
      * Display a listing of the resource.
@@ -96,8 +95,6 @@ class TaskController extends Controller
             'time_search'=> $request->get('time_search'),
         ]);
 
-//        Auth::login($user,false);
-//        return response()->json(compact('project'));
         return response()->json([],200);
     }
 
@@ -134,11 +131,6 @@ class TaskController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-//        Auth::login($user,false);
-//        $user_entity = JWTAuth::parseToken();
-//        return response()->json($user_entity);
-//        $user = User::findOrFail($user_entity);
-//        if(auth()->user()==null) return response()->json([],200);
         return response()->json(auth()->user()->tasks()->get());//
     }
 
@@ -196,9 +188,8 @@ class TaskController extends Controller
             'hours_count'=>'numeric',
             'date_completion'=>'date',
             'performer_id'=>'numeric',
-            'time_search'=>'numeric',]);
+            'time_search'=>'date_format:H:i:s',]);
         $task->update($request->all());
-        //Auth::login($user,false);
         return response()->json([],200);
     }
 

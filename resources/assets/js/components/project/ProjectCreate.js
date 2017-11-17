@@ -7,9 +7,6 @@ import Panel from "../Panel";
 class ProjectCreate extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        // if (!this.props.usersSuccess) {
-        //     this.props.getUsers();
-        // }
     }
 
     constructor(props) {
@@ -79,14 +76,7 @@ class ProjectCreate extends Component {
     }
 
     render() {
-        let users;
-        if (this.props.users.length && !this.props.isLoading) {
-            users = this.props.users;
-        }
-        else {
-            return <p>Loading...</p>;
-        }
-        return (users && <Panel title="Create New Project">
+        return (<Panel title="Create New Project">
             <form className="form-horizontal" onSubmit={this.handleSubmit}>
                 <fieldset className="form-group">
                     <label htmlFor="customer" className="col-md-4 control-label">Customer</label>
@@ -153,11 +143,9 @@ class ProjectCreate extends Component {
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
-        isLoading: state.user.isLoading,
         isError: state.user.isError,
         error: state.user.error,
         users: state.user.users,
-        usersSuccess: state.user.usersSuccess,
     }
 }
 

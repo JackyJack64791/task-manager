@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Register from "../auth/Register";
 import Login from "../auth/Login";
-import * as actions from '../../actions/actions';
-import Profile from "../user/Profile";
 import {connect} from 'react-redux';
 
 class Header extends Component {
@@ -65,14 +63,7 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         user: state.user.user,
-        // users: state.user.users,
-        // projects: state.project.projects,
-        // isLoadingProject: state.project.isLoading,
-        // isLoadingUsers: state.user.isLoading,
-        // getSuccessProjects: state.project.getSuccess,
-        // getSuccessUsers: state.user.usersSuccess,
-        // getSuccessInfo: state.user.infoSuccess,
     }
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, null)(Header);

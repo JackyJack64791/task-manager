@@ -14,15 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::get('profile', 'UserController@show')->name('profile');
 Route::post('login', 'SessionController@create')->name('login');
 Route::post('logout', "SessionController@logout")->name('logout');
 Route::put('update', "UserController@update")->name('update');
-//    Route::post('logout', 'SessionController@destroy')->name('logout');
+
 Route::post('register', 'UserController@register')->name('register');
 Route::post('reset/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::post('reset/password', 'Auth\ResetPasswordController@reset');

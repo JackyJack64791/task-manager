@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as actions from '../../actions/actions';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -38,7 +37,6 @@ class TaskInfo extends Component {
         task.author_id = this.props.user.full_name + "(you)";
         task.project_id = this.props.projects.find(item => item.id === task.project_id).title;
         if(task.performer_id!= null) task.performer_id = this.props.users.find(item => item.id === task.performer_id).full_name;
-        console.log(task);
         let names = this.getPropertyNames();
         return Object.keys(task).map((key, i) => {
                 return <InfoProperty style="list" name={names[i]} value={task[key]}/>
@@ -71,15 +69,10 @@ function mapStateToProps(state) {
         user: state.user.user,
         users: state.user.users,
         authenticated: state.auth.authenticated,
-        infoSuccess: state.user.infoSuccess,
-        usersSuccess: state.user.usersSuccess,
         projects: state.project.projects,
         tasks: state.task.tasks,
-        isLoading: state.project.isLoading,
-        isError: state.project.isError,
-        getSuccess: state.project.getSuccess,
     }
 }
 
-export default withRouter(connect(mapStateToProps, actions)(TaskInfo));
+export default withRouter(connect(mapStateToProps, null)(TaskInfo));
 

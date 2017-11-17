@@ -10,10 +10,9 @@ class LoginForm extends Component {
     }
     constructor(props) {
         super(props);
-        this.state = {email: '', password: '', remember: false};
+        this.state = {email: '', password: ''};
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        // this.handleRemember = this.handleRemember.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
     }
@@ -30,11 +29,6 @@ class LoginForm extends Component {
         })
     }
 
-    // handleRemember(e) {
-    //     this.setState({
-    //         remember: !this.state.remember
-    //     })
-    // }
     handleRedirect()
     {
         this.props.history.push("/home");
@@ -44,7 +38,6 @@ class LoginForm extends Component {
         const user = {
             email: this.state.email,
             password: this.state.password,
-            // remember: this.state.remember
         };
         this.props.authUser(user,this.handleRedirect);
     }
@@ -68,16 +61,6 @@ class LoginForm extends Component {
 
                     </div>
                 </fieldset>
-                {/*<fieldset className="form-group">*/}
-                    {/*<div className="col-md-6 col-md-offset-4">*/}
-                        {/*<div className="checkbox">*/}
-                            {/*<label>*/}
-                                {/*<input type="checkbox" name="remember" onChange={this.handleRemember}/>*/}
-                                {/*Remember Me*/}
-                            {/*</label>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                {/*</fieldset>*/}
                 <fieldset className="form-group">
                     <div className="col-md-8 col-md-offset-4">
                         <button type="submit" className="btn btn-primary">
@@ -94,7 +77,6 @@ class LoginForm extends Component {
 function mapStateToProps(state) {
     return {
         authenticated:state.auth.authenticated,
-        isLoading: state.auth.isLoading,
         isError: state.auth.isError,
         error: state.auth.error,
     }

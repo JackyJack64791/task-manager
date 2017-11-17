@@ -17,7 +17,6 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth');
-//        $this->middleware('jwt.refresh');
     }
     /**
      * Display a listing of the resource.
@@ -88,8 +87,7 @@ class ProjectController extends Controller
             'specification'=>$request->get('specification'),
         ]);
 
-//        Auth::login($user,false);
-//        return response()->json(compact('project'));
+
         return response()->json([],200);
     }
 
@@ -126,11 +124,7 @@ class ProjectController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-//        Auth::login($user,false);
-//        $user_entity = JWTAuth::parseToken();
-//        return response()->json($user_entity);
-//        $user = User::findOrFail($user_entity);
-//        if(auth()->user()==null) return response()->json([],200);
+
         return response()->json(auth()->user()->projectsManager()->get());//
 
     }
@@ -187,7 +181,6 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'specification'=>'string',]);
         $project->update($request->all());
-        //Auth::login($user,false);
         return response()->json([],200);
     }
 

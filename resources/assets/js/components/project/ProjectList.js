@@ -46,7 +46,6 @@ function mapStateToProps(state) {
         authenticated: state.auth.authenticated,
         projects: state.project.projects,
         isLoading: state.project.isLoading,
-        isError: state.project.isError,
         getSuccess: state.project.getSuccess,
     }
 }

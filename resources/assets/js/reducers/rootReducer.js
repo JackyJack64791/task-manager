@@ -10,9 +10,9 @@ const appReducer = combineReducers({
     project: projectReducer,
     task: taskReducer,
 });
-
+const token = localStorage.getItem('token');
 const rootReducer = (state,action) => {
-    if (action.type === 'LOGOUT_USER') {
+    if (action.type === 'LOGOUT_USER' || !token) {
         state = undefined
     }
     return appReducer(state,action);

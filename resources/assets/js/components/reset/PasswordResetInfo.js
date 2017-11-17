@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 import Panel from "../Panel";
 
 class PasswordResetInfo extends Component {
     componentDidMount() {
         if (this.props.authenticated) this.props.history.push("/profile/info");
-        if(!this.props.location.state.email) this.props.history.push("/reset/email");
+        if (!this.props.location.state.email) this.props.history.push("/reset/email");
     }
 
     render() {
@@ -14,5 +15,9 @@ class PasswordResetInfo extends Component {
         </Panel>;
     }
 }
-
-export default withRouter(PasswordResetInfo);
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated,
+    }
+}
+export default withRouter(connect(mapStateToProps, null)(PasswordResetInfo));

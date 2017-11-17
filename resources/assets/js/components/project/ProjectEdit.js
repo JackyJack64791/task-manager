@@ -8,16 +8,12 @@ import {Link} from 'react-router-dom';
 class ProjectEdit extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        // if (!this.props.infoSuccess) this.props.userInfo();
-        // if (!this.props.usersSuccess) this.props.getUsers();
-        // if (!this.props.getSuccess) this.props.getProjects();
     }
 
     constructor(props) {
         super(props);
         const {id} = this.props.match.params;
         let project = this.props.projects.find(item => item.id == id);
-        console.log(project);
         this.state = {
             id: project.id,
             customer_id: project.customer_id,
@@ -65,7 +61,6 @@ class ProjectEdit extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
         const project = {
             id: this.state.id,
             customer_id: this.state.customer_id,
@@ -80,13 +75,7 @@ class ProjectEdit extends Component {
 
     render() {
         const {id} = this.props.match.params;
-        let project;
-
-        if (this.props.getSuccess && !this.props.isLoading) {
-            project = this.props.projects.find(item => item.id == id);
-        }
-        else return <p>Loading...</p>;
-        return (project &&
+        return (
             <Panel title="Project Edit">
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
 
@@ -150,6 +139,7 @@ class ProjectEdit extends Component {
                         </div>
                     </div>
                 </form>
+                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
             </Panel>
         )
     }
@@ -158,15 +148,10 @@ class ProjectEdit extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user.user,
-        users: state.user.users,
         authenticated: state.auth.authenticated,
-        infoSuccess: state.user.infoSuccess,
-        usersSuccess: state.user.usersSuccess,
         projects: state.project.projects,
-        isLoading: state.project.isLoading,
         isError: state.project.isError,
-        getSuccess: state.project.getSuccess,
+        error: state.project.error,
     }
 }
 

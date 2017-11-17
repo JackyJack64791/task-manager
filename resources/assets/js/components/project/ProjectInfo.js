@@ -9,9 +9,6 @@ import Panel from "../Panel";
 class ProjectInfo extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
-        if (!this.props.infoSuccess) this.props.userInfo();
-        if (!this.props.getSuccess) this.props.getProjects();
-        if (!this.props.usersSuccess) this.props.getUsers();
     }
 
     filterProject(project) {
@@ -34,7 +31,6 @@ class ProjectInfo extends Component {
             this.props.projects.find(item => item.id == id));
         project.customer_id = this.props.users.find(item => item.id === project.customer_id).full_name;
         project.manager_id = this.props.user.full_name + "(you)";
-        console.log(project);
         let names = this.getPropertyNames();
         return Object.keys(project).map((key, i) => {
                 return <InfoProperty style="list" name={names[i]} value={project[key]}/>
@@ -67,12 +63,7 @@ function mapStateToProps(state) {
         user: state.user.user,
         users: state.user.users,
         authenticated: state.auth.authenticated,
-        infoSuccess: state.user.infoSuccess,
-        usersSuccess: state.user.usersSuccess,
         projects: state.project.projects,
-        isLoading: state.project.isLoading,
-        isError: state.project.isError,
-        getSuccess: state.project.getSuccess,
     }
 }
 

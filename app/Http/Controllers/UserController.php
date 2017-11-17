@@ -15,7 +15,6 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.auth')->except('register');
-//        $this->middleware('jwt.refresh')->except('register');
     }
     /**
      * Display a listing of the resource.
@@ -116,14 +115,14 @@ class UserController extends Controller
             }
 
         } catch (TokenExpiredException $e) {
-//            try {
-//                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
-//                $user = JWTAuth::setToken($refreshed)->toUser();
-//                header('Authorization: Bearer ' . $refreshed);
-//
-//            } catch (JWTException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
                 return response()->json(['token_expired'], $e->getStatusCode());
-//            }
+            }
 
         } catch (TokenInvalidException $e) {
 
@@ -134,7 +133,7 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        // the token is valid and we have found the user via the sub claim
+
         return response()->json(compact('user'));
     }
 
@@ -192,7 +191,7 @@ class UserController extends Controller
             'bank_card'=> 'required|numeric|unique:users,bank_card,'.$request->id]);
         $user_entity->update($request->all());
         $token = JWTAuth::fromUser($user_entity);
-        // the token is valid and we have found the user via the sub claim
+
         return response()->json(compact('token'));
 
     }

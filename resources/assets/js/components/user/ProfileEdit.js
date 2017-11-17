@@ -8,7 +8,6 @@ import Panel from "../Panel";
 class ProfileEdit extends Component {
     componentDidMount(){
          if (!this.props.authenticated) this.props.history.push("/login");
-         // if(!this.props.user) this.props.getUser();
     }
     constructor(props) {
         super(props);
@@ -20,7 +19,6 @@ class ProfileEdit extends Component {
             phone: this.props.user.phone,
             bankCard: this.props.user.bank_card
         };
-        console.log(this.state);
         this.handleFullName = this.handleFullName.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -87,14 +85,7 @@ class ProfileEdit extends Component {
     }
 
     render() {
-        let user;
-        if (!this.props.isLoading) {
-            user = this.props.user;
-        }
-        else {
-            return <p>Loading...</p>;
-        }
-        return (user &&
+        return (
             <Panel title="Edit Profile">
                 <form className="form-horizontal" onSubmit={this.handleSubmit}>
 

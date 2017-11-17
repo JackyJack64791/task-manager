@@ -7,7 +7,6 @@ import {
 
 
 function taskReducer (state={tasks:{}, isLoading:false, getSuccess:false, isError: false}, action) {
-    console.log(state);
     switch (action.type) {
         case TASK_CREATE:
             return Object.assign({}, state, {
