@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9c0ae4f3-b23d-4aba-82eb-e2bdb202510c" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/css/app.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/favicon.ico" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/js/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/mix-manifest.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/robots.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/project/public/web.config" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/assets/js/actions/actions.js" afterPath="$PROJECT_DIR$/project/resources/assets/js/actions/actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/assets/js/components/layout/Header.js" afterPath="$PROJECT_DIR$/project/resources/assets/js/components/layout/Header.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/assets/js/components/layout/Layout.js" afterPath="$PROJECT_DIR$/project/resources/assets/js/components/layout/Layout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/assets/js/components/task/TaskCreate.js" afterPath="$PROJECT_DIR$/project/resources/assets/js/components/task/TaskCreate.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/assets/sass/_variables.sass" afterPath="$PROJECT_DIR$/project/resources/assets/sass/_variables.sass" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/resources/assets/sass/app.sass" afterPath="$PROJECT_DIR$/project/resources/assets/sass/app.sass" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/actions/actions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="32" column="46" lean-forward="false" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Header.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/layout/Header.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="756">
+              <caret line="46" column="40" lean-forward="false" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/app/Http/Controllers/TaskController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="792">
+              <caret line="190" column="43" lean-forward="false" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskCreate.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/task/TaskCreate.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3834">
+              <caret line="218" column="53" lean-forward="false" selection-start-line="218" selection-start-column="53" selection-end-line="218" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskEdit.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/task/TaskEdit.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="authReducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/reducers/authReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#120#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rootReducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/reducers/rootReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="projectReducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/reducers/projectReducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#301#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Layout.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/layout/Layout.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>route</find>
+      <find>api/login</find>
+      <find>actions</find>
+      <find>Nav</find>
+      <find>authenticated</find>
+      <find>console</find>
+      <find>sty</find>
+      <find>fetch</find>
+      <find>loading</find>
+      <find>getU</find>
+      <find>isLo</find>
+      <find>isLoad</find>
+      <find>isE</find>
+      <find>usersS</find>
+      <find>users</find>
+      <find>this.props.</find>
+      <find>isLoading</find>
+      <find>this.props</find>
+      <find>console.log</find>
+      <find>register</find>
+      <find>auth</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/project" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/resources/assets/js/components/Tab.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/project/ProjectTab.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/project/ProjectInfoProperty.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/InfoProperty.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/task/TaskInfoProperty.js" />
+        <option value="$PROJECT_DIR$/resources/assets/sass/app.sass" />
+        <option value="$PROJECT_DIR$/database/migrations/2017_10_27_113420_create_tasks_table.php" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/auth/LoginForm.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/layout/Header.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/project/ProjectList.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/project/ProjectCreate.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/reset/PasswordReset.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/reset/PasswordResetInfo.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/task/TaskList.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/task/TaskEdit.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/task/TaskTab.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/task/TaskCreate.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/user/Profile.js" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProjectController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SessionController.php" />
+        <option value="$PROJECT_DIR$/resources/assets/js/bootstrap.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/reducers/rootReducer.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/layout/Layout.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/project/ProjectEdit.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/project/ProjectInfo.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/task/TaskInfo.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" />
+        <option value="$PROJECT_DIR$/app/Rules/HashRule.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
+        <option value="$PROJECT_DIR$/resources/assets/js/constants/actionTypes.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/routes.js" />
+        <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/auth/Register.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/actions/actions.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/user/ProfileEdit.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/components/user/PasswordChange.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/assets/js/reducers/taskReducer.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/reducers/userReducer.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/reducers/authReducer.js" />
+        <option value="$PROJECT_DIR$/resources/assets/js/reducers/projectReducer.js" />
+        <option value="$PROJECT_DIR$/project/resources/assets/sass/app.sass" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/project/resources/assets/sass/_variables.sass" />
+        <option value="$PROJECT_DIR$/project/resources/assets/js/components/layout/Header.js" />
+        <option value="$PROJECT_DIR$/project/resources/assets/js/components/layout/Layout.js" />
+        <option value="$PROJECT_DIR$/project/resources/assets/js/components/task/TaskCreate.js" />
+        <option value="$PROJECT_DIR$/project/resources/assets/js/actions/actions.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/project/node_modules" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="676e12f3-db83-47c6-b012-03895ca112d9" name="Laravel" port="8000" />
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 7.1" />
+  <component name="PhpXdebugProxy" ide_key="phpstorm" host="localhost" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="217" />
+    <option name="y" value="30" />
+    <option name="width" value="1695" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Http" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="task-manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task-manager" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="task" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="reference.settings.php.debug.xdebug.proxy" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path" value="/usr/bin/node" />
+    <property name="SearchEverywhereHistoryKey" value=".hta&#9;FILE&#9;file:///home/alexey/Laravel/task-manager/public/.htaccess&#10;re&#9;FILE&#9;file:///home/alexey/Laravel/task-manager/app/Http/Middleware/RedirectIfAuthenticated.php" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/assets/js/components" />
+      <recent name="$PROJECT_DIR$/resources/assets/js/components/reset" />
+      <recent name="$PROJECT_DIR$/resources/assets/js/constants" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="PHP Web Application.task_manager">
+    <configuration name="RegisterController.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
+    <configuration name="api.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/routes/api.php" />
+    <configuration name="server.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/server.php" />
+    <configuration name="task_manager" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" browser="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" server_name="Laravel" />
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="PHP Web Application.task_manager" />
+      <item index="1" class="java.lang.String" itemvalue="PHP Script.RegisterController.php" />
+      <item index="2" class="java.lang.String" itemvalue="PHP Script.api.php" />
+      <item index="3" class="java.lang.String" itemvalue="PHP Script.server.php" />
+    </list>
+    <recent_temporary>
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="PHP Script.server.php" />
+        <item index="1" class="java.lang.String" itemvalue="PHP Script.api.php" />
+        <item index="2" class="java.lang.String" itemvalue="PHP Script.RegisterController.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9c0ae4f3-b23d-4aba-82eb-e2bdb202510c" name="Default" comment="" />
+      <created>1509083057964</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1509083057964</updated>
+      <workItem from="1509083059220" duration="1092000" />
+      <workItem from="1509091788475" duration="12722000" />
+      <workItem from="1509341408645" duration="23911000" />
+      <workItem from="1509425172599" duration="16126000" />
+      <workItem from="1509511893876" duration="22198000" />
+      <workItem from="1509600858970" duration="19653000" />
+      <workItem from="1509621388090" duration="4022000" />
+      <workItem from="1509687921657" duration="17695000" />
+      <workItem from="1509706139989" duration="6441000" />
+      <workItem from="1510024825331" duration="17491000" />
+      <workItem from="1510043462764" duration="2145000" />
+      <workItem from="1510120946629" duration="22596000" />
+      <workItem from="1510144911893" duration="296000" />
+      <workItem from="1510197750755" duration="28028000" />
+      <workItem from="1510284054841" duration="13382000" />
+      <workItem from="1510298187675" duration="7109000" />
+      <workItem from="1510548645161" duration="16560000" />
+      <workItem from="1510571553140" duration="3210000" />
+      <workItem from="1510641107093" duration="14508000" />
+      <workItem from="1510724055008" duration="16153000" />
+      <workItem from="1510740540422" duration="3868000" />
+      <workItem from="1510810272739" duration="23647000" />
+      <workItem from="1510834561199" duration="3248000" />
+      <workItem from="1510896405072" duration="7778000" />
+      <workItem from="1510916059857" duration="4174000" />
+      <workItem from="1511151647362" duration="4230000" />
+      <workItem from="1511156714102" duration="31000" />
+      <workItem from="1511168833688" duration="2793000" />
+      <workItem from="1511173868312" duration="45000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="315152000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="217" y="30" width="1695" height="1050" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22976965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39809927" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964131" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32698414" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="28" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/task/TaskInfo.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/task/TaskList.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/task/TaskTab.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/user/Profile.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/DeleteButton.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/EditButton.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/Home.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/InfoProperty.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/Panel.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/Tab.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/bootstrap.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/app.js" />
+    <entry file="file://$PROJECT_DIR$/config/app.php" />
+    <entry file="file://$PROJECT_DIR$/server.php" />
+    <entry file="file://$PROJECT_DIR$/public/.htaccess" />
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Validation/ValidatesRequests.php" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" />
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php" />
+    <entry file="file://$PROJECT_DIR$/app/Rules/HashRule.php" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/routes.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/constants/actionTypes.js" />
+    <entry file="file://$PROJECT_DIR$/resources/views/index.blade.php" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/auth/LoginForm.js" />
+    <entry file="file://$PROJECT_DIR$/routes/api.php" />
+    <entry file="file://$PROJECT_DIR$/public/js/app.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/user/PasswordChange.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/auth/Register.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/actions/actions.js" />
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/components/user/ProfileEdit.js" />
+    <entry file="file://$PROJECT_DIR$/routes/console.php" />
+    <entry file="file://$PROJECT_DIR$/public/index.php" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/reducers/userReducer.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/reducers/taskReducer.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/reducers/rootReducer.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/reducers/projectReducer.js" />
+    <entry file="file://$PROJECT_DIR$/resources/assets/js/reducers/authReducer.js" />
+    <entry file="file://$PROJECT_DIR$/.env.example" />
+    <entry file="file://$PROJECT_DIR$/.env" />
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/sass/app.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="28" column="6" lean-forward="false" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/sass/_variables.sass">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="32" column="46" lean-forward="false" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/reducers/rootReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/reducers/projectReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#301#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/layout/Layout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/reducers/authReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/layout/Header.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="46" column="40" lean-forward="false" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/task/TaskEdit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/components/task/TaskCreate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3834">
+          <caret line="218" column="53" lean-forward="false" selection-start-line="218" selection-start-column="53" selection-end-line="218" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/resources/assets/js/actions/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/app/Http/Controllers/TaskController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="190" column="43" lean-forward="false" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
