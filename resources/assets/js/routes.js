@@ -19,6 +19,7 @@ import TaskCreate from "./components/task/TaskCreate";
 import TaskList from "./components/task/TaskList";
 import TaskInfo from "./components/task/TaskInfo";
 import TaskEdit from "./components/task/TaskEdit";
+import PasswordChange from "./components/user/PasswordChange";
 
 
 const Routes = () => {
@@ -31,6 +32,7 @@ const Routes = () => {
             <Route path="/reset/email" component={PasswordResetEmail}/>
             <Route path="/reset/info" component={PasswordResetInfo}/>
             <Route path="/reset/password" component={PasswordReset}/>
+            <Route path="/password/change" component={PasswordChange}/>
             <Route path="/profile/info" component={Profile}/>
             <Route path="/profile/settings" component={ProfileEdit}/>
             <Route path="/project/create" component={ProjectCreate}/>

@@ -7,16 +7,18 @@ import {
     GET_PROJECTS_ERROR, GET_PROJECTS_LOADING, PROJECT_DELETE, PROJECT_DELETE_ERROR, PROJECT_CREATE_LOADING,
     PROJECT_UPDATE_LOADING, PROJECT_UPDATE_ERROR, PROJECT_UPDATE, PROJECT_DELETE_LOADING, TASK_DELETE_ERROR,
     TASK_CREATE_ERROR, TASK_UPDATE_ERROR, GET_TASKS_ERROR, TASK_CREATE_LOADING, TASK_UPDATE_LOADING, GET_TASKS_LOADING,
-    TASK_DELETE_LOADING, TASK_CREATE, TASK_UPDATE, GET_TASKS, TASK_DELETE, USER_INFO_LOADING
+    TASK_DELETE_LOADING, TASK_CREATE, TASK_UPDATE, GET_TASKS, TASK_DELETE, USER_INFO_LOADING, CHANGE_PASSWORD,
+    CHANGE_PASSWORD_ERROR
 } from "../constants/actionTypes";
 
-const ROOT_URL = 'http://localhost:8000';
+const ROOT_URL = location.protocol + '//' + location.host;
 
 /////////////////////////////////////////////////////
 //-----------------authReducer---------------------//
 /////////////////////////////////////////////////////
 
 export function authUser(user, redirect) {
+    console.log(window.location.hostname);
     return function (dispatch) {
         dispatch(authLoading());
         dispatch(getUsersLoading());
@@ -47,7 +49,7 @@ export function registerUser(user, redirect) {
     return function (dispatch) {
         axios.post(ROOT_URL + '/api/register', user)
             .then(response => {
-                localStorage.setItem('token', response.data.token);
+                //localStorage.setItem('token', response.data.token);
                 dispatch(authUser(user,redirect));
             })
             .catch(response => dispatch(authError(response.data.error)));
@@ -92,6 +94,29 @@ export function resetPassword(credentials, token, redirect) {
     }
 }
 
+export function changePassword(credentials, redirect) {
+    return function (dispatch) {
+        axios.post(ROOT_URL + '/api/change/password', credentials,
+            {
+                headers: {authorization: "Bearer " + localStorage.getItem('token')}
+            })
+            .then(response => {
+                dispatch(changePasswordSuccess());
+                redirect();
+            })
+            .catch(response => dispatch(changePasswordError("Old password is wrong")))
+    }
+}
+
+export function changePasswordSuccess(){
+    return {type: CHANGE_PASSWORD}
+}
+export function changePasswordError(error){
+    return {
+        type: CHANGE_PASSWORD_ERROR,
+        payload: error,
+    }
+}
 export function resetSendEmailError(error) {
     return {
         type: RESET_SEND_MAIL_ERROR,

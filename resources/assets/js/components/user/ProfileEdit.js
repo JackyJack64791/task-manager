@@ -156,12 +156,15 @@ class ProfileEdit extends Component {
                     <hr/>
 
                     <div className="form-group">
-                        <div className="col-md-6 col-md-offset-4">
+                        <div className="col-md-10 col-md-offset-4">
                             <button type="submit" className="btn btn-primary">
                                 Update
                             </button>
                             <Link to={"/profile/info"} className="btn btn-default">
                                 Back to profile
+                            </Link>
+                            <Link to={"/password/change"} className="btn btn-default">
+                                Change password
                             </Link>
                         </div>
                     </div>

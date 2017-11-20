@@ -3,7 +3,6 @@ import {
 } from "../constants/actionTypes";
 
 function authReducer (state={authenticated: false,isLoading: false, isError: false}, action) {
-
     switch(action.type)
     {
         case AUTH_ERROR:

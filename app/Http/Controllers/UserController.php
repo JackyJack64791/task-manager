@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -71,8 +72,8 @@ class UserController extends Controller
             'bank_card'=>$request->get('bank_card'),
         ]);
 
-        $token = JWTAuth::fromUser($user);
-        return response()->json(compact($token));
+        //$token = JWTAuth::fromUser($user);
+        return response()->json([],200);
 
     }
 
@@ -196,6 +197,50 @@ class UserController extends Controller
 
     }
 
+    public function changePassword(Request $request)
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+        $this->validate($request, [
+            'old_password' => 'required|string|min:6',
+            'password' => 'required|confirmed|string|min:6',
+        ]);
+        $user_entity = auth()->user();
+
+        $oldPassword = $request->get('old_password');
+        $newPassword = $request->get('password');
+        if (Hash::check($oldPassword, $user->password)) {
+            $obj_user = User::findOrFail($user_entity->id);
+            $obj_user->password = Hash::make($newPassword);
+            $obj_user->save();
+
+            return response()->json([],200);
+        }
+        return response()->json(['Wrong password'],401);
+    }
     /**
      * Remove the specified resource from storage.
      *

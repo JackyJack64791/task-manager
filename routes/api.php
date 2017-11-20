@@ -22,6 +22,7 @@ Route::put('update', "UserController@update")->name('update');
 Route::post('register', 'UserController@register')->name('register');
 Route::post('reset/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::post('reset/password', 'Auth\ResetPasswordController@reset');
+Route::post('change/password', 'UserController@changePassword');
 
 Route::get('users', 'UserController@index');
 
