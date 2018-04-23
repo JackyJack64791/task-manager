@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as actions from '../../actions/actions';
+import * as actions from '../../actions/index';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -48,6 +48,7 @@ class ProjectInfo extends Component {
         const {id} = this.props.match.params;
         return (
             <Panel title="Информация о проекте">
+                <img src={this.props.user.img_path}/>
             <ul className="list-group">
                 {this.projectTab(id)}
             </ul>

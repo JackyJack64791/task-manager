@@ -11,7 +11,7 @@ import {
   Progress,
 } from 'reactstrap';
 import {Link} from "react-router-dom";
-import * as actions from "../../../actions/actions";
+import * as actions from "../../../actions/index";
 
 const propTypes = {
   notif: PropTypes.bool,
@@ -88,8 +88,8 @@ class HeaderDropdown extends Component {
     return (
       <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle nav>
-          <img src={'img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-            {/*<img src={this.props.user.img_path} className="img-avatar" alt={this.props.user.full_name}/>*/}
+          {/*<img src={'img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>*/}
+            <img src={this.props.user.img_path} className="img-avatar" alt={this.props.user.full_name}/>
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem header tag="div" className="text-center"><strong>Профиль</strong></DropdownItem>
@@ -253,6 +253,7 @@ function mapStateToProps(state) {
         authenticated: state.auth.authenticated,
         projects: state.project.projects,
         users: state.user.users,
+        user: state.user.user,
         // isError: state.task.isError,
         // error: state.task.error,
     }

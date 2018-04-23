@@ -3,7 +3,7 @@ import {
     TASK_CREATE, TASK_CREATE_LOADING,TASK_CREATE_ERROR, TASK_DELETE, TASK_DELETE_ERROR, TASK_DELETE_LOADING, TASK_UPDATE,
     TASK_UPDATE_ERROR,
     TASK_UPDATE_LOADING
-} from "../constants/actionTypes";
+} from "../constants/index";
 
 
 function taskReducer (state={tasks:{}, isLoading:false, getSuccess:false, isError: false}, action) {

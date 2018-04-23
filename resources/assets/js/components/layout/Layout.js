@@ -14,7 +14,7 @@
 
 
 import React, {Component} from 'react';
-import * as actions from '../../actions/actions';
+import * as actions from '../../actions/index';
 import {connect} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {Container} from 'reactstrap';
@@ -90,7 +90,7 @@ class Layout extends Component {
             }
             else return <div className="app flex-row align-items-center">
                 <div style={{ height: '100vh', width: '100vw' }}>
-                    <Loading show={true} fadeIn="500" color="#00bfff" />
+                    <Loading show={true} fadeIn="full" color="#00bfff" />
                 </div>
             </div>;
             return (user && projects && users && tasks &&

@@ -1,0 +1,8 @@
+export const USER_INFO = "USER_INFO";
+export const USER_INFO_LOADING = "USER_INFO_LOADING";
+export const USER_INFO_ERROR = "USER_INFO_ERROR";
+export const USERS_GET = "USERS_GET";
+export const USERS_GET_LOADING = "USERS_GET_LOADING";
+export const USERS_GET_ERROR = "USERS_GET_ERROR";
+
+

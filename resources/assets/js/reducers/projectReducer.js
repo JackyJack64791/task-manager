@@ -3,7 +3,7 @@ import {
     PROJECT_CREATE, PROJECT_CREATE_ERROR, PROJECT_CREATE_LOADING,PROJECT_DELETE, PROJECT_DELETE_LOADING, PROJECT_DELETE_ERROR, PROJECT_UPDATE,
     PROJECT_UPDATE_LOADING, PROJECT_UPDATE_ERROR
     ,
-} from "../constants/actionTypes";
+} from "../constants/index";
 
 function projectReducer (state={projects:{}, isLoading:false, getSuccess:false, isError: false}, action) {
     switch(action.type)

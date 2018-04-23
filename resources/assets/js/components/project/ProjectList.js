@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import * as actions from '../../actions/actions';
+import * as actions from '../../actions/index';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import ProjectTab from "./ProjectTab";
@@ -32,10 +32,11 @@ class ProjectList extends Component {
             } else return <p>Loading...</p>;
         }
         return (projects && <Panel title="Проекты">
+            {/*<img src={this.props.user.img_path}/>*/}
             <ul className="list-group">
                 {this.projectsRender()}
             </ul>
-            <Link className="btn btn-primary" to='/project/create'>Создать новый проект</Link>
+            <Link className="btn btn-primary mt-4" to='/project/create'>Создать новый проект</Link>
         </Panel>);
     }
 

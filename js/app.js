@@ -841,7 +841,7 @@ function authUser(user, redirect) {
         dispatch(getUsersLoading());
         dispatch(getProjectsLoading());
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post(ROOT_URL + '/api/login', user).then(function (response) {
-            dispatch({ type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["c" /* AUTH_USER */] });
+            dispatch({ type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["c" /* LOGIN */] });
             localStorage.setItem('token', response.data.token);
             dispatch(userInfo(response.data.token));
             dispatch(getUsers(response.data.token));
@@ -943,13 +943,13 @@ function resetPasswordError(error) {
 
 function authError(error) {
     return {
-        type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["a" /* AUTH_ERROR */],
+        type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["a" /* LOGIN_ERROR */],
         payload: error
     };
 }
 
 function authLoading() {
-    return { type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["b" /* AUTH_LOADING */] };
+    return { type: __WEBPACK_IMPORTED_MODULE_2__constants_actionTypes__["b" /* LOGIN_LOADING */] };
 }
 
 function logoutUser() {
@@ -3928,9 +3928,9 @@ module.exports = DOMLazyTree;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return TASK_DELETE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return TASK_DELETE_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return TASK_DELETE_ERROR; });
-var AUTH_USER = "AUTH_USER";
-var AUTH_LOADING = "AUTH_LOADING";
-var AUTH_ERROR = "AUTH_ERROR";
+var AUTH_USER = "LOGIN";
+var AUTH_LOADING = "LOGIN_LOADING";
+var AUTH_ERROR = "LOGIN_ERROR";
 
 var LOGOUT_USER = "LOGOUT_USER";
 var LOGOUT_ERROR = "LOGOUT_ERROR";
@@ -14329,7 +14329,7 @@ var Store = createStoreWithMiddleware(__WEBPACK_IMPORTED_MODULE_1__reducers_root
 var token = localStorage.getItem('token');
 
 if (token) {
-    Store.dispatch({ type: __WEBPACK_IMPORTED_MODULE_3__constants_actionTypes__["c" /* AUTH_USER */] });
+    Store.dispatch({ type: __WEBPACK_IMPORTED_MODULE_3__constants_actionTypes__["c" /* LOGIN */] });
 }
 /* harmony default export */ __webpack_exports__["default"] = (Store);
 
@@ -30506,18 +30506,18 @@ function authReducer() {
     var action = arguments[1];
 
     switch (action.type) {
-        case __WEBPACK_IMPORTED_MODULE_0__constants_actionTypes__["a" /* AUTH_ERROR */]:
+        case __WEBPACK_IMPORTED_MODULE_0__constants_actionTypes__["a" /* LOGIN_ERROR */]:
             return Object.assign({}, state, {
                 isError: true,
                 error: action.payload
             });
-        case __WEBPACK_IMPORTED_MODULE_0__constants_actionTypes__["c" /* AUTH_USER */]:
+        case __WEBPACK_IMPORTED_MODULE_0__constants_actionTypes__["c" /* LOGIN */]:
             return Object.assign({}, state, {
                 authenticated: true,
                 isLoading: false,
                 isError: false
             });
-        case __WEBPACK_IMPORTED_MODULE_0__constants_actionTypes__["b" /* AUTH_LOADING */]:
+        case __WEBPACK_IMPORTED_MODULE_0__constants_actionTypes__["b" /* LOGIN_LOADING */]:
             return Object.assign({}, state, {
                 authenticated: false,
                 isLoading: true,

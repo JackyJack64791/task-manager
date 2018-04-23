@@ -6,17 +6,18 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\User;
 use Illuminate\Support\Facades\Input;
-use JWTAuth;
+//use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProjectController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('jwt.auth');
+        $this->middleware(['jwt.auth']);
     }
     /**
      * Display a listing of the resource.
@@ -57,6 +58,7 @@ class ProjectController extends Controller
                 $user = JWTAuth::setToken($refreshed)->toUser();
                 header('Authorization: Bearer ' . $refreshed);
 
+
             } catch (JWTException $e) {
                 return response()->json(['token_expired'], $e->getStatusCode());
             }
@@ -84,7 +86,7 @@ class ProjectController extends Controller
             'title' => $request->get('title'),
             'deadline'=>$request->get('deadline'),
             'description'=>$request->get('description'),
-            'specification'=>$request->get('specification'),
+            'specification'=>$request->get('specification_path'),
         ]);
 
 
@@ -110,9 +112,10 @@ class ProjectController extends Controller
                 $refreshed = JWTAuth::refresh(JWTAuth::getToken());
                 $user = JWTAuth::setToken($refreshed)->toUser();
                 header('Authorization: Bearer ' . $refreshed);
+                return response()->json('all_fine',302);
 
             } catch (JWTException $e) {
-                return response()->json(['token_expired'], $e->getStatusCode());
+                return response()->json(['token_expired!!!'], $e->getStatusCode());
             }
 
         } catch (TokenInvalidException $e) {

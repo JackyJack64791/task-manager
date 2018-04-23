@@ -1,7 +1,7 @@
 import {
     USER_INFO_ERROR, USER_INFO, USERS_GET, USERS_GET_ERROR, USERS_GET_LOADING,
     USER_INFO_LOADING
-} from "../constants/actionTypes";
+} from "../constants/index";
 
 function userReducer(state={ user:{}, users: {}, usersSuccess:false, infoSuccess:false, isError:false, isLoading: false}, action){
     switch (action.type)

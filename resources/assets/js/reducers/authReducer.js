@@ -1,6 +1,6 @@
 import {
     AUTH_ERROR, AUTH_USER, LOGOUT_USER, AUTH_LOADING, RESET_SEND_MAIL_ERROR,
-} from "../constants/actionTypes";
+} from "../constants/index";
 
 function authReducer (state={authenticated: false,isLoading: false, isError: false}, action) {
     switch(action.type)
