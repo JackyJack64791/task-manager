@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.container {
+  color: #00bfff;
+}
+
+.user-property {
+  text-align: left;
+  font-weight: bold;
+}
+
+.user-value {
+  text-align: right;
+  color: #444444;
+}
+
+.list-property {
+  text-align: left;
+  font-weight: bold;
+}
+
+.list-value {
+  color: #444444;
+}
+
+.error {
+  padding: 15px;
+  background-color: rgba(152, 203, 232, 0.25);
+  border: 1px solid #2a88bd;
+  border-radius: 4px;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+}
+
+.spinner div {
+  background-color: #00bfff;
+}
+
