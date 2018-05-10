@@ -55,9 +55,9 @@ export function getTeams(token = localStorage.getItem('token')) {
             {headers: {Authorization: "Bearer " + token}}
         )
             .then(response => {
-                dispatch(getTeamSuccess(response.data));
+                dispatch(getTeamsSuccess(response.data));
             })
-            .catch(response => dispatch(getTeamsError("You are not logged in")));
+            .catch(response => dispatch(getTeamsError("Войдите в систему")));
     }
 }
 
@@ -86,7 +86,7 @@ export function teamUpdateSuccess() {
     return {type: TEAM_UPDATE}
 }
 
-export function getTeamSuccess(teams) {
+export function getTeamsSuccess(teams) {
     return {
         type: GET_TEAMS,
         payload: teams

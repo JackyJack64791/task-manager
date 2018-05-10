@@ -18,18 +18,21 @@ class TeamsTableSeeder extends Seeder
             'name' => 'Symphony',
             'description' => 'Команда фрилансеров из Новосибирска. Основной стек технологй: Laravel(PHP), Python',
             'img_path' => '/teams/1.png',
+            'author_id' => 1,
         ]);
 
         Team::create([
             'name' => 'NewEra',
             'description' => 'Бюро по созданию сайтов и веб-приложений с уникальным дизайном. Основной стек технологй: Laravel(PHP), Python',
             'img_path' => '/teams/2.png',
+            'author_id' => 2,
         ]);
 
         Team::create([
             'name' => '.wrk',
             'description' => 'Бюро, предоставляющее услуги по аутсорсингу(аутстаффинг). Основной стек технологй: PHP, Python, Ruby, IOS, Android',
             'img_path' => '/teams/3.png',
+            'author_id' => 1,
         ]);
     }
 }

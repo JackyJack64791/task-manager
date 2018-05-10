@@ -71,6 +71,7 @@ class Layout extends Component {
             if (!this.props.getSuccessUsers && !this.props.isLoadingUsers) this.props.getUsers();
             if (!this.props.getSuccessProjects && !this.props.isLoadingProjects) this.props.getProjects();
             if (!this.props.getSuccessTasks && !this.props.isLoadingTasks) this.props.getTasks();
+            if (!this.props.getSuccessTeams && !this.props.isLoadingTeams) this.props.getTeams();
         }
     }
 
@@ -81,19 +82,29 @@ class Layout extends Component {
             let users;
             let user;
             let tasks;
-            if (this.props.getSuccessInfo && this.props.getSuccessProjects && this.props.getSuccessUsers && this.props.getSuccessTasks
-                && !this.props.isLoadingProjects && !this.props.isLoadingUsers && !this.props.isLoadingTasks && !this.props.isLoadingAuth) {
+            let teams;
+            if (this.props.getSuccessInfo &&
+                this.props.getSuccessProjects &&
+                this.props.getSuccessUsers &&
+                this.props.getSuccessTasks &&
+                this.props.getSuccessTeams &&
+                !this.props.isLoadingProjects &&
+                !this.props.isLoadingUsers &&
+                !this.props.isLoadingTasks &&
+                !this.props.isLoadingAuth &&
+                !this.props.isLoadingTeams) {
                 user = this.props.user;
                 projects = this.props.projects;
                 users = this.props.users;
                 tasks = this.props.tasks;
+                teams = this.props.teams;
             }
             else return <div className="app flex-row align-items-center">
                 <div style={{ height: '100vh', width: '100vw' }}>
                     <Loading show={true} fadeIn="full" color="#00bfff" />
                 </div>
             </div>;
-            return (user && projects && users && tasks &&
+            return (user && projects && users && tasks && teams &&
                 <div>
                     <div className="app">
                         <Header/>
@@ -137,6 +148,7 @@ class Layout extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state);
     return {
         authenticated: state.auth.authenticated,
         isLoadingAuth: state.auth.isLoading,
@@ -144,13 +156,16 @@ function mapStateToProps(state) {
         users: state.user.users,
         projects: state.project.projects,
         tasks: state.task.tasks,
+        teams: state.team.teams,
         isLoadingProjects: state.project.isLoading,
         isLoadingTasks: state.task.isLoading,
         isLoadingUsers: state.user.isLoading,
+        isLoadingTeams: state.team.isLoading,
         getSuccessProjects: state.project.getSuccess,
         getSuccessUsers: state.user.usersSuccess,
         getSuccessInfo: state.user.infoSuccess,
         getSuccessTasks: state.task.getSuccess,
+        getSuccessTeams: state.team.getSuccess,
     }
 }
 

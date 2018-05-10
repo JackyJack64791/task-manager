@@ -31,14 +31,15 @@ export function authUser(user, redirect) {
                 redirect();
             })
             .catch((response) => {
-                dispatch(authError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
+                dispatch(authError("Неправильные данные для входа, попробуйте снова"));
+                // console.log(response);
             })
-            .catch((response) => {
-                dispatch(getUsersError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
-            })
-            .catch((response) => {
-                dispatch(getProjectsError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
-            })
+            // .catch((response) => {
+            //     dispatch(getUsersError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
+            // })
+            // .catch((response) => {
+            //     dispatch(getProjectsError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
+            // })
     }
 }
 

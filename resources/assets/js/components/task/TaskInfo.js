@@ -42,7 +42,7 @@ class TaskInfo extends Component {
         else
             task.author_id = this.props.user.full_name;
         task.project_id = this.props.projects.find(item => item.id === task.project_id).title;
-        if(task.performer_id!= null) task.performer_id = this.props.users.find(item => item.id === task.performer_id).full_name;
+        if(task.performer_id != null) task.performer_id = this.props.users.find(item => item.id === task.performer_id).full_name;
         let names = this.getPropertyNames();
         return Object.keys(task).map((key, i) => {
                 return <InfoProperty style="list" name={names[i]} value={task[key]}/>

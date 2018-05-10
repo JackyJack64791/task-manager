@@ -77,7 +77,6 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'specification_path'=>'string',
             ]);
-//        return response()->json($request);
         $project = Project::create([
             'customer_id'=>$request->get('customer'),
             'manager_id'=>auth()->id(),

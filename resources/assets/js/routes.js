@@ -20,6 +20,10 @@ import TaskList from "./components/task/TaskList";
 import TaskInfo from "./components/task/TaskInfo";
 import TaskEdit from "./components/task/TaskEdit";
 import PasswordChange from "./components/user/PasswordChange";
+import TeamEdit from "./components/team/TeamEdit";
+import TeamInfo from "./components/team/TeamInfo";
+import TeamList from "./components/team/TeamList";
+import TeamCreate from "./components/team/TeamCreate";
 
 
 const Routes = () => {
@@ -44,6 +48,10 @@ const Routes = () => {
                 <Route path="/tasks" component={TaskList}/>
                 <Route path="/task/info/:id" component={TaskInfo}/>
                 <Route path="/task/edit/:id" component={TaskEdit}/>
+                <Route path="/team/create" component={TeamCreate}/>
+                <Route path="/teams" component={TeamList}/>
+                <Route path="/team/info/:id" component={TeamInfo}/>
+                <Route path="/team/edit/:id" component={TeamEdit}/>
                 <Redirect from="/" to="/dashboard"/>
             </Switch>
         </Layout>

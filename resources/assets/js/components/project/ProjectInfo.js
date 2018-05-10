@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import InfoProperty from '../InfoProperty';
 import Panel from "../Panel";
+import {Row} from "reactstrap";
 
 class ProjectInfo extends Component {
     componentDidMount() {
@@ -33,7 +34,8 @@ class ProjectInfo extends Component {
         console.log(project);
         if(project.customer_id!=null) project.customer_id = this.props.users.find(item => item.id === project.customer_id).full_name;
         else project.customer_id = project.customer_name;
-        project.manager_id = this.props.users.find(item => item.id === project.manager_id).full_name;
+        console.log(this.props.users);
+        project.manager_id = this.props.users.find(item => item.id == project.manager_id).full_name;
         if(project.manager_id===this.props.user.id)
             project.manager_id += "(you)";
         let names = this.getPropertyNames();
@@ -52,6 +54,7 @@ class ProjectInfo extends Component {
             <ul className="list-group">
                 {this.projectTab(id)}
             </ul>
+                <Row className="mt-2">
             <div className="col-md-8 col-md-offset-4">
                 <Link to={"/project/edit/" + id} className="btn btn-primary">
                     Изменить проект
@@ -60,6 +63,7 @@ class ProjectInfo extends Component {
                     Назад к списку
                 </Link>
             </div>
+                </Row>
         </Panel>);
     }
 
