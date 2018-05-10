@@ -5,6 +5,7 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import ProjectTab from "./ProjectTab";
 import Panel from "../Panel";
+import {Col, Row} from "reactstrap";
 
 class ProjectList extends Component {
 
@@ -26,8 +27,13 @@ class ProjectList extends Component {
         else {
             if (!this.props.isLoading) {
                 return <Panel title="Проекты">
-                    <p>Похоже, у вас нет ни одного проекта. Вы можете <Link to="/project/create">создать</Link> новый.
+                    <p>Похоже, у вас нет ни одного проекта. Вы можете создать новый.
                 </p>
+                    <Row className="justify-content-center">
+                        <Col sm={12}>
+                            <Link className="btn btn-primary btn-lg" to='/project/create'>Создать проект</Link>
+                        </Col>
+                    </Row>
                 </Panel>
             } else return <p>Loading...</p>;
         }

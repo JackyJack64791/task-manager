@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Team;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +50,7 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        return response()->json(User::all());
+        return response()->json(auth()->user()->teams()->first()->users()->get());
     }
 
     public function register(Request $request)
@@ -71,21 +72,12 @@ class UserController extends Controller
             'password'=>bcrypt($request->get('password')),
             'bank_card'=>$request->get('bank_card'),
         ]);
-
+        $user->teams()->sync(Team::find(1));
         //$token = JWTAuth::fromUser($user);
         return response()->json([],200);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -104,9 +96,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-//    public function getToken($id){
-//
-//    }
+
     public function show()
     {
         try {
@@ -138,16 +128,6 @@ class UserController extends Controller
         return response()->json(compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-    }
     /**
      * Update the specified resource in storage.
      *

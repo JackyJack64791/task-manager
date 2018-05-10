@@ -21,7 +21,7 @@ class ProjectEdit extends Component {
             title: project.title,
             deadline: project.deadline,
             description: project.description,
-            specification: project.specification,
+            specification_path: project.specification_path,
         };
         this.handleTitle = this.handleTitle.bind(this);
         this.handleDeadline = this.handleDeadline.bind(this);
@@ -29,6 +29,7 @@ class ProjectEdit extends Component {
         this.handleSpecification = this.handleSpecification.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        console.log(this.state);
     }
 
     handleTitle(e) {
@@ -51,7 +52,7 @@ class ProjectEdit extends Component {
 
     handleSpecification(e) {
         this.setState({
-            specification: e.target.value
+            specification_path: e.target.value
         })
     }
 
@@ -68,7 +69,7 @@ class ProjectEdit extends Component {
             title: this.state.title,
             deadline: this.state.deadline,
             description: this.state.description,
-            specification_path: this.state.specification,
+            specification_path: this.state.specification_path,
         };
         this.props.projectUpdate(project, this.handleRedirect);
     }
@@ -116,9 +117,9 @@ class ProjectEdit extends Component {
                         <label htmlFor="specification" className="col-md-4 control-label">Спецификация</label>
 
                         <div className="col-md-6">
-                            <input id="specification" type="text" className="form-control" name="specification"
-                                   placeholder="Link to project specification" required
-                                   onChange={this.handleSpecification} value={this.state.specification}/>
+                            <input id="specification" type="text" className="form-control" name="specification_path"
+                                   placeholder="Спецификация проекта(ссылка)" required
+                                   onChange={this.handleSpecification} value={this.state.specification_path}/>
 
                         </div>
                     </div>

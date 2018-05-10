@@ -35,3 +35,8 @@ Route::get('tasks', 'TaskController@show');
 Route::post('task/create', 'TaskController@store');
 Route::put('task/update/{id}','TaskController@update');
 Route::delete('task/delete/{id}','TaskController@destroy');
+
+Route::get('comments/{id}', 'CommentController@index');
+Route::post('comment/create', 'CommentController@store');
+Route::put('comment/update/{id}','CommentController@update');
+Route::delete('comment/delete/{id}','CommentController@destroy');

@@ -12,7 +12,7 @@ class Project extends Model
         'title',
         'deadline',
         'description',
-        'specification'
+        'specification_path'
     ];
 
     public function customer()
@@ -23,6 +23,11 @@ class Project extends Model
     public function manager()
     {
         return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class,'team_id');
     }
 
     public function completed()

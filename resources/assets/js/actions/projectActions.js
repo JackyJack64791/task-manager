@@ -36,7 +36,10 @@ export function getProjects(token = localStorage.getItem('token')) {
             .then(response => {
                 dispatch(getProjectsSuccess(response.data));
             })
-            .catch(response => dispatch(getProjectsError("You are not logged in")));
+            .catch(response => dispatch(
+                // getProjectsError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])
+                console.log(response)
+            ));
     }
 }
 
@@ -55,7 +58,7 @@ export function projectUpdate(project, redirect) {
                 dispatch(getProjects());
                 redirect();
             })
-            .catch(response => dispatch(projectUpdateError("Error")));
+            .catch(response => dispatch(projectUpdateError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
     }
 }
 
@@ -72,7 +75,7 @@ export function projectDelete(id) {
                 dispatch(projectDeleteSuccess());
                 dispatch(getProjects());
             })
-            .catch(response => dispatch(projectDeleteError("You are not logged in")))
+            .catch(response => dispatch(projectDeleteError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }
 }
 

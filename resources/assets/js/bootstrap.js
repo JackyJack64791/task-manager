@@ -2,7 +2,7 @@ import {createStore, applyMiddleware} from 'redux';
 import rootReducer from "./reducers/rootReducer";
 import jwt_decode from 'jwt-decode';
 import thunkMiddleware from 'redux-thunk'
-import {AUTH_USER} from './constants/index';
+import {LOGIN} from './constants/index';
 
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 var Store = createStoreWithMiddleware(rootReducer);
@@ -19,6 +19,6 @@ if(token){
     //     localStorage.removeItem('token');
     // }
 
-    Store.dispatch({type:AUTH_USER});
+    Store.dispatch({type:LOGIN});
 }
 export default Store;

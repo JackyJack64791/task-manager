@@ -9496,7 +9496,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
    *     render: function() { ... }
    *   });
    *
-   * A more formal specification of how these methods are used:
+   * A more formal specification_path of how these methods are used:
    *
    *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
    *   decl := ReactPropTypes.{type}(.isRequired)?
@@ -15842,7 +15842,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
       } catch (ex) {
         error = ex;
       }
-       true ? warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], typeSpecName, typeof error) : void 0;
+       true ? warning(!error || error instanceof Error, '%s: type specification_path of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], typeSpecName, typeof error) : void 0;
       if (error instanceof Error && !(error.message in loggedTypeFailures)) {
         // Only monitor this failure once because there tends to be a lot of the
         // same error.
@@ -15988,7 +15988,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         } catch (ex) {
           error = ex;
         }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        warning(!error || error instanceof Error, '%s: type specification_path of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
         if (error instanceof Error && !(error.message in loggedTypeFailures)) {
           // Only monitor this failure once because there tends to be a lot of the
           // same error.
@@ -16103,9 +16103,9 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
    * Composite components are higher-level components that compose other composite
    * or host components.
    *
-   * To create a new type of `ReactClass`, pass a specification of
+   * To create a new type of `ReactClass`, pass a specification_path of
    * your new class to `React.createClass`. The only requirement of your class
-   * specification is that you implement a `render` method.
+   * specification_path is that you implement a `render` method.
    *
    *   var MyComponent = React.createClass({
    *     render: function() {
@@ -16113,10 +16113,10 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
    *     }
    *   });
    *
-   * The class specification supports a specific protocol of methods that have
+   * The class specification_path supports a specific protocol of methods that have
    * special meaning (e.g. `render`). See `ReactClassInterface` for
    * more the comprehensive protocol. Any other properties and methods in the
-   * class specification will be available on the prototype.
+   * class specification_path will be available on the prototype.
    *
    * @interface ReactClassInterface
    * @internal
@@ -16342,9 +16342,9 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
   };
 
   /**
-   * Mapping from class specification keys to special processing functions.
+   * Mapping from class specification_path keys to special processing functions.
    *
-   * Although these are declared like instance properties in the specification
+   * Although these are declared like instance properties in the specification_path
    * when defining classes using `React.createClass`, they are actually static
    * and are accessible on the constructor instead of the prototype. Despite
    * being static, they must be defined outside of the "statics" key under
@@ -16436,7 +16436,7 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
       _invariant(
         specPolicy === 'OVERRIDE_BASE',
         'ReactClassInterface: You are attempting to override ' +
-          '`%s` from your class specification. Ensure that your method names ' +
+          '`%s` from your class specification_path. Ensure that your method names ' +
           'do not overlap with React methods.',
         name
       );
@@ -16456,7 +16456,7 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
 
   /**
    * Mixin helper which handles policy validation and reserved
-   * specification keys when building React classes.
+   * specification_path keys when building React classes.
    */
   function mixSpecIntoComponent(Constructor, spec) {
     if (!spec) {
@@ -16802,10 +16802,10 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
   );
 
   /**
-   * Creates a composite component class given a class specification.
+   * Creates a composite component class given a class specification_path.
    * See https://facebook.github.io/react/docs/top-level-api.html#react.createclass
    *
-   * @param {object} spec Class specification (which must define `render`).
+   * @param {object} spec Class specification_path (which must define `render`).
    * @return {function} Component constructor function.
    * @public
    */
@@ -16890,7 +16890,7 @@ function factory(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
 
     _invariant(
       Constructor.prototype.render,
-      'createClass(...): Class specification must implement a `render` method.'
+      'createClass(...): Class specification_path must implement a `render` method.'
     );
 
     if (true) {
@@ -23480,7 +23480,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
       } catch (ex) {
         error = ex;
       }
-       true ? warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], typeSpecName, typeof error) : void 0;
+       true ? warning(!error || error instanceof Error, '%s: type specification_path of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], typeSpecName, typeof error) : void 0;
       if (error instanceof Error && !(error.message in loggedTypeFailures)) {
         // Only monitor this failure once because there tends to be a lot of the
         // same error.
@@ -26210,7 +26210,7 @@ var translateToKey = {
 function getEventKey(nativeEvent) {
   if (nativeEvent.key) {
     // Normalize inconsistent values reported by browsers due to
-    // implementations of a working draft specification.
+    // implementations of a working draft specification_path.
 
     // FireFox implements `key` but returns `MozPrintableKey` for all
     // printable characters (normalized to `Unidentified`), ignore it.
@@ -26553,7 +26553,7 @@ var MOD = 65521;
 // adler32 is not cryptographically strong, and is only used to sanity check that
 // markup generated on the server matches the markup generated on the client.
 // This implementation (a modified version of the SheetJS version) has been optimized
-// for our use case, at the expense of conforming to the adler32 specification
+// for our use case, at the expense of conforming to the adler32 specification_path
 // for non-ascii inputs.
 function adler32(data) {
   var a = 1;
@@ -33587,7 +33587,7 @@ var ProjectCreate = function (_Component) {
                 title: this.state.title,
                 deadline: this.state.deadline,
                 description: this.state.description,
-                specification: this.state.specification
+                specification: this.state.specification_path
             };
             this.props.projectCreate(project, this.handleRedirect);
         }
@@ -33680,15 +33680,15 @@ var ProjectCreate = function (_Component) {
                         { className: 'form-group' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'label',
-                            { htmlFor: 'specification',
+                            { htmlFor: 'specification_path',
                                 className: 'col-md-4 control-label' },
                             'Specification'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-md-6' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { id: 'specification', type: 'text', className: 'form-control',
-                                name: 'specification', required: true, onChange: this.handleSpecification })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { id: 'specification_path', type: 'text', className: 'form-control',
+                                name: 'specification_path', required: true, onChange: this.handleSpecification })
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -34056,14 +34056,14 @@ var ProjectInfo = function (_Component) {
                     manager_id = _ref.manager_id,
                     deadline = _ref.deadline,
                     description = _ref.description,
-                    specification = _ref.specification;
+                    specification = _ref.specification_path;
                 return {
                     title: title,
                     customer_id: customer_id,
                     manager_id: manager_id,
                     deadline: deadline,
                     description: description,
-                    specification: specification
+                    specification_path: specification
                 };
             }(project);
         }
@@ -34186,7 +34186,7 @@ var ProjectEdit = function (_Component) {
             title: project.title,
             deadline: project.deadline,
             description: project.description,
-            specification: project.specification
+            specification_path: project.specification_path
         };
         _this.handleTitle = _this.handleTitle.bind(_this);
         _this.handleDeadline = _this.handleDeadline.bind(_this);
@@ -34241,7 +34241,7 @@ var ProjectEdit = function (_Component) {
                 title: this.state.title,
                 deadline: this.state.deadline,
                 description: this.state.description,
-                specification: this.state.specification
+                specification: this.state.specification_path
             };
             this.props.projectUpdate(project, this.handleRedirect);
         }
@@ -34309,15 +34309,15 @@ var ProjectEdit = function (_Component) {
                         { className: 'form-group' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'label',
-                            { htmlFor: 'specification', className: 'col-md-4 control-label' },
+                            { htmlFor: 'specification_path', className: 'col-md-4 control-label' },
                             'Specification'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-md-6' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { id: 'specification', type: 'text', className: 'form-control', name: 'specification',
-                                placeholder: 'Link to project specification', required: true,
-                                onChange: this.handleSpecification, value: this.state.specification })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { id: 'specification_path', type: 'text', className: 'form-control', name: 'specification_path',
+                                placeholder: 'Link to project specification_path', required: true,
+                                onChange: this.handleSpecification, value: this.state.specification_path })
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('hr', null),

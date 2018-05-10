@@ -7,7 +7,7 @@ class Tab extends Component {
     render() {
         return <li className="list-group-item">
             <DeleteButton submit={this.props.deleteAction}/>
-            <EditButton link={this.props.linkEdit}/>
+            {/*{this.props.linkEdit ? <EditButton link={this.props.linkEdit} : ''}*/}
             {this.props.children}
         </li>;
     }

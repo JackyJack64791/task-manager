@@ -23,7 +23,7 @@ export function taskCreate(task, redirect) {
                 dispatch(getTasks());
                 redirect();
             })
-            .catch(response => dispatch(taskCreateError(response.data.error)));
+            .catch(response => dispatch(taskCreateError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
     }
 }
 
@@ -42,7 +42,7 @@ export function taskUpdate(task, redirect) {
                 dispatch(getTasks());
                 redirect();
             })
-            .catch(response => dispatch(taskUpdateError("Error")));
+            .catch(response => dispatch(taskUpdateError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
     }
 }
 
@@ -55,7 +55,10 @@ export function getTasks(token = localStorage.getItem('token')) {
             .then(response => {
                 dispatch(getTasksSuccess(response.data));
             })
-            .catch(response => dispatch(getTasksError("You are not logged in")));
+            .catch(response => dispatch(
+                // getTasksError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]))
+                console.log(response)
+            ));
     }
 }
 
@@ -72,7 +75,7 @@ export function taskDelete(id) {
                 dispatch(taskDeleteSuccess());
                 dispatch(getTasks());
             })
-            .catch(response => dispatch(taskDeleteError("You are not logged in")))
+            .catch(response => dispatch(taskDeleteError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }
 }
 

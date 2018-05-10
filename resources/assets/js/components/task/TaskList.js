@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Panel from "../Panel";
 import TaskTab from "./TaskTab";
+import {Card, CardBody, CardHeader, Col, Row} from "reactstrap";
 
 
 class TaskList extends Component {
@@ -12,13 +13,26 @@ class TaskList extends Component {
     }
 
     projectsRender() {
-        return this.props.projects.map((key) => (<div>
-            <ul className="list-group">
-                <h4 className="h4 bold">{key.title}</h4>
-                {this.tasksRender(key.id)}
-            </ul>
-            <hr/>
-        </div>))
+        return this.props.projects.map((key) => (
+            <Row>
+            <Col sm="12">
+                <Card className="card-accent-primary">
+                    <CardHeader>
+                        <Link to={"/project/info/"+key.id}>{key.title}</Link>
+                    </CardHeader>
+                    <CardBody>
+                        {this.tasksRender(key.id)}
+                    </CardBody>
+                </Card>
+            </Col>
+        </Row>));
+            {/*</Col><div>*/}
+            {/*<ul className="list-group">*/}
+                {/*<h4 className="h4 bold">{key.title}</h4>*/}
+                {/*{this.tasksRender(key.id)}*/}
+            {/*</ul>*/}
+            {/*<hr/>*/}
+        {/*</div>))*/}
     }
 
     tasksRender(id) {
@@ -30,13 +44,18 @@ class TaskList extends Component {
 
     render() {
         if (!this.props.tasks.length)
-            return <Panel title="Tasks">
-                <p>You haven't any tasks. You can <Link to="/task/create">create</Link> one
+            return <Panel title="Задачи">
+                <p>У вас нет ни одной задачи. Вы можете создать новую.
                 </p>
+                <Row className="justify-content-center">
+                    <Col sm={12}>
+                        <Link className="btn btn-primary btn-lg" to='/task/create'>Создать задачу</Link>
+                    </Col>
+                </Row>
             </Panel>;
-        else return <Panel title="Tasks">
+        else return <Panel title="Задачи">
             {this.projectsRender()}
-            <Link className="btn btn-primary" to='/task/create'>Create New Task</Link>
+            <Link className="btn btn-primary" to='/task/create'>Создать задачу</Link>
         </Panel>
     }
 

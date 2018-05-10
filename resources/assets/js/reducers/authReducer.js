@@ -1,22 +1,22 @@
 import {
-    AUTH_ERROR, AUTH_USER, LOGOUT_USER, AUTH_LOADING, RESET_SEND_MAIL_ERROR,
+    LOGIN_ERROR, LOGIN, LOGOUT_USER, LOGIN_LOADING, RESET_SEND_MAIL_ERROR,
 } from "../constants/index";
 
 function authReducer (state={authenticated: false,isLoading: false, isError: false}, action) {
     switch(action.type)
     {
-        case AUTH_ERROR:
+        case LOGIN_ERROR:
             return Object.assign({},state,{
                 isError:true,
                error:action.payload
             });
-        case AUTH_USER:
+        case LOGIN:
             return Object.assign({},state,{
                 authenticated: true,
                 isLoading: false,
                 isError: false,
             });
-        case AUTH_LOADING:
+        case LOGIN_LOADING:
             return Object.assign({},state,{
                 authenticated: false,
                isLoading: true,

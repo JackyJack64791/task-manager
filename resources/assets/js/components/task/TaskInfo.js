@@ -4,10 +4,13 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import InfoProperty from '../InfoProperty';
 import Panel from "../Panel";
+import {Col, Row} from "reactstrap";
+import CommentList from "./comments/CommentList";
 
 class TaskInfo extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
+        // if (!this.props.comments) this.props.getComments();
     }
 
     filterTask(project) {
@@ -49,20 +52,25 @@ class TaskInfo extends Component {
 
     render() {
         const {id} = this.props.match.params;
-         return (
-            <Panel title="Инфморация о задаче">
+         return (<div>
+            <Panel title="Информация о задаче">
             <ul className="list-group">
                 {this.projectTab(id)}
             </ul>
-            <div className="col-md-8 col-md-offset-4">
+            <Row className="mt-2">
+            <Col sm={8}>
                 <Link to={"/task/edit/" + id} className="btn btn-primary">
                     Изменить задачу
                 </Link>
                 <Link to={"/tasks"} className="btn btn-default">
                     Назад к задачам
                 </Link>
-            </div>
-        </Panel>);
+
+            </Col>
+            </Row>
+        </Panel>
+                 <CommentList id={id}/>
+         </div>);
     }
 
 }

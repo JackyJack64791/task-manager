@@ -10,6 +10,7 @@ import {
 import {getUsers, getUsersError, getUsersLoading, userInfo} from "./userActions";
 import {getProjects, getProjectsError, getProjectsLoading} from "./projectActions";
 import {getTasks} from "./taskActions";
+import {getTeams} from "./teamActions";
 
 const ROOT_URL = location.protocol + '//' + location.host;
 
@@ -26,16 +27,17 @@ export function authUser(user, redirect) {
                 dispatch(getUsers(response.data.token));
                 dispatch(getProjects(response.data.token));
                 dispatch(getTasks(response.data.token));
+                dispatch(getTeams(response.data.token));
                 redirect();
             })
-            .catch(() => {
-                dispatch(authError("Wrong email or password"));
+            .catch((response) => {
+                dispatch(authError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
             })
-            .catch(() => {
-                dispatch(getUsersError("Users are retards"));
+            .catch((response) => {
+                dispatch(getUsersError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
             })
-            .catch(() => {
-                dispatch(getProjectsError("Projects are too"));
+            .catch((response) => {
+                dispatch(getProjectsError(response.response.data.errors[Object.keys(response.response.data.errors)[0]]));
             })
     }
 }
@@ -47,7 +49,9 @@ export function registerUser(user, redirect) {
                 //localStorage.setItem('token', response.data.token);
                 dispatch(authUser(user, redirect));
             })
-            .catch(response => dispatch(authError(response.data.error)));
+            .catch(response => dispatch(
+                authError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])
+                ));
 
     }
 
@@ -63,7 +67,7 @@ export function updateUser(user, redirect) {
                 dispatch(userInfo());
                 redirect();
             })
-            .catch(response => dispatch(authError("Invalid data")));
+            .catch(response => dispatch(authError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
     }
 }
 
@@ -74,7 +78,7 @@ export function resetSendEmail(email, redirect) {
                 dispatch({type: RESET_SEND_MAIL});
                 redirect();
             })
-            .catch(response => dispatch(resetSendEmailError("Email doesn't exist")))
+            .catch(response => dispatch(resetSendEmailError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }
 }
 
@@ -85,7 +89,7 @@ export function resetPassword(credentials, token, redirect) {
                 dispatch({type: RESET_PASSWORD});
                 redirect();
             })
-            .catch(response => dispatch(resetPasswordError(response.data.error)))
+            .catch(response => dispatch(resetPasswordError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }
 }
 
@@ -99,7 +103,7 @@ export function changePassword(credentials, redirect) {
                 dispatch(changePasswordSuccess());
                 redirect();
             })
-            .catch(response => dispatch(changePasswordError("Old password is wrong")))
+            .catch(response => dispatch(changePasswordError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }
 }
 

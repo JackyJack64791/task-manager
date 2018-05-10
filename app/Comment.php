@@ -8,6 +8,7 @@ class Comment extends Model
 {
     protected $fillable = [
         'author_id',
+        'task_id',
         'text',
     ];
 
@@ -16,4 +17,8 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function task()
+    {
+        return $this->belongsTo(Task::class, 'task_id');
+    }
 }

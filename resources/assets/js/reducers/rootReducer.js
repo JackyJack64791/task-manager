@@ -3,13 +3,15 @@ import authReducer from './authReducer';
 import userReducer from './userReducer';
 import projectReducer from './projectReducer';
 import taskReducer from './taskReducer';
+import commentReducer from './commentReducer';
 import jwt_decode from 'jwt-decode';
 
 const appReducer = combineReducers({
-    auth:authReducer,
-    user:userReducer,
+    auth: authReducer,
+    user: userReducer,
     project: projectReducer,
     task: taskReducer,
+    comment: commentReducer,
 });
 const token = localStorage.getItem('token');
 const rootReducer = (state,action) => {

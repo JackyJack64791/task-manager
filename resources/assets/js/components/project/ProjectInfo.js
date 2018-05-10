@@ -12,14 +12,14 @@ class ProjectInfo extends Component {
     }
 
     filterProject(project) {
-        return (({title, customer_id, customer_name, manager_id, deadline, description, specification}) => ({
+        return (({title, customer_id, customer_name, manager_id, deadline, description, specification_path}) => ({
             title,
             customer_id,
             customer_name,
             manager_id,
             deadline,
             description,
-            specification
+            specification_path
         }))(project)
     }
 
@@ -48,7 +48,7 @@ class ProjectInfo extends Component {
         const {id} = this.props.match.params;
         return (
             <Panel title="Информация о проекте">
-                <img src={this.props.user.img_path}/>
+                {/*<img src={this.props.user.img_path}/>*/}
             <ul className="list-group">
                 {this.projectTab(id)}
             </ul>

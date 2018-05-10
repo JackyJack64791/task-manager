@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
-use App\User;
-use Illuminate\Support\Facades\Input;
-//use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -80,13 +77,15 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'specification_path'=>'string',
             ]);
+//        return response()->json($request);
         $project = Project::create([
             'customer_id'=>$request->get('customer'),
             'manager_id'=>auth()->id(),
+            'team_id' => auth()->user()->teams()->first()->id,
             'title' => $request->get('title'),
             'deadline'=>$request->get('deadline'),
             'description'=>$request->get('description'),
-            'specification'=>$request->get('specification_path'),
+            'specification_path'=>$request->get('specification_path'),
         ]);
 
 
@@ -130,7 +129,7 @@ class ProjectController extends Controller
 //        return response()->json(auth()->user()->roles()->get());
         if(auth()->user()->roles()->get()->contains('role','admin'))
             return response()->json(Project::all());
-        return response()->json(auth()->user()->projectsManager()->get());//
+        return response()->json(auth()->user()->teams()->first()->projects()->get());//Project::where('team_id',auth()->user()->teams()->first()->id));//
 
     }
 
@@ -187,8 +186,8 @@ class ProjectController extends Controller
             'title' => 'required',
             'deadline' => 'required|date',
             'description' => 'required|string',
-            'specification_path'=>'string',]);
-        $project->update($request->all());
+            'specification_path'=>'string']);
+        $project->update($request->only('title','deadline','description','specification_path'));
         return response()->json(['good'],200);
     }
 

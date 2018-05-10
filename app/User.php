@@ -19,6 +19,16 @@ class User extends Authenticatable
         'full_name', 'email', 'login', 'address','phone','bank_card', 'password',
     ];
 
+//    protected $fields = [
+//        'full_name' => 'ФИО',
+//        'email' => 'Электронная почта',
+//        'login' => 'Логин',
+//        'address' => 'Адрес',
+//        'phone' => 'Телефон',
+//        'bank_card' => 'Номер банковской карты',
+//        'password' => 'Пароль',
+//    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -50,7 +60,9 @@ class User extends Authenticatable
 
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'author_id');
+//        return $this->hasMany(Task::class, 'author_id');
+        return Task::where('author_id',$this->id)
+            ->orWhere('performer_id',$this->id);
     }
 
     public function teams()

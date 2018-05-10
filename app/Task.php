@@ -39,4 +39,9 @@ class Task extends Model
     {
         return $this->belongsToMany(Skill::class,'task_skill');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

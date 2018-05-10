@@ -162,5 +162,6 @@ class UsersTableSeeder extends Seeder
 
         $user->skills()->sync($skills);
         $user->roles()->sync($roles->get(4));
+        $user->teams()->sync($teams->get(1));
     }
 }

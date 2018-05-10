@@ -74,7 +74,7 @@ class ProjectCreate extends Component {
             title: this.state.title,
             deadline: this.state.deadline,
             description: this.state.description,
-            specification_path: this.state.specification,
+            specification_path: this.state.specification_path,
         };
         this.props.projectCreate(project, this.handleRedirect);
     }
@@ -87,7 +87,7 @@ class ProjectCreate extends Component {
         console.log(this.state.handleCustomerChange);
         if(this.state.handleCustomerChange)
             return (<Input type="select" id="customer" defaultValue="0" onChange={this.handleCustomer} required>
-                <option disabled value="0">Choose customer...</option>
+                <option disabled value="0">Выберите заказчика</option>
                 {this.customers()}
             </Input>);
         else return <Input id="customer" type="text" name="customer" required onChange={this.handleCustomer}/>
@@ -95,11 +95,16 @@ class ProjectCreate extends Component {
     render() {
         return (<Panel title="Создание нового проекта">
             <Form onSubmit={this.handleSubmit}>
+                <FormGroup row>
+                    <Label for="customer_choose" sm={4}>Заказчик из вашей команды?</Label>
+                    <Col sm={8}>
                 <Label className="switch switch-3d switch-primary">
-                    <Input type="checkbox" className="switch-input" defaultChecked onChange={this.handleCustomerChange}/>
+                    <Input id="customer_choose" type="checkbox" className="switch-input" defaultChecked onChange={this.handleCustomerChange}/>
                     <span className="switch-label"></span>
                     <span className="switch-handle"></span>
                 </Label>
+                    </Col>
+                </FormGroup>
                 <FormGroup row>
                     <Label for="customer" sm={4}>Заказчик</Label>
                     <Col sm={8}>

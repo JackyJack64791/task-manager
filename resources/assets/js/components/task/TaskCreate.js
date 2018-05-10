@@ -4,7 +4,7 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import Panel from "../Panel";
 import {Link} from 'react-router-dom';
-import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
 
 
 class TaskCreate extends Component {
@@ -139,10 +139,10 @@ class TaskCreate extends Component {
     render() {
         if(!this.props.projects.length)
             return <Panel title="Новая задача">
-                <p>Похоже у вас нет ни одного проекта. Для создания задач вам необходим проект. Вы можете  <Link to="/project/create">создать</Link> новый.
-                </p>
+                <p>Похоже у вас нет ни одного проекта. Для создания задач вам необходим проект. Вы можете  <Link to="/project/create">создать</Link> новый.</p>
             </Panel>;
         else return <Panel title="Новая задача">
+            {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label for="project" sm={4}>Проект</Label>
@@ -225,7 +225,7 @@ class TaskCreate extends Component {
                         </Button>
                     </Col>
                 </FormGroup>
-                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
+
             </Form>
         </Panel>
     }
