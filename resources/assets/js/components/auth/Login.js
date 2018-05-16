@@ -82,7 +82,7 @@ class Login extends Component {
                                             <h2>Нет профиля?</h2>
                                             <p>Для использования "Менеджера IT-проектов" необходимо зарегистрироваться в системе. Вы можете это сделать, нажав кнопку ниже
                                                 Это абсолютно бесплатно.</p>
-                                            <Link to="/register" className="mt-3 btn btn-primary active">Зарегистрироваться</Link>
+                                            <Link to="/register/step1" className="mt-3 btn btn-primary active">Зарегистрироваться</Link>
                                         </div>
                                     </CardBody>
                                 </Card>

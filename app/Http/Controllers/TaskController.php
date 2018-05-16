@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Skill;
 use Illuminate\Http\Request;
 use JWTAuth;
 use App\Task;
@@ -69,16 +70,17 @@ class TaskController extends Controller
 
         }
 
+//        return response()->json($request->get('skills')[0]['label'],407);
         $this->validate($request, [
             'project' => 'required',
             'title' => 'required|string',
             'description' => 'required|string',
             'priority' => 'required',
             'difficulty'=>'required',
-            'hours_count'=>'numeric',
-            'date_completion'=>'date',
-            'performer_id'=>'numeric',
-            'time_search'=>'date_format:H:i',
+            'hours_count'=>'numeric|nullable',
+            'date_completion'=>'date|nullable',
+            'performer_id'=>'numeric|nullable',
+            'time_search'=>'date_format:H:i|nullable',
         ]);
         $task = Task::create([
             'author_id' => auth()->id(),
@@ -94,6 +96,21 @@ class TaskController extends Controller
             'performer_id'=> $request->get('performer_id'),
             'time_search'=> $request->get('time_search'),
         ]);
+        if($request->get('skills'))
+        {
+            foreach ($request->get('skills') as $skill)
+            {
+                if(Skill::where('skill', $skill['label']))
+                $task->skills()->attach($skill['value']);
+                else {
+                    $newSkill = Skill::create([
+                        'skill' => $skill['label']
+                    ]);
+                    return response()->json($newSkill,200);
+                    $task->skills()->attach($newSkill->id);
+                }
+            }
+        }
 
         return response()->json([],200);
     }
@@ -185,11 +202,27 @@ class TaskController extends Controller
             'description' => 'required|string',
             'priority' => 'required',
             'difficulty'=>'required',
-            'hours_count'=>'numeric',
-            'date_completion'=>'date',
-            'performer_id'=>'numeric',
-            'time_search'=>'date_format:H:i:s',]);
+            'hours_count'=>'numeric|nullable',
+            'date_completion'=>'date|nullable',
+            'performer_id'=>'numeric|nullable',
+            'time_search'=>'date_format:H:i:s|nullable',]);
         $task->update($request->all());
+        if($request->get('skills'))
+        {
+            foreach ($request->get('skills') as $skill)
+            {
+                if(Skill::where('skill', $skill['label']))
+                    $task->skills()->attach($skill['value']);
+                else {
+                    $newSkill = Skill::create([
+                        'skill' => $skill['label']
+                    ]);
+                    return response()->json($newSkill,200);
+                    $task->skills()->attach($newSkill->id);
+                }
+            }
+        }
+
         return response()->json([],200);
     }
 

@@ -95,9 +95,10 @@ class HeaderDropdown extends Component {
           <DropdownItem header tag="div" className="text-center"><strong>Профиль</strong></DropdownItem>
           {/*<DropdownItem><i className="fa fa-envelope-o"></i> Сообщения<Badge color="info">3</Badge></DropdownItem>*/}
             <DropdownItem tag={Link} to="/projects">
-                <i className="fa fa-file"></i>Проекты<Badge color="success">2</Badge>
+                <i className="fa fa-files-o"></i>Проекты<Badge color="success">{this.props.projects.length}</Badge>
             </DropdownItem>
-          <DropdownItem tag={Link} to="/tasks"><i className="fa fa-tasks"></i> Задания<Badge color="danger">13</Badge></DropdownItem>
+          <DropdownItem tag={Link} to="/tasks"><i className="fa fa-tasks"></i> Задания<Badge color="info">{this.props.tasks.length}</Badge></DropdownItem>
+            {/*<DropdownItem tag={Link} to="/tasks"><i className="icon-people"></i> Команды<Badge color="primary">{this.props.teams.length}</Badge></DropdownItem>*/}
           {/*<DropdownItem tag={Link} to="/projects"><i className="fa fa-comments"></i> Комментарии<Badge color="warning">22</Badge></DropdownItem>*/}
           <DropdownItem header tag="div" className="text-center"><strong>Настройки</strong></DropdownItem>
           <DropdownItem tag={Link} to="/profile/info"><i className="fa fa-user"></i> Профиль</DropdownItem>
@@ -252,6 +253,8 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         projects: state.project.projects,
+        tasks: state.task.tasks,
+        teams: state.team.teams,
         users: state.user.users,
         user: state.user.user,
         // isError: state.task.isError,

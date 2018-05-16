@@ -36,13 +36,9 @@ class TeamController extends Controller
             }
 
         } catch (TokenInvalidException $e) {
-
             return response()->json(['token_invalid'], $e->getStatusCode());
-
         } catch (JWTException $e) {
-
             return response()->json(['token_absent'], $e->getStatusCode());
-
         }
 
         return response()->json(auth()->user()->teams()->first(),200);

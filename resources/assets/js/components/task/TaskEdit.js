@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Panel from "../Panel";
 import {Link} from 'react-router-dom';
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import { Creatable } from 'react-select';
 
 
 class TaskCreate extends Component {
@@ -12,6 +13,13 @@ class TaskCreate extends Component {
         super(props);
         const {id} = this.props.match.params;
         let task = this.props.tasks.find(item => item.id == id);
+        let initSkills = Object.values(this.props.skills);
+        for(let i = 0; i< initSkills.length; i++) {
+            initSkills[i].value = initSkills[i].id;
+            initSkills[i].label = initSkills[i].skill;
+            delete initSkills[i].id;
+            delete initSkills[i].skill;
+        }
         this.state = {
             id: task.id,
             title: task.title,
@@ -21,7 +29,9 @@ class TaskCreate extends Component {
             hoursCount: task.hours_count,
             dateCompletion: task.date_completion,
             performer: task.performer_id,
-            timeSearch: task.time_search
+            timeSearch: task.time_search,
+            skills: task.skills,
+            initSkills: initSkills,
         };
         this.handleTitle = this.handleTitle.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
@@ -31,6 +41,8 @@ class TaskCreate extends Component {
         this.handleDateCompletion = this.handleDateCompletion.bind(this);
         this.handlePerformer = this.handlePerformer.bind(this);
         this.handleTimeSearch = this.handleTimeSearch.bind(this);
+        this.handleInitSkills = this.handleInitSkills.bind(this);
+        this.handleSkills = this.handleSkills.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
     }
@@ -88,6 +100,20 @@ class TaskCreate extends Component {
         })
     }
 
+    handleInitSkills(e) {
+        this.setState({
+            initSkills: e.target.value
+        })
+    }
+    handleSkills(skills) {
+        // console.log(e);
+        this.setState({
+            skills: skills
+        })
+    }
+
+
+
     handleRedirect() {
         if (!this.props.isError) this.props.history.push("/task/info/" + this.state.id);
     }
@@ -103,7 +129,8 @@ class TaskCreate extends Component {
             hours_count: this.state.hoursCount,
             date_completion: this.state.dateCompletion,
             performer_id: this.state.performer,
-            time_search: this.state.timeSearch
+            time_search: this.state.timeSearch,
+            skills: this.state.skills,
         };
         this.props.taskUpdate(task, this.handleRedirect);
     }
@@ -187,6 +214,18 @@ class TaskCreate extends Component {
                     </Col>
                 </FormGroup>
                 <FormGroup row>
+                    <Label for="skills" sm={4}>Необходимые навыки</Label>
+                    <Col sm={8}>
+                        <Creatable
+                            name="skills"
+                            value={this.state.skills}
+                            multi={true}
+                            onChange={this.handleSkills}
+                            options={this.state.initSkills}
+                        />
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
                     <Label for="dateCompletion" sm={4}>Предположительная дата завершения</Label>
 
                     <Col sm={8}>
@@ -236,6 +275,7 @@ function mapStateToProps(state) {
         authenticated: state.auth.authenticated,
         projects: state.project.projects,
         tasks: state.task.tasks,
+        skills: state.skill.skills,
         users: state.user.users,
         isError: state.task.isError,
         error: state.task.error,

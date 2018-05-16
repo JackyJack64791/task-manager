@@ -49,32 +49,35 @@ class Header extends Component {
         <NavbarToggler className="d-md-down-none" onClick={this.sidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
-        <Nav className="d-md-down-none" navbar>
-          <NavItem className="px-3">
-            <Link to="/dashboard">Панель управления</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <Link to="/projects">Проекты</Link>
-          </NavItem>
-            <NavItem className="px-3">
-                <Link to="/tasks">Задания</Link>
-            </NavItem>
-          <NavItem className="px-3">
-            <Link to="/profile/settings">Настройки</Link>
-          </NavItem>
-        </Nav>
-        <Nav className="ml-auto" navbar>
+        {/*<Nav className="d-md-down-none" navbar>*/}
+          {/*/!*<NavItem className="px-3">*!/*/}
+            {/*/!*<Link to="/dashboard">Панель управления</Link>*!/*/}
+          {/*/!*</NavItem>*!/*/}
+          {/*<NavItem className="px-3">*/}
+            {/*<Link to="/projects">Проекты</Link>*/}
+          {/*</NavItem>*/}
+            {/*<NavItem className="px-3">*/}
+                {/*<Link to="/tasks">Задания</Link>*/}
+            {/*</NavItem>*/}
+            {/*<NavItem className="px-3">*/}
+                {/*<Link to="/teams">Команды</Link>*/}
+            {/*</NavItem>*/}
+          {/*<NavItem className="px-3">*/}
+            {/*<Link to="/profile/settings">Настройки</Link>*/}
+          {/*</NavItem>*/}
+        {/*</Nav>*/}
+        <Nav className="ml-auto mr-4" navbar>
           {/*<HeaderDropdown notif/>*/}
           {/*<HeaderDropdown tasks/>*/}
           {/*<HeaderDropdown mssgs/>*/}
           {/*<NavItem className="d-md-down-none">*/}
             {/*<NavLink href="#"><i className="icon-location-pin"></i></NavLink>*/}
           {/*</NavItem>*/}
-          <HeaderDropdown accnt/>
+          <HeaderDropdown accnt />
         </Nav>
-        <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
-          <span className="navbar-toggler-icon"></span>
-        </NavbarToggler>
+        {/*<NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>*/}
+          {/*<span className="navbar-toggler-icon"></span>*/}
+        {/*</NavbarToggler>*/}
       </header>
     );
   }

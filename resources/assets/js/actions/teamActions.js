@@ -105,8 +105,6 @@ export function teamJoinSuccess() {
     return {type: TEAM_JOIN}
 }
 
-
-
 //#LOADING
 export function teamCreateLoading() {
     return {type: TEAM_CREATE_LOADING}

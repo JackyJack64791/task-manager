@@ -4,6 +4,7 @@ export * from './taskActions';
 export * from './teamActions';
 export * from './userActions';
 export * from './commentActions';
+export * from './skillActions';
 
 
 

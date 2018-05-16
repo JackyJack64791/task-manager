@@ -11,6 +11,7 @@ import {getUsers, getUsersError, getUsersLoading, userInfo} from "./userActions"
 import {getProjects, getProjectsError, getProjectsLoading} from "./projectActions";
 import {getTasks} from "./taskActions";
 import {getTeams} from "./teamActions";
+import {getSkills} from "./skillActions";
 
 const ROOT_URL = location.protocol + '//' + location.host;
 
@@ -28,10 +29,12 @@ export function authUser(user, redirect) {
                 dispatch(getProjects(response.data.token));
                 dispatch(getTasks(response.data.token));
                 dispatch(getTeams(response.data.token));
+                dispatch(getSkills(response.data.token));
                 redirect();
             })
             .catch((response) => {
-                dispatch(authError("Неправильные данные для входа, попробуйте снова"));
+                if(localStorage.getItem('token')) dispatch(logoutUser());
+                else dispatch(authError("Неправильные данные для входа, попробуйте снова"));
                 // console.log(response);
             })
             // .catch((response) => {

@@ -1,18 +1,3 @@
-// import React, {Component} from 'react';
-// import Header from './Header';
-
-//
-// class Layout extends Component {
-
-//
-//     render() {
-
-
-//     }
-// }
-//
-
-
 import React, {Component} from 'react';
 import * as actions from '../../actions/index';
 import {connect} from 'react-redux';
@@ -20,46 +5,6 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import {Container} from 'reactstrap';
 import Header from '../../src/components/Header/';
 import Sidebar from '../../src/components/Sidebar/';
-import Breadcrumb from '../../src/components/Breadcrumb/';
-import Aside from '../../src/components/Aside/';
-import Footer from '../../src/components/Footer/';
-import Dashboard from '../../src/views/Dashboard/';
-import Charts from '../../src/views/Charts/';
-import Widgets from '../../src/views/Widgets/';
-
-// Components
-import Buttons from '../../src/views/Components/Buttons/';
-import Cards from '../../src/views/Components/Cards/';
-// import Forms from '../../views/Components/Forms/';
-import Modals from '../../src/views/Components/Modals/';
-import SocialButtons from '../../src/views/Components/SocialButtons/';
-import Switches from '../../src/views/Components/Switches/';
-import Tables from '../../src/views/Components/Tables/';
-import Tabs from '../../src/views/Components/Tabs/';
-
-// Icons
-import FontAwesome from '../../src/views/Icons/FontAwesome/';
-import SimpleLineIcons from '../../src/views/Icons/SimpleLineIcons/';
-
-// Forms
-import BasicForms from '../../src/views/Forms/BasicForms/';
-import AdvancedForms from '../../src/views/Forms/AdvancedForms';
-
-// Editors
-import CodeEditors from '../../src/views/Editors/CodeEditors';
-
-// Plugins
-import Calendar from '../../src/views/Plugins/Calendar/';
-import DataTable from '../../src/views/Plugins/DataTable/';
-import LoadingButtons from '../../src/views/Plugins/LoadingButtons/';
-import Notifications from '../../src/views/Plugins/Notifications/';
-import Spinners from '../../src/views/Plugins/Spinners/';
-
-// UI Kits
-import Invoice from '../../src/views/UI-Kits/Invoicing/';
-import Inbox from '../../src/views/UI-Kits/Email/Inbox/';
-import Message from '../../src/views/UI-Kits/Email/Message/';
-import Compose from '../../src/views/UI-Kits/Email/Compose/';
 
 import Loading from 'react-loading-spinkit';
 
@@ -72,6 +17,7 @@ class Layout extends Component {
             if (!this.props.getSuccessProjects && !this.props.isLoadingProjects) this.props.getProjects();
             if (!this.props.getSuccessTasks && !this.props.isLoadingTasks) this.props.getTasks();
             if (!this.props.getSuccessTeams && !this.props.isLoadingTeams) this.props.getTeams();
+            if (!this.props.getSuccessSkills && !this.props.isLoadingSkills) this.props.getSkills();
         }
     }
 
@@ -83,14 +29,17 @@ class Layout extends Component {
             let user;
             let tasks;
             let teams;
+            let skills;
             if (this.props.getSuccessInfo &&
                 this.props.getSuccessProjects &&
                 this.props.getSuccessUsers &&
                 this.props.getSuccessTasks &&
                 this.props.getSuccessTeams &&
+                this.props.getSuccessSkills &&
                 !this.props.isLoadingProjects &&
                 !this.props.isLoadingUsers &&
                 !this.props.isLoadingTasks &&
+                !this.props.isLoadingSkills &&
                 !this.props.isLoadingAuth &&
                 !this.props.isLoadingTeams) {
                 user = this.props.user;
@@ -98,13 +47,15 @@ class Layout extends Component {
                 users = this.props.users;
                 tasks = this.props.tasks;
                 teams = this.props.teams;
+                skills = this.props.skills;
             }
             else return <div className="app flex-row align-items-center">
                 <div style={{ height: '100vh', width: '100vw' }}>
+                    {/*<h1>Ошибка, попробуйте перезайти в систему</h1>*/}
                     <Loading show={true} fadeIn="full" color="#00bfff" />
                 </div>
             </div>;
-            return (user && projects && users && tasks && teams &&
+            return (user && projects && users && tasks && teams && skills &&
                 <div>
                     <div className="app">
                         <Header/>
@@ -117,7 +68,7 @@ class Layout extends Component {
                                     {this.props.children}
                                 </Container>
                             </main>
-                            <Aside/>
+                            {/*<Aside/>*/}
                         </div>
                     </div>
                 </div>
@@ -157,15 +108,18 @@ function mapStateToProps(state) {
         projects: state.project.projects,
         tasks: state.task.tasks,
         teams: state.team.teams,
+        skills: state.skill.skills,
         isLoadingProjects: state.project.isLoading,
         isLoadingTasks: state.task.isLoading,
         isLoadingUsers: state.user.isLoading,
         isLoadingTeams: state.team.isLoading,
+        isLoadingSkills: state.skill.isLoading,
         getSuccessProjects: state.project.getSuccess,
         getSuccessUsers: state.user.usersSuccess,
         getSuccessInfo: state.user.infoSuccess,
         getSuccessTasks: state.task.getSuccess,
         getSuccessTeams: state.team.getSuccess,
+        getSuccessSkills: state.skill.getSuccess,
     }
 }
 

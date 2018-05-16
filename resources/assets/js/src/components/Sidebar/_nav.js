@@ -1,14 +1,14 @@
 export default {
   items: [
-    {
-      name: 'Панель управления',
-      url: '/dashboard',
-      icon: 'icon-speedometer',
+    // {
+      // name: 'Панель управления',
+      // url: '/dashboard',
+      // icon: 'icon-speedometer',
       // badge: {
       //   variant: 'info',
       //   text: 'NEW'
       // }
-    },
+    // },
       // {
       //   name: 'Задания',
       //   url: '/tasks',
@@ -38,7 +38,7 @@ export default {
     {
       name: 'Проекты',
       url: '/projects',
-      icon: 'icon-puzzle',
+      icon: 'fa fa-files-o',
     //   children: [
     //     {
     //       name: 'Список проектов',
@@ -82,7 +82,7 @@ export default {
     {
       name: 'Задания',
       url: '/tasks',
-      icon: 'icon-note',
+      icon: 'fa fa-tasks',
     //   children: [
     //     {
     //       name: 'Список заданий',
@@ -96,6 +96,11 @@ export default {
     //     },
     //   ]
     },
+      // {
+      //     name: 'Команды',
+      //     url: '/teams',
+      //     icon: 'icon-people',
+      // },
     // {
     //   name: 'Editors',
     //   url: '/editors',

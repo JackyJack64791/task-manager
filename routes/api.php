@@ -42,7 +42,7 @@ Route::post('comment/create', 'CommentController@store');
 Route::put('comment/update/{id}','CommentController@update');
 Route::delete('comment/delete/{id}','CommentController@destroy');
 
-Route::get('skills/{id}', 'SkillController@index');
+Route::get('skills', 'SkillController@index');
 Route::post('skill/create', 'SkillController@store');
 Route::put('skill/update/{id}','SkillController@update');
 Route::delete('skill/delete/{id}','SkillController@destroy');

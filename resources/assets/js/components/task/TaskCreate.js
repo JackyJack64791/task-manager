@@ -5,11 +5,19 @@ import {connect} from 'react-redux';
 import Panel from "../Panel";
 import {Link} from 'react-router-dom';
 import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
-
+// import Select from 'react-select';
+import { Creatable } from 'react-select';
 
 class TaskCreate extends Component {
     constructor(props) {
         super(props);
+        let initSkills = Object.values(this.props.skills);
+        for(let i = 0; i< initSkills.length; i++) {
+            initSkills[i].value = initSkills[i].id;
+            initSkills[i].label = initSkills[i].skill;
+            delete initSkills[i].id;
+            delete initSkills[i].skill;
+        }
         this.state = {
             project: '',
             title: '',
@@ -19,7 +27,10 @@ class TaskCreate extends Component {
             hoursCount: '',
             dateCompletion: '',
             performer: '',
-            timeSearch: ''
+            timeSearch: '',
+            skills: [],
+            initSkills: initSkills,
+                // .filter(item => {return item.skill}),
         };
         this.handleProject = this.handleProject.bind(this);
         this.handleTitle = this.handleTitle.bind(this);
@@ -30,8 +41,11 @@ class TaskCreate extends Component {
         this.handleDateCompletion = this.handleDateCompletion.bind(this);
         this.handlePerformer = this.handlePerformer.bind(this);
         this.handleTimeSearch = this.handleTimeSearch.bind(this);
+        this.handleInitSkills = this.handleInitSkills.bind(this);
+        this.handleSkills = this.handleSkills.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
+        // console.log(this.state);
     }
 
     componentDidMount() {
@@ -91,6 +105,17 @@ class TaskCreate extends Component {
             timeSearch: e.target.value
         })
     }
+    handleInitSkills(e) {
+        this.setState({
+            initSkills: e.target.value
+        })
+    }
+    handleSkills(skills) {
+        // console.log(e);
+        this.setState({
+            skills: skills
+        })
+    }
 
     handleRedirect() {
         if(!this.props.isError) this.props.history.push("/tasks");
@@ -98,6 +123,7 @@ class TaskCreate extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        // let isNew = this.state.skills.some( r => this.state.initSkills.indexOf(r) < 0);
         const task = {
             project: this.state.project,
             title: this.state.title,
@@ -107,7 +133,8 @@ class TaskCreate extends Component {
             hours_count: this.state.hoursCount,
             date_completion: this.state.dateCompletion,
             performer_id: this.state.performer,
-            time_search: this.state.timeSearch
+            time_search: this.state.timeSearch,
+            skills: this.state.skills,
         };
         this.props.taskCreate(task, this.handleRedirect);
     }
@@ -168,7 +195,6 @@ class TaskCreate extends Component {
                     <Col sm={8}>
                         <Input  type="textarea" id="description" className="form-control"
                                name="description" required onChange={this.handleDescription}/>
-
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -184,6 +210,18 @@ class TaskCreate extends Component {
                     </Col>
                 </FormGroup>
                 <hr/>
+                <FormGroup row>
+                    <Label for="skills" sm={4}>Необходимые навыки</Label>
+                    <Col sm={8}>
+                        <Creatable
+                            name="skills"
+                            value={this.state.skills}
+                            multi={true}
+                            onChange={this.handleSkills}
+                            options={this.state.initSkills}
+                        />
+                    </Col>
+                </FormGroup>
                 <FormGroup row>
                     <Label for="hoursCount" sm={4}>Предположительное время разработки(ч.)</Label>
                     <Col sm={8}>
@@ -236,6 +274,7 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         projects: state.project.projects,
+        skills: state.skill.skills,
         users: state.user.users,
         isError: state.task.isError,
         error: state.task.error,

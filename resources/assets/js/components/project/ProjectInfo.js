@@ -30,7 +30,8 @@ class ProjectInfo extends Component {
 
     projectTab(id) {
         let project = this.filterProject(
-            this.props.projects.find(item => item.id == id));
+            this.props.projects.find(item => item.id == id)
+        );
         console.log(project);
         if(project.customer_id!=null) project.customer_id = this.props.users.find(item => item.id === project.customer_id).full_name;
         else project.customer_id = project.customer_name;

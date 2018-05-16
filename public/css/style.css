@@ -11914,10 +11914,6 @@ base-chart.chart {
   line-height: 1.5;
 }
 
-.app-header.navbar .dropdown-item {
-  min-width: 180px;
-}
-
 .navbar-brand {
   color: #29363d;
 }

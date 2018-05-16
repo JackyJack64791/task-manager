@@ -5,6 +5,7 @@ import projectReducer from './projectReducer';
 import taskReducer from './taskReducer';
 import commentReducer from './commentReducer';
 import teamReducer from './teamReducer';
+import skillReducer from './skillReducer';
 import jwt_decode from 'jwt-decode';
 
 const appReducer = combineReducers({
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
     task: taskReducer,
     comment: commentReducer,
     team: teamReducer,
+    skill: skillReducer,
 });
 const token = localStorage.getItem('token');
 const rootReducer = (state,action) => {

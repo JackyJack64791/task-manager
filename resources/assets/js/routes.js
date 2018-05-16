@@ -24,6 +24,7 @@ import TeamEdit from "./components/team/TeamEdit";
 import TeamInfo from "./components/team/TeamInfo";
 import TeamList from "./components/team/TeamList";
 import TeamCreate from "./components/team/TeamCreate";
+import RegisterCard from "./components/auth/RegisterCard";
 
 
 const Routes = () => {
@@ -31,7 +32,8 @@ const Routes = () => {
         <Layout>
             <Switch>
                 <Route path="/dashboard" component={Dashboard}/>
-                <Route path="/register" component={Register}/>
+                <Route path="/register/step1" component={Register}/>
+                <Route path="/register/step2" component={RegisterCard}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/logout" component={Logout}/>
                 <Route path="/reset/email" component={PasswordResetEmail}/>
