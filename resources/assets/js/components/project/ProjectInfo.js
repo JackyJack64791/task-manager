@@ -5,12 +5,18 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import InfoProperty from '../InfoProperty';
 import Panel from "../Panel";
-import {Row} from "reactstrap";
+import {Row} from "reactstrap"
+import Dropzone from 'react-dropzone';
 
 class ProjectInfo extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
     }
+    constructor(props) {
+        super(props);
+        this.handleDrop = this.handleDrop.bind(this);
+    }
+
 
     filterProject(project) {
         return (({title, customer_id, customer_name, manager_id, deadline, description, specification_path}) => ({
@@ -46,20 +52,42 @@ class ProjectInfo extends Component {
             }
         )
     }
+    handleDrop(acceptedFiles) {
+        console.log('Handle drop');
+        // this.setState({ preview })
 
+        let formData = new FormData();
+
+        acceptedFiles.forEach(function(file) {
+            formData.append('avatar', file);
+        });
+
+        console.log('Send fetch request');
+        fetch('/talent/uploadUserAvatar', {
+            method: 'POST',
+            credentials: 'include',   //send the files to serverside
+            body: formData
+        })
+    }
     render() {
         const {id} = this.props.match.params;
         return (
             <Panel title="Информация о проекте">
-                {/*<img src={this.props.user.img_path}/>*/}
             <ul className="list-group">
                 {this.projectTab(id)}
             </ul>
                 <Row className="mt-2">
             <div className="col-md-8 col-md-offset-4">
-                <Link to={"/project/edit/" + id} className="btn btn-primary">
+                {this.props.user.roles.some(item => item.role === 'project_manager') ||
+                this.props.user.roles.some(item => item.role === 'admin') ?
+                    <div>
+                <Link to={"/project/edit/" + id} className="btn btn-primary mr-2">
                     Изменить проект
                 </Link>
+                <Link to={{pathname:"/task/create",state:{project_id: id}}}  className="btn btn-primary">
+                    Добавить задачу
+                </Link>
+                    </div> : ''}
                 <Link to={"/projects"} className="btn btn-default">
                     Назад к списку
                 </Link>

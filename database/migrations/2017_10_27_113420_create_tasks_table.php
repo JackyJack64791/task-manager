@@ -20,11 +20,12 @@ class CreateTasksTable extends Migration
             $table->text('description');
             $table->enum('priority',['1','2', '3']);
             $table->enum('difficulty',['easy','medium','hard']);
-            $table->enum('status',['new task','task is performing','task is ready','task is confirmed']);
+            $table->enum('status',['new_task','task_is_performing','task_is_testing','task_is_ready','task_is_confirmed']);
             $table->decimal('completion_percent');
             $table->integer('hours_count')->nullable();
             $table->date('date_completion')->nullable();
             $table->integer('performer_id')->nullable();
+            $table->integer('possible_performer_id')->nullable();
             $table->time('time_search')->nullable();
             $table->timestamps();
         });

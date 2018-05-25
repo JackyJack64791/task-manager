@@ -11,6 +11,7 @@ class ProjectList extends Component {
 
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
+        // console.log(this.props.user.roles.some(item => item.role == 'project_manager'),'test')
     }
 
     projectsRender() {
@@ -27,6 +28,9 @@ class ProjectList extends Component {
         else {
             if (!this.props.isLoading) {
                 return <Panel title="Проекты">
+                    {this.props.user.roles.some(item => item.role === 'project_manager') ||
+                    this.props.user.roles.some(item => item.role === 'admin') ?
+                        <div>
                     <p>Похоже, у вас нет ни одного проекта. Вы можете создать новый.
                 </p>
                     <Row className="justify-content-center">
@@ -34,6 +38,7 @@ class ProjectList extends Component {
                             <Link className="btn btn-primary btn-lg" to='/project/create'>Создать проект</Link>
                         </Col>
                     </Row>
+                        </div> : <p>У вас нет ни одного проекта.</p>}
                 </Panel>
             } else return <p>Loading...</p>;
         }
@@ -42,7 +47,10 @@ class ProjectList extends Component {
             <ul className="list-group">
                 {this.projectsRender()}
             </ul>
-            <Link className="btn btn-primary mt-4" to='/project/create'>Создать новый проект</Link>
+            {this.props.user.roles.some(item => item.role === 'project_manager') ||
+            this.props.user.roles.some(item => item.role === 'admin') ?
+                <Link className="btn btn-primary mt-4" to='/project/create'>Создать новый проект</Link>
+                : ''}
         </Panel>);
     }
 
@@ -51,6 +59,7 @@ class ProjectList extends Component {
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
+        user: state.user.user,
         projects: state.project.projects,
         isLoading: state.project.isLoading,
         getSuccess: state.project.getSuccess,

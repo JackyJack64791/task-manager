@@ -25,6 +25,7 @@ import TeamInfo from "./components/team/TeamInfo";
 import TeamList from "./components/team/TeamList";
 import TeamCreate from "./components/team/TeamCreate";
 import RegisterCard from "./components/auth/RegisterCard";
+import LoginTeam from "./components/auth/LoginTeam";
 
 
 const Routes = () => {
@@ -35,6 +36,7 @@ const Routes = () => {
                 <Route path="/register/step1" component={Register}/>
                 <Route path="/register/step2" component={RegisterCard}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/team_choose" component={LoginTeam}/>
                 <Route path="/logout" component={Logout}/>
                 <Route path="/reset/email" component={PasswordResetEmail}/>
                 <Route path="/reset/info" component={PasswordResetInfo}/>

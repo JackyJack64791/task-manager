@@ -12,39 +12,20 @@ class TeamCreate extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {customer: '', title: '', deadline: '', description: '', specification: '', handleCustomerChange: true};
-        this.handleCustomer = this.handleCustomer.bind(this);
-        this.handleTitle = this.handleTitle.bind(this);
-        this.handleDeadline = this.handleDeadline.bind(this);
+        this.state = {name: '',  description: ''};
+        // this.handleCustomer = this.handleCustomer.bind(this);
+        this.handleName = this.handleName.bind(this);
+        // this.handleDeadline = this.handleDeadline.bind(this);
         this.handleDescription = this.handleDescription.bind(this);
-        this.handleSpecification = this.handleSpecification.bind(this);
-        this.handleCustomerChange = this.handleCustomerChange.bind(this);
+        // this.handleSpecification = this.handleSpecification.bind(this);
+        // this.handleCustomerChange = this.handleCustomerChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
     }
 
-    customers() {
-        return this.props.users.map((key) =>
-            <option value={key.id}>{key.full_name}</option>
-        )
-
-    }
-
-    handleCustomer(e) {
+    handleName(e) {
         this.setState({
-            customer: e.target.value
-        })
-    }
-
-    handleTitle(e) {
-        this.setState({
-            title: e.target.value
-        })
-    }
-
-    handleDeadline(e) {
-        this.setState({
-            deadline: e.target.value
+            name: e.target.value
         })
     }
 
@@ -54,27 +35,11 @@ class TeamCreate extends Component {
         })
     }
 
-
-    handleSpecification(e) {
-        this.setState({
-            specification: e.target.value
-        })
-    }
-
-    handleCustomerChange(e) {
-        this.setState({
-            handleCustomerChange: e.target.checked
-        })
-    }
-
     handleSubmit(e) {
         e.preventDefault();
         const team = {
-            customer: this.state.customer,
-            title: this.state.title,
-            deadline: this.state.deadline,
+            name: this.state.name,
             description: this.state.description,
-            specification_path: this.state.specification_path,
         };
         this.props.teamCreate(team, this.handleRedirect);
     }
@@ -83,73 +48,29 @@ class TeamCreate extends Component {
         if (!this.props.isError) this.props.history.push("/teams");
     }
 
-    customerChange() {
-        console.log(this.state.handleCustomerChange);
-        if(this.state.handleCustomerChange)
-            return (<Input type="select" id="customer" defaultValue="0" onChange={this.handleCustomer} required>
-                <option disabled value="0">Выберите заказчика</option>
-                {this.customers()}
-            </Input>);
-        else return <Input id="customer" type="text" name="customer" required onChange={this.handleCustomer}/>
-    }
     render() {
-        return (<Panel title="Создание нового проекта">
+        return (<Panel title="Создание новой команды">
             <Form onSubmit={this.handleSubmit}>
+                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
                 <FormGroup row>
-                    <Label for="customer_choose" sm={4}>Заказчик из вашей команды?</Label>
+                    <Label for="name" sm={4}>Название</Label>
                     <Col sm={8}>
-                        <Label className="switch switch-3d switch-primary">
-                            <Input id="customer_choose" type="checkbox" className="switch-input" defaultChecked onChange={this.handleCustomerChange}/>
-                            <span className="switch-label"></span>
-                            <span className="switch-handle"></span>
-                        </Label>
+                        <Input id="name" type="text" name="name" required onChange={this.handleName}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
-                    <Label for="customer" sm={4}>Заказчик</Label>
+                    <Label for="name" sm={4}>Описание</Label>
                     <Col sm={8}>
-                        {/*<Input type="select" id="customer" defaultValue="0" onChange={this.handleCustomer}*/}
-                        {/*required>*/}
-                        {/*<option disabled value="0">Choose customer...</option>*/}
-                        {/*{this.customers()}*/}
-                        {/*</Input>*/}
-                        {this.customerChange()}
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="title" sm={4}>Название</Label>
-                    <Col sm={8}>
-                        <Input id="title" type="text" name="title" required onChange={this.handleTitle}/>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="deadline" sm={4}>Дата окончания</Label>
-
-                    <Col sm={8}>
-                        <Input id="deadline" type="date" name="deadline" required onChange={this.handleDeadline}/>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="description" sm={4}>Описание</Label>
-                    <Col sm={8}>
-                        <Input type="textarea" id="description" name="description" required onChange={this.handleDescription}/>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="specification" sm={4}>Спецификация</Label>
-                    <Col sm={8}>
-                        <Input id="specification" type="text"
-                               name="specification" required onChange={this.handleSpecification}/>
+                        <Input id="description" type="textarea" name="description" required onChange={this.handleDescription}/>
                     </Col>
                 </FormGroup>
                 <FormGroup row>
                     <Col sm={8}>
                         <Button type="submit" color="primary">
-                            Создать проект
+                            Создать команду
                         </Button>
                     </Col>
                 </FormGroup>
-                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
             </Form>
         </Panel>);
     }
@@ -160,7 +81,7 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         isError: state.user.isError,
-        error: state.user.error,
+        error: state.team.error,
         users: state.user.users,
     }
 }

@@ -9,6 +9,10 @@ import {
     TASK_UPDATE, TASK_UPDATE_ERROR,
     TASK_UPDATE_LOADING
 } from "../constants/taskConstants";
+import {
+    TASK_CHOOSE, TASK_CHOOSE_ERROR, TASK_CHOOSE_LOADING, TASK_STATUS, TASK_STATUS_ERROR,
+    TASK_STATUS_LOADING
+} from "../constants";
 const ROOT_URL = location.protocol + '//' + location.host;
 
 export function taskCreate(task, redirect) {
@@ -20,10 +24,40 @@ export function taskCreate(task, redirect) {
         )
             .then(response => {
                 dispatch(taskCreateSuccess());
-                dispatch(getTasks());
+                dispatch(getTasks(localStorage.getItem('team')));
                 redirect();
             })
             .catch(response => dispatch(taskCreateError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
+    }
+}
+
+export function taskChoose(id) {
+    return function (dispatch) {
+        dispatch(taskCreateLoading());
+        axios.put(ROOT_URL + '/api/task/choose/'+id,{},
+            {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
+        )
+            .then(response => {
+                dispatch(taskChooseSuccess());
+                dispatch(getTasks(localStorage.getItem('team')));
+            })
+            .catch(response => dispatch(taskChooseError(response.error)));
+    }
+}
+
+export function taskStatus(request) {
+    return function (dispatch) {
+        dispatch(taskStatusLoading());
+        axios.put(ROOT_URL + '/api/task/status/update',
+            request,
+            {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
+        )
+            .then(response => {
+                dispatch(taskStatusSuccess());
+                dispatch(getTasks(localStorage.getItem('team')));
+                redirect();
+            })
+            .catch(response => dispatch(taskStatusError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
     }
 }
 
@@ -39,17 +73,17 @@ export function taskUpdate(task, redirect) {
             })
             .then(response => {
                 dispatch(taskUpdateSuccess());
-                dispatch(getTasks());
+                dispatch(getTasks(localStorage.getItem('team')));
                 redirect();
             })
             .catch(response => dispatch(taskUpdateError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
     }
 }
 
-export function getTasks(token = localStorage.getItem('token')) {
+export function getTasks(team = localStorage.getItem('team'), token = localStorage.getItem('token')) {
     return function (dispatch) {
         dispatch(getTasksLoading());
-        axios.get(ROOT_URL + '/api/tasks',
+        axios.get(ROOT_URL + '/api/tasks/'+team,
             {headers: {Authorization: "Bearer " + token}}
         )
             .then(response => {
@@ -73,7 +107,7 @@ export function taskDelete(id) {
         )
             .then(response => {
                 dispatch(taskDeleteSuccess());
-                dispatch(getTasks());
+                dispatch(getTasks(localStorage.getItem('team')));
             })
             .catch(response => dispatch(taskDeleteError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }
@@ -85,6 +119,14 @@ export function taskCreateSuccess() {
 
 export function taskUpdateSuccess() {
     return {type: TASK_UPDATE}
+}
+
+export function taskChooseSuccess() {
+    return {type: TASK_CHOOSE}
+}
+
+export function taskStatusSuccess() {
+    return {type: TASK_STATUS}
 }
 
 export function getTasksSuccess(tasks) {
@@ -108,6 +150,14 @@ export function taskUpdateLoading() {
 
 export function getTasksLoading() {
     return {type: GET_TASKS_LOADING}
+}
+
+export function taskChooseLoading() {
+    return {type: TASK_CHOOSE_LOADING}
+}
+
+export function taskStatusLoading() {
+    return {type: TASK_STATUS_LOADING}
 }
 
 export function taskDeleteLoading() {
@@ -138,6 +188,20 @@ export function getTasksError(error) {
 export function taskDeleteError(error) {
     return {
         type: TASK_DELETE_ERROR,
+        payload: error,
+    }
+}
+
+export function taskStatusError(error) {
+    return {
+        type: TASK_STATUS_ERROR,
+        payload: error,
+    }
+}
+
+export function taskChooseError(error) {
+    return {
+        type: TASK_CHOOSE_ERROR,
         payload: error,
     }
 }

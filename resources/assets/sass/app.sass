@@ -7,13 +7,15 @@
 
 @import "~react-credit-cards/lib/styles.scss"
 
-@import '~react-select/dist/react-select.css'
+@import "./scss/vendors/react-select/react-select.scss"
+
+@import "~cropperjs/dist/cropper.css"
 
 // Bootstrap
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap"
 
 .container
-  color: #00bfff
+  color: #051838
 
 //h1
 //  text-align: center
@@ -68,3 +70,15 @@
 //    cursor: pointer
 //    opacity: 0.5
 //    filter: alpha(opacity=50)
+.card-accent-primary > .card-header > a
+  color: $gray-100 !important
+
+.dropzone
+  width: 200px
+  height: 200px
+  border-radius: 5px
+  border: 2px dashed theme-color('primary')
+
+.img_preview
+  width: 200px
+  height: 200px

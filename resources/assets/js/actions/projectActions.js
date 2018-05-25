@@ -20,18 +20,19 @@ export function projectCreate(project, redirect) {
         )
             .then(response => {
                 dispatch(projectAddSuccess());
-                dispatch(getProjects());
+                dispatch(getProjects(project.team_id));
                 redirect();
             })
-            .catch(response => dispatch(projectAddError("You are not logged in")));
+            .catch(response => dispatch(projectAddError("Проверьте ")));
     }
 }
 
-export function getProjects(token = localStorage.getItem('token')) {
+export function getProjects(team = localStorage.getItem('team'),token = localStorage.getItem('token')) {
     return function (dispatch) {
         dispatch(getProjectsLoading());
-        axios.get(ROOT_URL + '/api/projects',
-            {headers: {Authorization: "Bearer " + token}}
+        axios.get(ROOT_URL + '/api/projects/'+team,
+
+            {headers: {Authorization: "Bearer " + token},}
         )
             .then(response => {
                 dispatch(getProjectsSuccess(response.data));
@@ -55,7 +56,7 @@ export function projectUpdate(project, redirect) {
             })
             .then(response => {
                 dispatch(projectUpdateSuccess());
-                dispatch(getProjects());
+                dispatch(getProjects(project.team_id));
                 redirect();
             })
             .catch(response => dispatch(projectUpdateError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])));
@@ -73,7 +74,7 @@ export function projectDelete(id) {
         )
             .then(response => {
                 dispatch(projectDeleteSuccess());
-                dispatch(getProjects());
+                dispatch(getProjects(localStorage.getItem('team')));
             })
             .catch(response => dispatch(projectDeleteError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }

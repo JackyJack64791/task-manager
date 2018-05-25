@@ -14,7 +14,7 @@ class TaskInfo extends Component {
     }
 
     filterTask(project) {
-        return (({author_id, project_id, title, description, priority, difficulty,status,completion_percent, hours_count, date_completion, performer_id, time_search}) => ({
+        return (({author_id, project_id, title, description, priority, difficulty,status,completion_percent, hours_count, date_completion, performer_id,possible_performer_id, time_search}) => ({
             author_id,
             project_id,
             title,
@@ -26,12 +26,13 @@ class TaskInfo extends Component {
             hours_count,
             date_completion,
             performer_id,
+            possible_performer_id,
             time_search
         }))(project)
     }
 
     getPropertyNames() {
-        return ["Автор", "Проект", "Название", "Описание", "Приоритет", "Сложность", "Статус", "Процент готовности", "Количество часов", "Дата завершения", "Исполнитель", "Время на поиск(ч)"];
+        return ["Автор", "Проект", "Название", "Описание", "Приоритет", "Сложность", "Статус", "Процент готовности", "Количество часов", "Дата завершения", "Исполнитель", "Возможный исполнитель", "Время на поиск(ч)"];
     }
 
     projectTab(id) {
@@ -43,6 +44,7 @@ class TaskInfo extends Component {
             task.author_id = this.props.user.full_name;
         task.project_id = this.props.projects.find(item => item.id === task.project_id).title;
         if(task.performer_id != null) task.performer_id = this.props.users.find(item => item.id === task.performer_id).full_name;
+        if(task.possible_performer_id != null) task.possible_performer_id = this.props.users.find(item => item.id === task.possible_performer_id).full_name;
         let names = this.getPropertyNames();
         return Object.keys(task).map((key, i) => {
                 return <InfoProperty style="list" name={names[i]} value={task[key]}/>
@@ -59,9 +61,12 @@ class TaskInfo extends Component {
             </ul>
             <Row className="mt-2">
             <Col sm={8}>
+                {this.props.user.roles.some(item => item.role === 'project_manager') ||
+                this.props.user.roles.some(item => item.role === 'admin') ?
                 <Link to={"/task/edit/" + id} className="btn btn-primary">
                     Изменить задачу
                 </Link>
+                    : ''}
                 <Link to={"/tasks"} className="btn btn-default">
                     Назад к задачам
                 </Link>

@@ -52,7 +52,7 @@ class Layout extends Component {
             else return <div className="app flex-row align-items-center">
                 <div style={{ height: '100vh', width: '100vw' }}>
                     {/*<h1>Ошибка, попробуйте перезайти в систему</h1>*/}
-                    <Loading show={true} fadeIn="full" color="#00bfff" />
+                    <Loading show={true} fadeIn="full" color="#2D4571" />
                 </div>
             </div>;
             return (user && projects && users && tasks && teams && skills &&

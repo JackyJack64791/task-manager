@@ -8,6 +8,8 @@ import {Link} from 'react-router-dom';
 class ProjectEdit extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
+        if (!this.props.user.roles.some(item => item.role === 'project_manager') &&
+            !this.props.user.roles.some(item => item.role === 'admin')) this.props.history.push("/projects");
     }
 
     constructor(props) {
@@ -70,6 +72,7 @@ class ProjectEdit extends Component {
             deadline: this.state.deadline,
             description: this.state.description,
             specification_path: this.state.specification_path,
+            team_id: this.props.currentTeam,
         };
         this.props.projectUpdate(project, this.handleRedirect);
     }
@@ -153,6 +156,8 @@ function mapStateToProps(state) {
         projects: state.project.projects,
         isError: state.project.isError,
         error: state.project.error,
+        user: state.user.user,
+        currentTeam: state.auth.currentTeam,
     }
 }
 

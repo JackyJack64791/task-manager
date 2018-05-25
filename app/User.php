@@ -19,6 +19,10 @@ class User extends Authenticatable
         'full_name', 'email', 'login', 'address','phone','bank_card', 'password',
     ];
 
+    protected $with = [
+        'skills',
+        'roles',
+    ];
 //    protected $fields = [
 //        'full_name' => 'ФИО',
 //        'email' => 'Электронная почта',

@@ -9,7 +9,8 @@ class Team extends Model
     protected $fillable = [
         'name',
         'description',
-        'img_path'
+        'img_path',
+        'author_id',
     ];
 
     public function users()

@@ -18,6 +18,7 @@ class Task extends Model
         'hours_count',
         'date_completion',
         'performer_id',
+        'possible_performer_id',
         'time_search',
     ];
     public function author()
@@ -33,6 +34,11 @@ class Task extends Model
     public function performer()
     {
         return $this->belongsTo(User::class, 'performer_id');
+    }
+
+    public function possible_performer()
+    {
+        return $this->belongsTo(User::class,'possible_performer_id');
     }
 
     public function skills()

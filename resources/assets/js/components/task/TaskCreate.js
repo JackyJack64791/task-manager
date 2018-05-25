@@ -4,22 +4,51 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import Panel from "../Panel";
 import {Link} from 'react-router-dom';
-import {Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
+import {Badge, Button, Col, Form, FormGroup, Input, Label, Row} from "reactstrap";
 // import Select from 'react-select';
 import { Creatable } from 'react-select';
+import Select from 'react-select';
+
+const SelectOption = React.createClass({
+    handleMouseDown (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.props.onSelect(this.props.option, event);
+    },
+    handleMouseEnter (event) {
+        this.props.onFocus(this.props.option, event);
+    },
+    handleMouseMove (event) {
+        if (this.props.isFocused) return;
+        this.props.onFocus(this.props.option, event);
+    },
+    skillsBadges() {
+        return this.props.option.skills.map((key) =>
+            <Badge style={{margin:2, fontSize: 0.9 +'em'}}>{key.skill}</Badge>
+        )
+    },
+    render () {
+
+        return (
+            <div className={this.props.className}
+                 onMouseDown={this.handleMouseDown}
+                 onMouseEnter={this.handleMouseEnter}
+                 onMouseMove={this.handleMouseMove}
+            >
+
+                <div style={{marginRight:10}}>{this.props.children}</div>
+                <Label>{this.skillsBadges()}</Label>
+            </div>
+        );
+    }
+});
 
 class TaskCreate extends Component {
     constructor(props) {
         super(props);
         let initSkills = Object.values(this.props.skills);
-        for(let i = 0; i< initSkills.length; i++) {
-            initSkills[i].value = initSkills[i].id;
-            initSkills[i].label = initSkills[i].skill;
-            delete initSkills[i].id;
-            delete initSkills[i].skill;
-        }
         this.state = {
-            project: '',
+            project: this.props.location.state ? this.props.location.state.project_id : '',
             title: '',
             description: '',
             priority: '',
@@ -30,7 +59,6 @@ class TaskCreate extends Component {
             timeSearch: '',
             skills: [],
             initSkills: initSkills,
-                // .filter(item => {return item.skill}),
         };
         this.handleProject = this.handleProject.bind(this);
         this.handleTitle = this.handleTitle.bind(this);
@@ -50,6 +78,8 @@ class TaskCreate extends Component {
 
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
+        if (!this.props.user.roles.some(item => item.role === 'project_manager') &&
+            !this.props.user.roles.some(item => item.role === 'admin')) this.props.history.push("/tasks");
     }
 
     handleProject(e) {
@@ -94,9 +124,9 @@ class TaskCreate extends Component {
         })
     }
 
-    handlePerformer(e) {
+    handlePerformer(value) {
         this.setState({
-            performer: e.target.value
+            performer: value.id
         })
     }
 
@@ -132,7 +162,7 @@ class TaskCreate extends Component {
             difficulty: this.state.difficulty,
             hours_count: this.state.hoursCount,
             date_completion: this.state.dateCompletion,
-            performer_id: this.state.performer,
+            possible_performer_id: this.state.performer,
             time_search: this.state.timeSearch,
             skills: this.state.skills,
         };
@@ -140,9 +170,10 @@ class TaskCreate extends Component {
     }
 
     projects() {
-        return this.props.projects.map((key) =>
-            <option value={key.id}>{key.title}</option>
-        )
+        return this.props.projects.map((key) => {
+            let selected = key.id === this.state.project.id;
+            return <option value={key.id} >{key.title}</option>
+        })
     }
     priority() {
         let priorities = ['1','2','3'];
@@ -174,7 +205,7 @@ class TaskCreate extends Component {
                 <FormGroup row>
                     <Label for="project" sm={4}>Проект</Label>
                     <Col sm={8}>
-                        <Input id="project" defaultValue="0" type="select" onChange={this.handleProject}
+                        <Input id="project" defaultValue={this.state.project === '' ? '0' : this.state.project} type="select" onChange={this.handleProject}
                                 required>
                             <option disabled value="0">Выберите проект...</option>
                             {this.projects()}
@@ -219,6 +250,8 @@ class TaskCreate extends Component {
                             multi={true}
                             onChange={this.handleSkills}
                             options={this.state.initSkills}
+                            labelKey="skill"
+                            valueKey="id"
                         />
                     </Col>
                 </FormGroup>
@@ -238,14 +271,29 @@ class TaskCreate extends Component {
                                name="dateCompletion"  onChange={this.handleDateCompletion}/>
                     </Col>
                 </FormGroup>
+                {/*<FormGroup row>*/}
+                    {/*<Label for="performer" sm={4}>Возможный исполнитель</Label>*/}
+                    {/*<Col sm={8}>*/}
+                        {/*<Input type="select" id="performer" defaultValue="0" onChange={this.handlePerformer}*/}
+                                {/*>*/}
+                            {/*<option disabled value="0">Выберите исполнителя...</option>*/}
+                            {/*{this.performers()}*/}
+                        {/*</Input>*/}
+                    {/*</Col>*/}
+                {/*</FormGroup>*/}
                 <FormGroup row>
                     <Label for="performer" sm={4}>Возможный исполнитель</Label>
                     <Col sm={8}>
-                        <Input type="select" id="performer" defaultValue="0" onChange={this.handlePerformer}
-                                >
-                            <option disabled value="0">Выберите исполнителя...</option>
-                            {this.performers()}
-                        </Input>
+                        <Select
+                            name="performer"
+                            value={this.state.performer}
+                            multi={false}
+                            onChange={this.handlePerformer}
+                            options={this.props.users}
+                            optionComponent={SelectOption}
+                            labelKey="full_name"
+                            valueKey="id"
+                        />
                     </Col>
                 </FormGroup>
                 <FormGroup row>
@@ -276,6 +324,7 @@ function mapStateToProps(state) {
         projects: state.project.projects,
         skills: state.skill.skills,
         users: state.user.users,
+        user: state.user.user,
         isError: state.task.isError,
         error: state.task.error,
     }

@@ -8,6 +8,8 @@ import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 class ProjectCreate extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
+        if (!this.props.user.roles.some(item => item.role === 'project_manager') &&
+            !this.props.user.roles.some(item => item.role === 'admin')) this.props.history.push("/projects");
     }
 
     constructor(props) {
@@ -75,6 +77,7 @@ class ProjectCreate extends Component {
             deadline: this.state.deadline,
             description: this.state.description,
             specification_path: this.state.specification_path,
+            team_id: this.props.currentTeam,
         };
         this.props.projectCreate(project, this.handleRedirect);
     }
@@ -94,6 +97,7 @@ class ProjectCreate extends Component {
     }
     render() {
         return (<Panel title="Создание нового проекта">
+            {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup row>
                     <Label for="customer_choose" sm={4}>Заказчик из вашей команды?</Label>
@@ -149,7 +153,6 @@ class ProjectCreate extends Component {
                         </Button>
                     </Col>
                 </FormGroup>
-                {this.props.isError ? <p className="error">{this.props.error}</p> : ""}
             </Form>
         </Panel>);
     }
@@ -160,8 +163,10 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         isError: state.user.isError,
-        error: state.user.error,
+        error: state.project.error,
+        user: state.user.user,
         users: state.user.users,
+        currentTeam: state.auth.currentTeam,
     }
 }
 

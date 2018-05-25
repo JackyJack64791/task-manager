@@ -5,7 +5,11 @@ import {withRouter} from 'react-router';
 
 class Logout extends Component {
     componentWillMount(){
-        this.props.logoutUser();
+        this.props.logoutUser(this.handleRedirect.bind(this));
+        console.log('LOGOUT');
+        // this.props.history.push("/login");
+    }
+    handleRedirect() {
         this.props.history.push("/login");
     }
     render(){

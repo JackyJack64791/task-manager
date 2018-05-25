@@ -18,7 +18,9 @@
 }
 
 .card-header {
-
+  background-color: theme-color('primary');
+  color: $gray-100;//theme-color('secondary');
+  //border-color:
   .icon-bg {
     display: inline-body;
     padding: $card-spacer-y $card-spacer-x !important;

@@ -23,7 +23,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($team)
     {
         try {
 
@@ -50,7 +50,18 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        return response()->json(auth()->user()->teams()->first()->users()->get());
+//            if(auth()->user()->teams()->count()!=0)
+        $getTeam = auth()->user()->teams()->find($team);
+        if($getTeam) {
+//            $users = [];
+//            foreach ($getTeam->users()->get() as $user) {
+//                $users[] = $user->with('skills')->get()->toArray();
+//                $count++;
+//            }
+            return response()->json($getTeam->users()->with(['skills','roles'])->get()->toArray());
+        }
+//        return response()->json($getTeam->users()->get());
+        else return response()->json([],200);
     }
 
     public function register(Request $request)
@@ -124,8 +135,8 @@ class UserController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-
-        return response()->json(compact('user'));
+//        $user = auth()->user()->with(['skills','roles'])->get();
+        return response()->json($user);
     }
 
     /**
@@ -171,6 +182,11 @@ class UserController extends Controller
             'phone' => 'required|regex:/[0-9]{1}[0-9]{10}/|unique:users,phone,'.$request->id,
             'bank_card'=> 'required|numeric|unique:users,bank_card,'.$request->id]);
         $user_entity->update($request->all());
+        if($request->get('skills'))
+        {
+            $user_entity->skills()->sync(array_column($request->get('skills'),'id'));
+        }
+        else $user_entity->skills()->detach();
         $token = JWTAuth::fromUser($user_entity);
 
         return response()->json(compact('token'));

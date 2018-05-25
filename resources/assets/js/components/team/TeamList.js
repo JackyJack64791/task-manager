@@ -14,22 +14,14 @@ class TeamList extends Component {
     }
 
     teamsRender() {
-        return this.props.teams.map((key) => <p>{key.name}</p>
-
-        )
+         // if(this.props.teams.length > 0)
+        return this.props.teams.map((key) => <TeamTab id={key.id} name={key.name} description={key.description}/>
+        );
     }
 
     render() {
-        let teams;
-        console.log(this.props.teams, "length");
-        if (this.props.teams !== undefined && !this.props.isLoading) {
-            teams = this.props.teams;
-            console.log(teams, "teams");
-        }
-        else {
-            if (!this.props.isLoading) {
-                return <Panel title="Проекты">
-                    {/*{this.props.teams[0].name}*/}
+            if (!this.props.teams.length) {
+                return <Panel title="Команды">
                     <p>Ошибка загрузки команд, попробуйте еще раз.
                     </p>
                     <Row className="justify-content-center">
@@ -38,14 +30,14 @@ class TeamList extends Component {
                         </Col>
                     </Row>
                 </Panel>
-            } else return <p>Loading...</p>;
-        }
-        return (teams && <Panel title="Команды">
+            }
+            else return (<Panel title="Команды">
             {/*<img src={this.props.user.img_path}/>*/}
             <ul className="list-group">
                 {this.teamsRender()}
             </ul>
             <Link className="btn btn-primary mt-4" to='/team/create'>Создать новую команду</Link>
+                <Link className="btn btn-primary mt-4 ml-2" to='/team_choose'>Выбрать команду</Link>
         </Panel>);
     }
 

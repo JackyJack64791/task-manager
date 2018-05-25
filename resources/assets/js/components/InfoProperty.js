@@ -7,12 +7,12 @@ class InfoProperty extends Component {
             case "list":
                 return <li className="list-group-item">
                     <h4 className="list-property">{this.props.name}</h4>
-                    <p className="list-value">{this.props.value}</p>
+                    <p className="list-value">{this.props.value ? this.props.value : '-'}</p>
                 </li>;
             case "table":
                 return <tr>
                     <td className="user-property">{this.props.name}</td>
-                    <td className="user-value">{this.props.value}</td>
+                    <td className="user-value">{this.props.value ? this.props.value : '-'}</td>
                 </tr>;
             default:
         }

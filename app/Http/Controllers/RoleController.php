@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Project;
-use App\Skill;
+use App\Role;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class SkillController extends Controller
+class RoleController extends Controller
 {
     public function __construct()
     {
@@ -46,7 +46,7 @@ class SkillController extends Controller
 
         }
 
-        return response()->json(Skill::all(),200);
+        return response()->json(Role::all(),200);
     }
 
 
@@ -86,10 +86,10 @@ class SkillController extends Controller
         }
 
         $this->validate($request, [
-            'skill' => 'required',
+            'role' => 'required',
         ]);
-        $skill = Skill::create([
-            'skill' => $request['skill']
+        $role = Role::create([
+            'role' => $request['role']
         ]);
 
 
@@ -132,11 +132,11 @@ class SkillController extends Controller
         }
 //        return response()->json($request);
 
-        $skill = Skill::findOrFail($id);
+        $role = Role::findOrFail($id);
         $this->validate($request, [
-            'skill' => 'required',
-            ]);
-        $skill->update($request->all());
+            'role' => 'required',
+        ]);
+        $role->update($request->all());
         return response()->json([],200);
     }
 
@@ -173,7 +173,7 @@ class SkillController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        $skill = Skill::findOrFail($id)->delete();
+        $role = Role::findOrFail($id)->delete();
 
         return response()->json([],200);
 

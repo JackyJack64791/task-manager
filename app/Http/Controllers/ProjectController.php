@@ -69,7 +69,7 @@ class ProjectController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-
+//        return response()->json(auth()->user()->teams()->first(),503);
         $this->validate($request, [
             'customer' => 'required',
             'title' => 'required',
@@ -79,8 +79,8 @@ class ProjectController extends Controller
             ]);
         $project = Project::create([
             'customer_id'=>$request->get('customer'),
-            'manager_id'=>auth()->id(),
-            'team_id' => auth()->user()->teams()->first()->id,
+            'manager_id'=> auth()->id(),
+            'team_id' => $request->get('team_id'),
             'title' => $request->get('title'),
             'deadline'=>$request->get('deadline'),
             'description'=>$request->get('description'),
@@ -97,7 +97,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($team)
     {
         try {
 
@@ -126,10 +126,12 @@ class ProjectController extends Controller
 
         }
 //        return response()->json(auth()->user()->roles()->get());
-        if(auth()->user()->roles()->get()->contains('role','admin'))
-            return response()->json(Project::all());
-        return response()->json(auth()->user()->teams()->first()->projects()->get());//Project::where('team_id',auth()->user()->teams()->first()->id));//
-
+//        if(auth()->user()->roles()->get()->contains('role','admin'))
+//            return response()->json(Project::all());
+        $getTeam = auth()->user()->teams()->find($team);
+        if($getTeam)
+        return response()->json($getTeam->projects()->get());//Project::where('team_id',auth()->user()->teams()->first()->id));//
+        else return response()->json([],200);
     }
 
     /**

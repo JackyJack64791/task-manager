@@ -44,14 +44,15 @@ $colors: (
 );
 
 $theme-colors: (
-  primary:                        $blue,
-  secondary:                      $gray-300,
+  primary:                        #2D4571,
+  secondary:                      #7389AE,
   success:                        $green,
   info:                           $cyan,
   warning:                        $yellow,
   danger:                         $red,
   light:                          $gray-100,
-  dark:                           $gray-800
+  dark:                           $gray-800,
+        dark-bg:                  #051838,
 );
 
 // Options
@@ -80,14 +81,14 @@ $breadcrumb-margin-bottom:        1.5rem;
 
 // Cards
 
-$card-border-color:               $gray-200;
+$card-border-color:               theme-color('primary');
 $card-cap-bg:                     $gray-100;
 
 // Dropdowns
 
 $dropdown-padding-y:              0;
-$dropdown-border-color:           $gray-200;
-$dropdown-divider-bg:             $gray-100;
+$dropdown-border-color:           theme-color('primary');
+$dropdown-divider-bg:             theme-color('primary');
 
 // Buttons
 

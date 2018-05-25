@@ -96,11 +96,11 @@ export default {
     //     },
     //   ]
     },
-      // {
-      //     name: 'Команды',
-      //     url: '/teams',
-      //     icon: 'icon-people',
-      // },
+      {
+          name: 'Команды',
+          url: '/teams',
+          icon: 'icon-people',
+      },
     // {
     //   name: 'Editors',
     //   url: '/editors',

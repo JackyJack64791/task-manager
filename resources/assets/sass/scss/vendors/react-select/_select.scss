@@ -14,7 +14,7 @@ $select-input-bg:                   $input-bg;
 $select-input-bg-disabled:          #f9f9f9 !default;
 $select-input-border-color:         $input-border-color;
 $select-input-border-radius:        4px !default;
-$select-input-border-focus:         #08c !default; // blue
+$select-input-border-focus:         theme-color('primary') !default; // blue
 $select-input-border-width:         $input-btn-border-width;
 $select-input-height:               36px !default;
 $select-input-internal-height:      ($select-input-height - ($select-input-border-width * 2)) !default;
@@ -61,8 +61,8 @@ $select-item-gutter:                5px !default;
 $select-item-padding-vertical:      2px !default;
 $select-item-padding-horizontal:    5px !default;
 $select-item-font-size:             .9em !default;
-$select-item-color:                 #08c !default; // pale blue
-$select-item-bg:                    #f2f9fc !default;
+$select-item-color:                 $gray-100 !default; // pale blue
+$select-item-bg:                    theme-color('primary') !default;
 $select-item-border-color:          darken($select-item-bg, 10%) !default;
 $select-item-hover-color:           darken($select-item-color, 5%) !default; // pale blue
 $select-item-hover-bg:              darken($select-item-bg, 5%) !default;

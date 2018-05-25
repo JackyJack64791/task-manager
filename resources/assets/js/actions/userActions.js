@@ -15,17 +15,17 @@ export function userInfo(token = localStorage.getItem('token')) {
             headers: {authorization: "Bearer " + token}
         })
             .then(response => {
-                dispatch(userInfoSuccess(response.data.user),
+                dispatch(userInfoSuccess(response.data),
                 );
             })
             .catch(response => dispatch(userInfoError("You are not logged in")));
     }
 }
 
-export function getUsers(token = localStorage.getItem('token')) {
+export function getUsers(team = localStorage.getItem('team'), token = localStorage.getItem('token')) {
     return function (dispatch) {
         dispatch(getUsersLoading());
-        axios.get(ROOT_URL + '/api/users', {
+        axios.get(ROOT_URL + '/api/users/'+team, {
             headers: {authorization: "Bearer " + token}
         })
             .then(response => {

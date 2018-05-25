@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import Panel from "../Panel";
 import {Button, Card, CardBody, CardGroup, Col, Form, FormGroup, Input, InputGroup, Label, Row} from "reactstrap";
+import ImageUpload from "../ImageUpload";
+import {Creatable} from "react-select";
 
 class ProfileEdit extends Component {
     componentDidMount() {
@@ -13,13 +15,17 @@ class ProfileEdit extends Component {
 
     constructor(props) {
         super(props);
+        let initSkills = Object.values(this.props.skills);
+        let userSkills = this.props.user.skills ? Object.values(this.props.user.skills) : [];
         this.state = {
             fullName: this.props.user.full_name,
             email: this.props.user.email,
             login: this.props.user.login,
             address: this.props.user.address,
             phone: this.props.user.phone,
-            bankCard: this.props.user.bank_card
+            bankCard: this.props.user.bank_card,
+            skills: userSkills ,
+            initSkills: initSkills,
         };
         this.handleFullName = this.handleFullName.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
@@ -28,6 +34,7 @@ class ProfileEdit extends Component {
         this.handlePhone = this.handlePhone.bind(this);
         this.handleBankCard = this.handleBankCard.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSkills = this.handleSkills.bind(this);
         this.handleRedirect = this.handleRedirect.bind(this);
     }
 
@@ -66,6 +73,12 @@ class ProfileEdit extends Component {
             bankCard: e.target.value
         })
     }
+    handleSkills(skills) {
+        // console.log(e);
+        this.setState({
+            skills: skills
+        })
+    }
 
     handleRedirect() {
         this.props.history.push("/profile/info");
@@ -79,8 +92,9 @@ class ProfileEdit extends Component {
             email: this.state.email,
             login: this.state.login,
             address: this.state.address,
-            phone: this.state.phone,
+            phone: this.state.phone.replace(/[^0-9]/g, ''),
             bank_card: this.state.bankCard,
+            skills: this.state.skills,
         };
         this.props.updateUser(user, this.handleRedirect);
 
@@ -159,8 +173,22 @@ class ProfileEdit extends Component {
                                            onChange={this.handleBankCard} value={this.state.bankCard}/>
                                 </Col>
                             </FormGroup>
+                            <FormGroup row>
+                                <Label for="skills" sm={4}>Навыки</Label>
+                                <Col sm={8}>
+                                    <Creatable
+                                        name="skills"
+                                        value={this.state.skills}
+                                        multi={true}
+                                        onChange={this.handleSkills}
+                                        options={this.state.initSkills}
+                                        labelKey="skill"
+                                        valueKey="id"
+                                    />
+                                </Col>
+                            </FormGroup>
                             <hr/>
-
+                            {/*<ImageUpload/>*/}
                             <FormGroup row>
                                 <Col md={10}>
                                     <Button type="submit" color="primary" className="btn btn-primary">
@@ -186,6 +214,7 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated,
         user: state.user.user,
+        skills: state.skill.skills,
     }
 }
 

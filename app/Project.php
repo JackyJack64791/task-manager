@@ -12,6 +12,7 @@ class Project extends Model
         'title',
         'deadline',
         'description',
+        'team_id',
         'specification_path'
     ];
 
@@ -28,6 +29,11 @@ class Project extends Model
     public function team()
     {
         return $this->belongsTo(Team::class,'team_id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class,'project_id');
     }
 
     public function completed()

@@ -62,6 +62,6 @@ class SessionController extends Controller
         Auth::logout();
 
 
-        return response()->json(["name" => Auth::user()]);
+        return response()->json([],200);
     }
 }

@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             'phone' => '88005553535',
             'img_path' => '/users/1.png',
         ]);
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(0));
         $user->teams()->sync($teams->get(0));
 
@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/2.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(0));
         $user->teams()->sync($teams->get(1));
 
@@ -64,7 +64,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/3.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(1));
         $user->teams()->sync($teams->get(0));
 
@@ -80,7 +80,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/4.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(1));
         $user->teams()->sync($teams->get(1));
 
@@ -96,7 +96,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/5.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(2));
         $user->teams()->sync($teams->get(0));
 
@@ -112,7 +112,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/6.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(2));
         $user->teams()->sync($teams->get(1));
 
@@ -128,7 +128,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/7.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(3));
         $user->teams()->sync($teams->get(0));
 
@@ -144,7 +144,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/8.png',
         ]);
 
-        $user->skills()->sync($skills->random(rand(1, 28))->pluck('id')->toArray());
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(3));
         $user->teams()->sync($teams->get(1));
 
@@ -160,7 +160,7 @@ class UsersTableSeeder extends Seeder
             'img_path' => '/users/9.png',
         ]);
 
-        $user->skills()->sync($skills);
+        $user->skills()->sync($skills->random(rand(1, 5))->pluck('id')->toArray());
         $user->roles()->sync($roles->get(4));
         $user->teams()->sync($teams->get(1));
     }

@@ -34,6 +34,7 @@
 		font-size: $select-item-font-size;
 		margin-left: $select-item-gutter;
 		margin-top: $select-item-gutter;
+		margin-bottom: $select-item-gutter;
 		vertical-align: top;
 	}
 
@@ -49,6 +50,8 @@
 		@include border-right-radius( $select-item-border-radius );
 		cursor: default;
 		padding: $select-item-padding-vertical $select-item-padding-horizontal;
+		width: 75%;
+		float:left;
 	}
 	a.Select-value-label {
 		color: $select-item-color;
@@ -63,6 +66,9 @@
 	// icon
 	.Select-value-icon {
 		cursor: pointer;
+		width: 25%;
+		height: 100%;
+		float: right;
 		@include border-left-radius( $select-item-border-radius );
 		border-right: 1px solid $select-item-border-color;
 

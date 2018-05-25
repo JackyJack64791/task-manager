@@ -1,8 +1,9 @@
 import {
     LOGIN_ERROR, LOGIN, LOGOUT_USER, LOGIN_LOADING, RESET_SEND_MAIL_ERROR,
 } from "../constants/index";
+import {LOGIN_TEAM} from "../constants";
 
-function authReducer (state={authenticated: false,isLoading: false, isError: false}, action) {
+function authReducer (state={authenticated: false,isLoading: false, isError: false,currentTeam: null}, action) {
     switch(action.type)
     {
         case LOGIN_ERROR:
@@ -15,6 +16,10 @@ function authReducer (state={authenticated: false,isLoading: false, isError: fal
                 authenticated: true,
                 isLoading: false,
                 isError: false,
+            });
+        case LOGIN_TEAM:
+            return Object.assign({},state,{
+                currentTeam: localStorage.getItem('team')
             });
         case LOGIN_LOADING:
             return Object.assign({},state,{

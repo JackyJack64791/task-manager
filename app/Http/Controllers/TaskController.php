@@ -79,7 +79,7 @@ class TaskController extends Controller
             'difficulty'=>'required',
             'hours_count'=>'numeric|nullable',
             'date_completion'=>'date|nullable',
-            'performer_id'=>'numeric|nullable',
+            'possible_performer_id'=>'numeric|nullable',
             'time_search'=>'date_format:H:i|nullable',
         ]);
         $task = Task::create([
@@ -89,22 +89,22 @@ class TaskController extends Controller
             'description' => $request->get('description'),
             'priority' => $request->get('priority'),
             'difficulty'=> $request->get('difficulty'),
-            'status'=> "new task",
+            'status'=> "new_task",
             'completion_percent'=> 0,
             'hours_count'=> $request->get('hours_count'),
             'date_completion'=> $request->get('date_completion'),
-            'performer_id'=> $request->get('performer_id'),
+            'possible_performer_id'=> $request->get('possible_performer_id'),
             'time_search'=> $request->get('time_search'),
         ]);
         if($request->get('skills'))
         {
             foreach ($request->get('skills') as $skill)
             {
-                if(Skill::where('skill', $skill['label']))
-                $task->skills()->attach($skill['value']);
+                if(Skill::where('skill', $skill['skill']))
+                $task->skills()->attach($skill['id']);
                 else {
                     $newSkill = Skill::create([
-                        'skill' => $skill['label']
+                        'skill' => $skill['skill']
                     ]);
                     return response()->json($newSkill,200);
                     $task->skills()->attach($newSkill->id);
@@ -121,7 +121,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($team)
     {
         try {
 
@@ -148,7 +148,17 @@ class TaskController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-        return response()->json(auth()->user()->tasks()->get());//
+        $getTeam = auth()->user()->teams()->find($team);
+        if($getTeam) {
+            $tasks = [];
+            foreach ($getTeam->projects()->get() as $project)
+            {
+                $tasks = array_merge($tasks, $project->tasks()->with('skills')->get()->toArray());
+//                $count++;
+            }
+            return response()->json($tasks);
+        }
+        else return response()->json([],200);
     }
 
     /**
@@ -204,23 +214,38 @@ class TaskController extends Controller
             'difficulty'=>'required',
             'hours_count'=>'numeric|nullable',
             'date_completion'=>'date|nullable',
-            'performer_id'=>'numeric|nullable',
-            'time_search'=>'date_format:H:i:s|nullable',]);
+            'possible_performer_id'=>'numeric|nullable',
+            'time_search'=>'date_format:H:i:s|nullable',
+            ]);
         $task->update($request->all());
         if($request->get('skills'))
         {
-            foreach ($request->get('skills') as $skill)
+            $skills = array_where($request->get('skills'), function($value, $key) {
+               return Skill::find($value['id']);
+            });
+            $newSkills = array_map('unserialize',array_diff(array_map('serialize',$request->get('skills')), array_map('serialize',$skills)));
+            $task->skills()->sync(array_column($skills,'id'));
+            foreach($newSkills as $skill)
             {
-                if(Skill::where('skill', $skill['label']))
-                    $task->skills()->attach($skill['value']);
-                else {
-                    $newSkill = Skill::create([
-                        'skill' => $skill['label']
+                $newSkill = Skill::create([
+                        'skill' => $skill['skill']
                     ]);
-                    return response()->json($newSkill,200);
                     $task->skills()->attach($newSkill->id);
-                }
             }
+//            return response()->json($results);
+//            foreach ($request->get('skills') as $skill)
+//            {
+//                if(Skill::where('skill', $skill['skill']))
+//                    if($task->skills()->contains($skill))
+//                    $task->skills()->syncWithoutDetaching([$skill['id']]);
+//                else {
+//                    $newSkill = Skill::create([
+//                        'skill' => $skill['skill']
+//                    ]);
+//                    $task->skills()->attach($newSkill->id);
+////                    return response()->json($newSkill,200);
+//                }
+//            }
         }
 
         return response()->json([],200);
@@ -260,6 +285,79 @@ class TaskController extends Controller
 
         }
         $task = Task::findOrFail($id)->delete();
+
+        return response()->json([],200);
+    }
+
+    public function update_status(Request $request)
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+
+        }
+//        $this->validate($request,[
+//           'id' => 'required',
+//           'status' => "in:new_task,task_is_performing,task_is_testing,task_is_ready,task_is_confirmed"
+//        ]);
+        $task = Task::find($request->get('id'));
+        $task->update([
+           'status' => $request->get('status')
+        ]);
+        return response()->json([],200);
+    }
+
+    public function choose_task($id)
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+            try {
+                $refreshed = JWTAuth::refresh(JWTAuth::getToken());
+                $user = JWTAuth::setToken($refreshed)->toUser();
+                header('Authorization: Bearer ' . $refreshed);
+
+            } catch (JWTException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            }
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+        $task = Task::find($id);
+        $task->update([
+            'performer_id' => auth()->user()->id,
+            'status' => 'task_is_performing'
+        ]);
 
         return response()->json([],200);
     }

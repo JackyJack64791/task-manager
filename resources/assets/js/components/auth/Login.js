@@ -33,7 +33,7 @@ class Login extends Component {
 
     handleRedirect()
     {
-        this.props.history.push("/dashboard");
+        this.props.history.push("/team_choose");
     }
     handleSubmit (e) {
         e.preventDefault();

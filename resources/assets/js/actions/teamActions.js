@@ -11,6 +11,8 @@ import {
     TEAM_JOIN, TEAM_JOIN_ERROR, TEAM_JOIN_LOADING,
     TEAM_UPDATE, TEAM_UPDATE_ERROR, TEAM_UPDATE_LOADING
 } from "../constants/teamConstants";
+import {getUsers} from "./userActions";
+import {TEAM_USER_REMOVE, TEAM_USER_REMOVE_ERROR, TEAM_USER_REMOVE_LOADING} from "../constants";
 const ROOT_URL = location.protocol + '//' + location.host;
 
 export function teamCreate(team, redirect) {
@@ -77,6 +79,38 @@ export function teamDelete(id) {
             .catch(response => dispatch(teamDeleteError("You are not logged in")))
     }
 }
+
+export function teamInvite(request) {
+    return function (dispatch) {
+        dispatch(teamInviteLoading());
+        axios.post(ROOT_URL + '/api/team/user/add',
+            request,
+            {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
+        )
+            .then(response => {
+                dispatch(teamInviteSuccess());
+                // dispatch(getTeams());
+                dispatch(getUsers());
+            })
+            .catch(response => dispatch(teamInviteError(response.error)));
+    }
+}
+
+export function teamUserRemove(request) {
+    return function (dispatch) {
+        dispatch(teamUserRemoveLoading());
+        axios.post(ROOT_URL + '/api/team/user/remove',
+            request,
+            {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
+        )
+            .then(response => {
+                dispatch(teamUserRemoveSuccess());
+                // dispatch(getTeams());
+                dispatch(getUsers());
+            })
+            .catch(response => dispatch(teamUserRemoveError(response.data.error)));
+    }
+}
 //#SUCCESS
 export function teamCreateSuccess() {
     return {type: TEAM_CREATE}
@@ -100,7 +134,9 @@ export function teamDeleteSuccess() {
 export function teamInviteSuccess() {
     return {type: TEAM_INVITE}
 }
-
+export function teamUserRemoveSuccess() {
+    return {type: TEAM_USER_REMOVE}
+}
 export function teamJoinSuccess() {
     return {type: TEAM_JOIN}
 }
@@ -124,6 +160,10 @@ export function teamDeleteLoading() {
 
 export function teamInviteLoading() {
     return {type: TEAM_INVITE_LOADING}
+}
+
+export function teamUserRemoveLoading() {
+    return {type: TEAM_USER_REMOVE_LOADING}
 }
 
 export function teamJoinLoading() {
@@ -169,6 +209,13 @@ export function teamInviteError(error) {
 export function teamJoinError(error) {
     return {
         type: TEAM_JOIN_ERROR,
+        payload: error,
+    }
+}
+
+export function teamUserRemoveError(error) {
+    return {
+        type: TEAM_USER_REMOVE_ERROR,
         payload: error,
     }
 }
