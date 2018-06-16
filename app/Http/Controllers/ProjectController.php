@@ -69,16 +69,16 @@ class ProjectController extends Controller
             return response()->json(['token_absent'], $e->getStatusCode());
 
         }
-//        return response()->json(auth()->user()->teams()->first(),503);
+;
         $this->validate($request, [
-            'customer' => 'required',
+//            'customer' => 'required',
             'title' => 'required',
             'deadline' => 'required|date',
             'description' => 'required|string',
-            'specification_path'=>'string',
+            'specification_path'=>'file|nullable',
             ]);
         $project = Project::create([
-            'customer_id'=>$request->get('customer'),
+//            'customer_id'=>$request->get('customer'),
             'manager_id'=> auth()->id(),
             'team_id' => $request->get('team_id'),
             'title' => $request->get('title'),
@@ -86,7 +86,16 @@ class ProjectController extends Controller
             'description'=>$request->get('description'),
             'specification_path'=>$request->get('specification_path'),
         ]);
+        if($request->get('customer_id'))
+            $project->customer_id = $request->get('customer_id');
+        else if ($request->get('customer_name'))
+            $project->customer_name = $request->get('customer_name');
+        $project->save();
 
+        if($request->hasFile('specification_path'))
+        {
+            return response()->json('hui',305);
+        }
 
         return response()->json([],200);
     }

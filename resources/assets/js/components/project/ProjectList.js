@@ -16,7 +16,7 @@ class ProjectList extends Component {
 
     projectsRender() {
         return this.props.projects.map((key) =>
-            <ProjectTab id={key.id} name={key.title} description={key.description}/>
+            <ProjectTab id={key.id} name={key.title} description={key.description} status={key.status}/>
         )
     }
 

@@ -53,6 +53,7 @@ class TaskCreate extends Component {
         let initSkills = Object.values(this.props.skills);
         this.state = {
             id: task.id,
+            project: task.project_id,
             title: task.title,
             description: task.description,
             priority: task.priority,
@@ -156,6 +157,7 @@ class TaskCreate extends Component {
         e.preventDefault();
         const task = {
             id: this.state.id,
+            project: this.state.project,
             title: this.state.title,
             description: this.state.description,
             priority: this.state.priority,

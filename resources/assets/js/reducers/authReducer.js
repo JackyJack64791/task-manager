@@ -19,7 +19,7 @@ function authReducer (state={authenticated: false,isLoading: false, isError: fal
             });
         case LOGIN_TEAM:
             return Object.assign({},state,{
-                currentTeam: localStorage.getItem('team')
+                currentTeam: action.payload
             });
         case LOGIN_LOADING:
             return Object.assign({},state,{

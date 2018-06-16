@@ -12,6 +12,7 @@ class ProjectInfo extends Component {
     componentDidMount() {
         if (!this.props.authenticated) this.props.history.push("/login");
     }
+
     constructor(props) {
         super(props);
         this.handleDrop = this.handleDrop.bind(this);
@@ -31,7 +32,15 @@ class ProjectInfo extends Component {
     }
 
     getPropertyNames() {
-        return {title:"Название", customer_id:"Заказчик", manager_id:"Менеджер проекта",deadline: "Дата завершения",description: "Описание", specification_path: "Спецификация"};
+        return {
+            title: "Название",
+            customer_id: "Заказчик",
+            customer_name: 'Заказчик',
+            manager_id: "Менеджер проекта",
+            deadline: "Дата завершения",
+            description: "Описание",
+            specification_path: "Спецификация"
+        };
     }
 
     projectTab(id) {
@@ -39,26 +48,26 @@ class ProjectInfo extends Component {
             this.props.projects.find(item => item.id == id)
         );
         console.log(project);
-        if(project.customer_id!=null) project.customer_id = this.props.users.find(item => item.id === project.customer_id).full_name;
-        else project.customer_id = project.customer_name;
-        console.log(this.props.users);
+        if(project.customer_name) delete project.customer_id;
+        else if (project.customer_id != null) project.customer_id = this.props.users.find(item => item.id === project.customer_id).full_name;
         project.manager_id = this.props.users.find(item => item.id == project.manager_id).full_name;
-        if(project.manager_id===this.props.user.id)
+        if (project.manager_id === this.props.user.id)
             project.manager_id += "(you)";
         let names = this.getPropertyNames();
         return Object.keys(project).map((key) => {
-            if(project[key])
-                return <InfoProperty style="list" name={names[key]} value={project[key]}/>
+                if (project[key])
+                    return <InfoProperty style="list" name={names[key]} value={project[key]}/>
             }
         )
     }
+
     handleDrop(acceptedFiles) {
         console.log('Handle drop');
         // this.setState({ preview })
 
         let formData = new FormData();
 
-        acceptedFiles.forEach(function(file) {
+        acceptedFiles.forEach(function (file) {
             formData.append('avatar', file);
         });
 
@@ -69,31 +78,37 @@ class ProjectInfo extends Component {
             body: formData
         })
     }
+
     render() {
         const {id} = this.props.match.params;
         return (
             <Panel title="Информация о проекте">
-            <ul className="list-group">
-                {this.projectTab(id)}
-            </ul>
+                <ul className="list-group">
+                    {this.projectTab(id)}
+                </ul>
                 <Row className="mt-2">
-            <div className="col-md-8 col-md-offset-4">
-                {this.props.user.roles.some(item => item.role === 'project_manager') ||
-                this.props.user.roles.some(item => item.role === 'admin') ?
-                    <div>
-                <Link to={"/project/edit/" + id} className="btn btn-primary mr-2">
-                    Изменить проект
-                </Link>
-                <Link to={{pathname:"/task/create",state:{project_id: id}}}  className="btn btn-primary">
-                    Добавить задачу
-                </Link>
-                    </div> : ''}
-                <Link to={"/projects"} className="btn btn-default">
-                    Назад к списку
-                </Link>
-            </div>
+                    <div className="col-md-8 col-md-offset-4">
+                        {this.props.user.roles.some(item => item.role === 'project_manager') ||
+                        this.props.user.roles.some(item => item.role === 'admin') ?
+                            <div>
+                                <Link to={"/project/edit/" + id} className="btn btn-primary mr-2">
+                                    Изменить проект
+                                </Link>
+                                <Link to={"/project/stats/" + id} className="btn btn-primary mr-2">
+                                    Статистика проекта
+                                </Link>
+                                <Link to={{pathname: "/task/create", state: {project_id: id}}}
+                                      className="btn btn-primary">
+                                    Добавить задачу
+                                </Link>
+                            </div> : ''}
+                        <Link to={"/projects"} className="btn btn-default">
+                            Назад к списку
+                        </Link>
+
+                    </div>
                 </Row>
-        </Panel>);
+            </Panel>);
     }
 
 }

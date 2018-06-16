@@ -102,6 +102,7 @@ class HeaderDropdown extends Component {
           <DropdownItem header tag="div" className="text-center"><strong>Настройки</strong></DropdownItem>
           <DropdownItem tag={Link} to="/profile/info"><i className="fa fa-user"></i> Профиль</DropdownItem>
           <DropdownItem tag={Link} to="/profile/settings"><i className="fa fa-wrench"></i> Настройки</DropdownItem>
+            {/*<DropdownItem tag={Link} to="/profile/settings"><i className="fa fa-wrench"></i> Настройки</DropdownItem>*/}
           {/*<DropdownItem><i className="fa fa-usd"></i> Платежи<Badge color="secondary">1</Badge></DropdownItem>*/}
           {/*<DropdownItem><i className="fa fa-file"></i> Projects<Badge color="primary">42</Badge></DropdownItem>*/}
           {/*<DropdownItem divider/>*/}

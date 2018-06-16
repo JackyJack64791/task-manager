@@ -19,22 +19,22 @@ const ROOT_URL = location.protocol + '//' + location.host;
 export function authUser(user, redirect) {
     return function (dispatch) {
         dispatch(authLoading());
-        // dispatch(getUsersLoading());
-        // dispatch(getProjectsLoading());
-        // dispatch(getTasksLoading());
+        dispatch(getUsersLoading());
+        dispatch(getProjectsLoading());
+        dispatch(getTasksLoading());
         dispatch(getTeamsLoading());
-        // dispatch(getSkillsLoading());
+        dispatch(getSkillsLoading());
         axios.post(ROOT_URL + '/api/login', user)
             .then(response => {
                 dispatch({type: LOGIN});
                 localStorage.setItem('token', response.data.token);
                 dispatch(userInfo(response.data.token));
-                // dispatch(getUsers(response.data.token));
-                // dispatch(getProjects(response.data.token));
-                // dispatch(getTasks(response.data.token));
                 dispatch(getTeams(response.data.token));
-                // if(localStorage.getItem('team')) dispatch(loginTeam(localStorage.getItem('team')));
-                // dispatch(getSkills(response.data.token));
+                if(localStorage.getItem('team')) dispatch(loginTeam(localStorage.getItem('team')));
+                dispatch(getSkills(response.data.token));
+                dispatch(getUsers(response.data.token));
+                dispatch(getProjects(response.data.token));
+                dispatch(getTasks(response.data.token));
                 redirect();
             });
             // .catch((response) => {

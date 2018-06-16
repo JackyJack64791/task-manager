@@ -16,7 +16,12 @@ export function projectCreate(project, redirect) {
         dispatch(projectAddLoading());
         axios.post(ROOT_URL + '/api/project/create',
             project,
-            {headers: {Authorization: "Bearer " + localStorage.getItem('token')}}
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem('token'),
+                    // 'Content-Type': 'multipart/form-data'
+                }
+            }
         )
             .then(response => {
                 dispatch(projectAddSuccess());

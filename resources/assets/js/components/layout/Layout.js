@@ -7,6 +7,7 @@ import Header from '../../src/components/Header/';
 import Sidebar from '../../src/components/Sidebar/';
 
 import Loading from 'react-loading-spinkit';
+import {withRouter} from "react-router";
 
 class Layout extends Component {
 
@@ -19,6 +20,13 @@ class Layout extends Component {
             if (!this.props.getSuccessTeams && !this.props.isLoadingTeams) this.props.getTeams();
             if (!this.props.getSuccessSkills && !this.props.isLoadingSkills) this.props.getSkills();
         }
+    }
+    constructor(props) {
+        super(props);
+        this.handleRedirect = this.handleRedirect.bind(this);
+    }
+    handleRedirect() {
+        this.props.history.push("/login");
     }
 
     render() {
@@ -124,4 +132,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, actions)(Layout);
+export default withRouter(connect(mapStateToProps, actions)(Layout));

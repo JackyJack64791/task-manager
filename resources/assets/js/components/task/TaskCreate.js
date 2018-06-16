@@ -28,7 +28,6 @@ const SelectOption = React.createClass({
         )
     },
     render () {
-
         return (
             <div className={this.props.className}
                  onMouseDown={this.handleMouseDown}

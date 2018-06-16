@@ -96,7 +96,7 @@ export function getTasks(team = localStorage.getItem('team'), token = localStora
     }
 }
 
-export function taskDelete(id) {
+export function taskDelete(id,redirect) {
     return function (dispatch) {
         dispatch(taskDeleteLoading());
         axios.delete(`${ROOT_URL}/api/task/delete/${id}`, {
@@ -108,6 +108,7 @@ export function taskDelete(id) {
             .then(response => {
                 dispatch(taskDeleteSuccess());
                 dispatch(getTasks(localStorage.getItem('team')));
+                redirect();
             })
             .catch(response => dispatch(taskDeleteError(response.response.data.errors[Object.keys(response.response.data.errors)[0]])))
     }

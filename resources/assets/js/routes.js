@@ -26,6 +26,7 @@ import TeamList from "./components/team/TeamList";
 import TeamCreate from "./components/team/TeamCreate";
 import RegisterCard from "./components/auth/RegisterCard";
 import LoginTeam from "./components/auth/LoginTeam";
+import ProjectStats from "./components/project/ProjectStats";
 
 
 const Routes = () => {
@@ -47,6 +48,7 @@ const Routes = () => {
                 <Route path="/project/create" component={ProjectCreate}/>
                 <Route path="/projects" component={ProjectList}/>
                 <Route path="/project/info/:id" component={ProjectInfo}/>
+                <Route path="/project/stats/:id" component={ProjectStats}/>
                 <Route path="/project/edit/:id" component={ProjectEdit}/>
                 <Route path="/task/create" component={TaskCreate}/>
                 <Route path="/tasks" component={TaskList}/>
@@ -56,7 +58,7 @@ const Routes = () => {
                 <Route path="/teams" component={TeamList}/>
                 <Route path="/team/info/:id" component={TeamInfo}/>
                 <Route path="/team/edit/:id" component={TeamEdit}/>
-                <Redirect from="/" to="/dashboard"/>
+                <Redirect from="/" to="/projects"/>
             </Switch>
         </Layout>
     )

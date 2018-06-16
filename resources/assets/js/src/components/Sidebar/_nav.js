@@ -80,7 +80,7 @@ export default {
     //   ]
     // },
     {
-      name: 'Задания',
+      name: 'Задачи',
       url: '/tasks',
       icon: 'fa fa-tasks',
     //   children: [

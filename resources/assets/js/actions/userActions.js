@@ -15,10 +15,16 @@ export function userInfo(token = localStorage.getItem('token')) {
             headers: {authorization: "Bearer " + token}
         })
             .then(response => {
-                dispatch(userInfoSuccess(response.data),
-                );
+                dispatch(userInfoSuccess(response.data));
             })
-            .catch(response => dispatch(userInfoError("You are not logged in")));
+            .catch(response => {
+                dispatch(
+                    userInfoError("You are not logged in"),
+                    // localStorage.removeItem('token'),
+                    // redirect()
+                );
+            }
+            );
     }
 }
 

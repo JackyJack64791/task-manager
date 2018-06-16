@@ -19,6 +19,7 @@ Route::post('login', 'SessionController@create')->name('login');
 Route::post('logout', "SessionController@destroy")->name('logout');
 Route::put('update', "UserController@update")->name('update');
 Route::post('skills/update','SkillController@update_skills')->name('skills.update');
+Route::get('users/all/{email}', 'UserController@getAllUsers');
 
 Route::post('register', 'UserController@register')->name('register');
 Route::post('reset/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');

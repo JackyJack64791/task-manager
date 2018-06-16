@@ -21,6 +21,13 @@ if(token){
     // }
 
     Store.dispatch({type:LOGIN});
-    Store.dispatch({type:LOGIN_TEAM})
+
+}
+const team = localStorage.getItem('team');
+if (team) {
+    Store.dispatch({
+        type:LOGIN_TEAM,
+        payload:team,
+    });
 }
 export default Store;

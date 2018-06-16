@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\Skill;
 use Illuminate\Http\Request;
 use JWTAuth;
@@ -100,16 +101,22 @@ class TaskController extends Controller
         {
             foreach ($request->get('skills') as $skill)
             {
-                if(Skill::where('skill', $skill['skill']))
+                if(Skill::where('skill', $skill['skill'])->count()>0)
                 $task->skills()->attach($skill['id']);
                 else {
                     $newSkill = Skill::create([
                         'skill' => $skill['skill']
                     ]);
-                    return response()->json($newSkill,200);
+//                    return response()->json($newSkill,200);
                     $task->skills()->attach($newSkill->id);
                 }
             }
+        }
+        $project = Project::find($task->project_id);
+        if($project)
+        {
+            $project->status = 'project_is_performing';
+            $project->save();
         }
 
         return response()->json([],200);
@@ -324,6 +331,19 @@ class TaskController extends Controller
         $task->update([
            'status' => $request->get('status')
         ]);
+        if($request->get('status') == 'task_is_ready')
+        {
+            $project = Project::find($task->project_id);
+            if($project)
+            {
+                foreach ($project->tasks()->get() as $task)
+                {
+                    if($task->status!='task_is_ready') return response()->json([],200);
+                }
+                $project->status = 'project_is_done';
+                $project->save();
+            }
+        }
         return response()->json([],200);
     }
 
@@ -358,6 +378,15 @@ class TaskController extends Controller
             'performer_id' => auth()->user()->id,
             'status' => 'task_is_performing'
         ]);
+        $project = Project::find($task->project_id);
+        if($project)
+        {
+            if($project->status == "new_project")
+            {
+                $project->status = "project_is_performing";
+                $project->save();
+            }
+        }
 
         return response()->json([],200);
     }

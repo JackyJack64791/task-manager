@@ -22,6 +22,7 @@ class CreateProjectsTable extends Migration
             $table->integer('manager_id');
             $table->date('deadline')->nullable();
             $table->text('description');
+            $table->enum('status',['new_project','project_is_performing','project_is_ready'])->default('new_project');
             $table->string('specification_path')->nullable();
             $table->text('specification_link')->nullable();
             $table->boolean('completed')->default(false);

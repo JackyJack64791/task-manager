@@ -85,7 +85,7 @@ class RegisterCredentials extends Component {
     }
 
     handleRedirect() {
-        this.props.history.push("/dashboard");
+        this.props.history.push("/projects");
     }
 
     handleSubmit(e) {
